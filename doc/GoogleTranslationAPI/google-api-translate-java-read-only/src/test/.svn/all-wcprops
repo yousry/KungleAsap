@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svn/!svn/ver/65/trunk/src/test
+END
+DetectTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/52/trunk/src/test/DetectTest.java
+END
+LoopTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/52/trunk/src/test/LoopTest.java
+END
+AllTests.java
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/52/trunk/src/test/AllTests.java
+END
+TranslateTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/65/trunk/src/test/TranslateTest.java
+END
