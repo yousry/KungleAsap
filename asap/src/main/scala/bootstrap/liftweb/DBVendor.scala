@@ -10,7 +10,7 @@ object DBVendor extends ConnectionManager {
   def newConnection(name: ConnectionIdentifier): Box[Connection] = {
     try {
       Class.forName("com.mysql.jdbc.Driver")
-      val dm = DriverManager.getConnection("jdbc:mysql://127.0.0.1/usr_web0_1?user=web0&password=YgEW7bdh")
+      val dm = DriverManager.getConnection("jdbc:mysql://127.0.0.1/asap?user=web0&password=asap")
       Full(dm)
     } catch {
       case e: Exception => e.printStackTrace; Empty

@@ -1,0 +1,9 @@
+Create Database asap_db in utf8 :
+CREATE DATABASE `asap_db` /*!40100 CHARACTER SET utf8 COLLATE utf8_general_ci */
+
+user: asap
+pass: asap
+access: localhost
+
+No System Privileges
+All DB Privileges
