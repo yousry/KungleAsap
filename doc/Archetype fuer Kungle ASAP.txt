@@ -1,0 +1,17 @@
+$ mvn 
+archetype:generate 
+-DarchetypeRepository=http://scala-tools.org/repo-snapshots 
+-DremoteRepositories=http://scala-tools.org/repo-snapshots 
+-DarchetypeGroupId=net.liftweb 
+-DarchetypeArtifactId=lift-archetype-blank 
+-DarchetypeVersion=2.0-M3 
+-DgroupId=de.kungle.asap 
+-DartifactId=asap -Dversion=1.0-SNAPSHOT
+  
+ Executed: 
+$ mvn archetype:generate -DarchetypeRepository=http://scala-tools.org/repo-snapshots -DremoteRepositories=http://scala-tools.org/repo-snapshots -DarchetypeGroupId=net.liftweb -DarchetypeArtifactId=lift-archetype-blank -DarchetypeVersion=2.0-M3 -DgroupId=de.kungle.asap -DartifactId=asap -Dversion=1.0-SNAPSHOT
+
+Eclipse and Docs  
+mvn eclipse:eclipse -DdownloadJavadocs=true
+mvn test
+mvn -Declipse.workspace="C:\\Users\\yousry\\Documents\\workspace" eclipse:add-maven-repo
