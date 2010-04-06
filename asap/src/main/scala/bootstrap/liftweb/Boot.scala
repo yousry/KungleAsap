@@ -23,7 +23,10 @@ class Boot {
     LiftRules.addToPackages("de.kungle.asap")
 
     // Build SiteMap
-    val entries = Menu(Loc("Home", List("index"), "Home")) :: Nil
+    val entries = 
+      Menu(Loc("Home", List("index"), "Home")) :: 
+      Menu(Loc("Control",("admin" :: "control" :: Nil) -> false,"Control")) ::
+      Nil
     LiftRules.setSiteMap(SiteMap(entries:_*))
   }
 }
