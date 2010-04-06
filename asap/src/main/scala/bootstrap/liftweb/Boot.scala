@@ -6,6 +6,7 @@ import _root_.net.liftweb.http._
 import _root_.net.liftweb.sitemap._
 import _root_.net.liftweb.sitemap.Loc._
 import Helpers._
+import _root_.net.liftweb.mapper._
 
 /**
   * A class that's instantiated early and run.  It allows the application
@@ -13,6 +14,11 @@ import Helpers._
   */
 class Boot {
   def boot {
+    
+        
+    // bind mysql connection to mapper
+    DB.defineConnectionManager(DefaultConnectionIdentifier, DBVendor)
+    
     // where to search snippet
     LiftRules.addToPackages("de.kungle.asap")
 
