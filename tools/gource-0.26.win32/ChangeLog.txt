@@ -1,0 +1,101 @@
+0.26:
+ * Improved mouse dragging.
+ * Holding right mouse button and moving the mouse rotates the view.
+ * The middle mouse button now toggles the camera mode.
+ * Username positions now scale correctly.
+ * Simulation time no longer incremented while paused, counting towards file time lag.
+ * M key now toggles mouse visibility.
+ * Added --hide option to use instead of multiple --hide-ELEMENT options.
+
+0.25:
+ * Bazaar support (John Arbash Meinel).
+ * Dragging the mouse on the background moves the camera.
+ * Added --camera-mode option (track,overview).
+ * Support DOS line endings in logs.
+ * Improved compatibility of hg log command (Brendan Cully).
+ * Fixed PPM exporter producing blank images on some video cards.
+ * Fixed parsing of negative timezones from cvs-exp.pl logs.
+ * Fixed various gdb and compiler warnings.
+
+0.24:
+ * PPM output speed improvements, including using a second thread (HighlandSun).
+ * Now using standard autotools (Flameeyes).
+ * Fixed --max-file-lag not working with some custom log files.
+ * Gource will stop at the end of the log by default when recording a video.
+ * Fixed STDIN stopping working after the first lot of records with tail -f.
+ * Added proper exception handling.
+ * Print errors to stderr.
+
+0.23:
+ * Hiding filenames no longer hides directory names.
+ * Fixed --stop-on-idle option.
+ * Added --stop-at-end option (more intuitive than --stop-position 1.0).
+
+0.22:
+ * Fixed Mercurial log order.
+
+0.21b:
+ * Fixed windows build.
+
+0.21: 
+ * Some documentation fixes.
+
+0.20:
+ * Added bloom effect (turn off with --disable-bloom).
+ * Added support for Mercurial (thanks to Justin Love for gource.style).
+ * --start-position option now works in combination with --disable-progress.
+
+0.19:
+ * Use time_t instead of long for timestamps.
+
+0.18:
+ * Fixed camera movement while the simulation is paused.
+
+0.17:
+ * Show correct month for CVS logs.
+ * Added time scaling (Bitshifter).
+
+0.16:
+ * Added --hide-dirnames option.
+ * Added --user-scale option.
+ * Added --date-format option (Pat Notz).
+ * Fix bug when encountering long log lines.
+ * Fixed incorrect parsing of trivial merges.
+ * Fixed building issues on OSX.
+
+0.15:
+ * Added PPM output support for creating videos (Johannes Schindelin).
+ * Added experimental Apache combined access log support (--log-format apache).
+ * Added --stop-position and --stop-on-idle options (useful for making videos).
+ * Added --max-file-lag option to limit how long after a commit file changes can take to appear.
+ * Added --no-renames to the git log command as they don't display correctly.
+ * Added --max-user-speed and --user-friction as options.
+ * Now builds on OSX Leopard (with the required libaries installed).
+ * Caught raw exception from replace_invalid().
+ * Added CXXFLAGS. You may want to override the default (eg CXXFLAGS=-O3 ./configure).
+
+0.14:
+ * Updated SVN instructions.
+
+0.13:
+ * Removed single quotes from log command (fixes running gource --git-log-command in back ticks)
+ * Added SVN instructions.
+ * Fixed manpage hyphens.
+
+0.12:
+ * Added --enable-ttf-font-dir=DIR option to configure (to specify the ttf-freefont directory).
+ * UTF-8 support using UTF8-CPP (http://utfcpp.sourceforge.net/).
+ * Changed the git log command (see --git-log-command) to require less work to parse.
+   Log files generated with the previous git-log command used by gource should continue to work.
+ * Allow --seconds-per-day value less than 1.0.
+ * Added --git-branch command.
+ * Added --loop command.
+ * Added --crop command.
+
+0.11:
+ * Made N key skip to next entry.
+ * Documented --user-image-dir flag.
+ * temp file name now uses uid instead of time
+
+0.1:
+ * First release.
