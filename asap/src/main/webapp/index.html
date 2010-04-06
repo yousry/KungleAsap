@@ -1,9 +1,24 @@
 <lift:surround with="default" at="content">
+<div class="container">
+<div id="header" class="span-24 last primary-1">
 		<h2>Welcome to your project!</h2>
-		<p>
-      <lift:helloWorld.howdy>
-        <span>Welcome to asap at <b:time/></span>
-      </lift:helloWorld.howdy>
+
+</div>
+
+<div id="menu" class="span-24 last primary-2">
+		<h4>Welcome to your project!</h4>
+</div>
+
+
+<div id="content" class="span-24 last">
+	<p>
+		<lift:helloWorld.howdy>
+        	<span>Welcome to asap at <b:time/></span>
+        </lift:helloWorld.howdy>
     </p>
+</div>
+
+
+</div>
 </lift:surround>
 
