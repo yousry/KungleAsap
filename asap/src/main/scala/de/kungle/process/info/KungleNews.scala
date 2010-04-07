@@ -15,19 +15,32 @@ case class KungleNews(val KungleId: Long,
 }
 
 object KungleNews {
+
+  val sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S", java.util.Locale.US )
   
-  def buildEntries(doc: xml.Elem) : List[KungleNews] = {
+  def buildEntries(doc: xml.Elem) : List[KungleNews] = {    
+
+    def processEntry(node: scala.xml.Node) = new KungleNews(
+     (node \ "@id").text.toLong,
+     (node \ "title").text,
+     (node \ "summary").text,
+     (node \ "publisher").text,
+     sdf.parse((node \ "published").text),
+     (node \ "country").text,
+     (node \ "url").text,
+     (node \ "topic").text,
+     (node \ "originalLanguage").text
+    )
     
     def processEntries(xs : List[scala.xml.Node]) = {
-      xs map( x => 0) 
+      xs map(processEntry) 
     }
        
     doc match {
       case <kungle_news_api><entries>{entries@ _*}</entries></kungle_news_api> => processEntries(entries.toList)
-      case _ => ()
+      case _ => List()
     }    
     
-    List()
   }
   
     

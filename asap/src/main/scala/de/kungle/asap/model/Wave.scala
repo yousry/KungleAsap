@@ -25,7 +25,7 @@ class Wave extends LongKeyedMapper[Wave] with IdPK {
   object topic extends MappedPoliteString(this, 200)
   object originalLanguage extends MappedPoliteString(this, 200)
 
-  object kungleId extends MappedLong(this) 
+  object orignId extends MappedLong(this) 
   object markedBanned extends MappedInt(this)
   
 }
@@ -36,6 +36,6 @@ object Wave extends Wave with LongKeyedMetaMapper[Wave] {
   summary_english, summary_french, summary_german,
   publisher, publishingDate,
   geoCode,url,topic,originalLanguage,
-  kungleId, 
+  orignId, 
   markedBanned)
 }
