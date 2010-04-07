@@ -1,0 +1,5 @@
+At first three Info Streams will be available for ASAP
+
+1. Kungles Top News
+2. a Feed for example from a blog
+3. manual submit
