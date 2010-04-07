@@ -1,9 +1,17 @@
 Create Database asap_db in utf8 :
 CREATE DATABASE `asap_db` /*!40100 CHARACTER SET utf8 COLLATE utf8_general_ci */
 
+mysql> create database asap_db;
+Query OK, 1 row affected (0,00 sec)
+
+
 user: asap
 pass: asap
 access: localhost
 
+CREATE USER 'asap'@'localhost' IDENTIFIED BY 'asap';
+
 No System Privileges
 All DB Privileges
+
+GRANT ALL ON asap_db.* TO 'asap'@'localhost';

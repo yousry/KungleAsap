@@ -1,3 +1,5 @@
+syntax: regexp
+
 \.orig$
 \.orig\..*$
 \.chg\..*$
@@ -5,3 +7,8 @@
 \.conflict\~$
 ^asap/target/.*$
 ^asap/\.manager/.*$
+^asap/\.settings/org\.eclipse\.jdt\.core\.prefs$
+.*~$
+^asap/\.classpath$
+^asap/\.project$
+

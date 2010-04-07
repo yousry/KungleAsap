@@ -15,3 +15,6 @@ Eclipse and Docs
 mvn eclipse:eclipse -DdownloadJavadocs=true
 mvn test
 mvn -Declipse.workspace="C:\\Users\\yousry\\Documents\\workspace" eclipse:add-maven-repo
+
+mvn -Declipse.workspace="/home/yousry/workspace" eclipse:add-maven-repo
+
