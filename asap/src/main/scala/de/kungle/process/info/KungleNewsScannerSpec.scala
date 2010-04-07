@@ -12,13 +12,31 @@ import bootstrap.liftweb._
 
 object KungleNewsScannerSpec {
   def main(args : Array[String]) : Unit = {
+
+        
+    //Logger.setup
+    println("init Logging")
+    LiftRules.configureLogging
+
     
-    println("Start Scanner")
+    println("Test Scanner Spec")
     
     // bind mysql connection to mapper
     DB.defineConnectionManager(DefaultConnectionIdentifier, DBVendor)
-
+    
+      
     // create a KungleScanner
+    val kungleScanner = new KungleScanner()
+    println("Scanner created")
+    
+    // scan kungles top news
+    try {
+    	kungleScanner.scan
+    } catch {
+      case ex : Exception => println(ex)
+    }
+    
+    println("Kungle Top News scanned")
     
   }
 }
