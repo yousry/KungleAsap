@@ -13,9 +13,9 @@ class Wave extends LongKeyedMapper[Wave] with IdPK {
   object title_french extends MappedPoliteString(this, 200)
   object title_german extends MappedPoliteString(this, 200)
 
-  object summary_english extends MappedPoliteString(this, 200)
-  object summary_french extends MappedPoliteString(this, 200)
-  object summary_german extends MappedPoliteString(this, 200)
+  object summary_english extends MappedPoliteString(this, 500)
+  object summary_french extends MappedPoliteString(this, 500)
+  object summary_german extends MappedPoliteString(this, 500)
 
   object translator extends MappedPoliteString(this, 200) {
     override def defaultValue = "none"
