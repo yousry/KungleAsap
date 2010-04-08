@@ -15,3 +15,17 @@ No System Privileges
 All DB Privileges
 
 GRANT ALL ON asap_db.* TO 'asap'@'localhost';
+
+
+8.4
+
+update DDL
+
+mysql> update wave
+    -> set translator = 'none'
+    -> where translator is null;
+Query OK, 88 rows affected (0,04 sec)
+Rows matched: 88  Changed: 88  Warnings: 0
+
+mysql> select count(*) from wave;
+
