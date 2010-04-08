@@ -17,6 +17,11 @@ class Wave extends LongKeyedMapper[Wave] with IdPK {
   object summary_french extends MappedPoliteString(this, 200)
   object summary_german extends MappedPoliteString(this, 200)
 
+  object translator extends MappedPoliteString(this, 200) {
+    override def defaultValue = "none"
+  }
+  
+  
   object publisher extends MappedPoliteString(this, 200)
   object publishingDate extends MappedDateTime(this)
 
@@ -34,6 +39,7 @@ object Wave extends Wave with LongKeyedMetaMapper[Wave] {
   override def fieldOrder = List(id, 
   title_english,title_french,title_german,
   summary_english, summary_french, summary_german,
+  translator,
   publisher, publishingDate,
   geoCode,url,topic,originalLanguage,
   orignId, 

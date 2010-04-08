@@ -15,8 +15,12 @@ object KungleNewsScannerSpec {
 
         
     //Logger.setup
-    println("init Logging")
-    LiftRules.configureLogging
+    try {
+      println("init Logging")
+      LiftRules.configureLogging
+    } catch {
+      case ex: Exception => println("FUU: " + ex)
+    }
 
     
     println("Test Scanner Spec")
