@@ -2,32 +2,45 @@
 
 <div class="container">
  <div id="header" class="span-42 last primary-1">
-  <h2>Welcome to your project!</h2>
+  <h2>kungle asap alpha</h2>
  </div>
  
  <div id="menu" class="span-42 last primary-2">
-  <h4>Welcome to your project!</h4>
+  <h4>top menu</h4>
  </div>
  
  <div id="leftColumn" class="span-14 secondary-a-5">
-  Menu
+  side menu
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  <lift:helloWorld.howdy>
+   <span>asap alpha at <b:time/></span>
+  </lift:helloWorld.howdy>
   <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
   <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
   <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-  
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
  </div>
  
- <div id="content" class="span-28 last showgrid">
-  <lift:helloWorld.howdy>
-   <span>Welcome to asap at <b:time/></span>
-  </lift:helloWorld.howdy>
+ <div id="content" class="span-28 last">
+ <br/>
+ <lift:SimpleWaveList.queryTabel>
+  <query:entries>
+   <h4>Title</h4>
+   <b>English: </b><entry:titleEnglish/><br/>
+   <b>French: </b><entry:titleFrench/><br/>
+   <b>German: </b><entry:titleGerman/><br/><br/>
+   <h4>Summary</h4>
+   <b>English: </b><entry:summaryEnglish/><br/>
+   <b>French: </b><entry:summaryFrench/><br/>
+   <b>German: </b><entry:summaryGerman/><br/>
+   <hr/>
+  </query:entries>
+ </lift:SimpleWaveList.queryTabel>
  </div>
-
 
  <div id="blubber" class="span-42 last secondary-b-2">
  footer
  </div>
-
 
 </div>
 

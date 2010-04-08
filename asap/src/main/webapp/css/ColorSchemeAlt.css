@@ -1,0 +1,80 @@
+@CHARSET "ISO-8859-1";
+ 
+/* Palette color codes */
+/* Feel free to copy&paste color codes to your application */
+
+.primary-1 { background-color: #01939A }
+.primary-2 { background-color: #1D7074 }
+.primary-3 { background-color: #006064 }
+.primary-4 { background-color: #34C6CD }
+.primary-5 { background-color: #5DC8CD }
+
+.secondary-a-1 { background-color: #FFFC00 }
+.secondary-a-2 { background-color: #BFBD30 }
+.secondary-a-3 { background-color: #A6A400 }
+.secondary-a-4 { background-color: #FFFD40 }
+.secondary-a-5 { background-color: #FFFD73 }
+
+.secondary-b-1 { background-color: #7C07A9 }
+.secondary-b-2 { background-color: #65247F }
+.secondary-b-3 { background-color: #50026E }
+.secondary-b-4 { background-color: #A93CD4 }
+.secondary-b-5 { background-color: #B564D4 }
+
+/* end */
+
+
+body {
+	margin:0; padding: 2em;
+	background:white;
+	color: #666;
+	font: 75%/1.33 Verdana, sans-serif;
+	text-align:left;
+	}
+h1 {
+	margin: 0.5em 0;
+	font-size: 200%;
+	}
+p {
+	margin: 0.5em 0;
+	}
+
+.color-table {
+	margin: 2em 2em 5em;
+	border-collapse:collapse;
+	border:none;
+	border-spacing:0;
+	font-size:100%;
+	}
+.color-table th {
+	padding: 0 1em 0 0;
+	text-align:right;
+	vertical-align: middle;
+	font-size:110%;
+	border: none;
+	}
+.color-table td.sample {
+	width:8em; height:8em;
+	padding: 10px;
+	text-align:center;
+	vertical-align:middle;
+	font-size:90%;
+	border: 1px solid white;
+	}
+.color-table.small td.sample {
+	width:4em; height:4em;
+	padding:0;
+	border:none;
+	}
+.color-table .white { color:white }
+.color-table .black { color:black }
+
+hr {
+	border:none;
+	border-bottom:1px solid silver;
+	}
+#footer {
+	padding:1em;
+	text-align:center;
+	font-size:80%;
+	}
