@@ -29,3 +29,17 @@ Rows matched: 88  Changed: 88  Warnings: 0
 
 mysql> select count(*) from wave;
 
+
+changing the size of a schemified table column raises following error
+
+Exception in thread "main" com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column 'summary_french' at row 1
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3560)
+
+Workaround:
+
+ALTER TABLE tablename MODIFY columnname varchar(100);
+
+ALTER TABLE wave MODIFY summary_english varchar(500);
+ALTER TABLE wave MODIFY summary_french varchar(500);
+ALTER TABLE wave MODIFY summary_german varchar(500);
+
