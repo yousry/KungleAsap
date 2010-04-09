@@ -11,7 +11,7 @@ import de.kungle.asap.model.Wave
 
 object TranslationCollector extends LiftActor with BackgroundTask with Loggable {
   
-   override var scheduleIntervall : Long = 10 // 10 Minutes intervall
+   override var scheduleIntervall : Long = 2 // 10 Minutes intervall
        
    protected def messageHandler = {
       case DoWork => work
@@ -27,9 +27,11 @@ object TranslationCollector extends LiftActor with BackgroundTask with Loggable 
       untranslatedWaves.foreach(new WaveTranslator(_))
    
       logger.info("Translator finished.")
+
+          
+      ProcessMaster ! ProcessMaster.UpdateStatus("TranslationCollector")    
       
       val stillWork = if(Wave.findAll(By(Wave.translator,"none")).length > 0) true else false
-      
       if(stillWork) {
         logger.info("Translator: still work to be done - continue in 10 seconds.")
         ActorPing.schedule(TranslationCollector, TranslationCollector.DoWork, 10 seconds)

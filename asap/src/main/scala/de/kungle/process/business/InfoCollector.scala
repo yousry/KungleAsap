@@ -34,7 +34,7 @@ object InfoCollector extends LiftActor with BackgroundTask with Loggable {
       case ex : Exception => println(ex)
     }
 
-        
+    ProcessMaster ! ProcessMaster.UpdateStatus("InfoCollector")    
     logger.info("Scanner finished.")
     ActorPing.schedule(InfoCollector, InfoCollector.DoWork, scheduleIntervall minutes)
  }
