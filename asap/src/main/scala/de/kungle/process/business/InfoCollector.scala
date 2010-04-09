@@ -9,7 +9,7 @@ import net.liftweb.common._
 import de.kungle.process.info.KungleScanner
 
 
-object InfoCollector extends LiftActor with BackgroundTask with Loggable{
+object InfoCollector extends LiftActor with BackgroundTask with Loggable {
 
  override var scheduleIntervall : Long = 10 // 10 Minutes intervall
   
@@ -21,7 +21,7 @@ object InfoCollector extends LiftActor with BackgroundTask with Loggable{
   
 
  def work() = {
-   logger.info("Info Collector finished at: %s".format(now))
+   logger.info("Info Collector started at: %s".format(now))
    
        // create a KungleScanner
     val kungleScanner = new KungleScanner()

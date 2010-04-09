@@ -9,7 +9,7 @@ import Helpers._
 import _root_.net.liftweb.mapper._
 import de.kungle.asap.model._
 
-import de.kungle.process.business.InfoCollector
+import de.kungle.process.business.{InfoCollector, TranslationCollector}
 
 /**
   * A class that's instantiated early and run.  It allows the application
@@ -38,6 +38,7 @@ class Boot {
     
     //  start Actors
     ActorPing.schedule(InfoCollector, InfoCollector.DoWork, 1 seconds)
+    ActorPing.schedule(TranslationCollector, TranslationCollector.DoWork, 1 seconds)
     
     
   }
