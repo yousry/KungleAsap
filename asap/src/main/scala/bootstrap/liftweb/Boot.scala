@@ -9,6 +9,8 @@ import Helpers._
 import _root_.net.liftweb.mapper._
 import de.kungle.asap.model._
 
+import de.kungle.process.business.InfoCollector
+
 /**
   * A class that's instantiated early and run.  It allows the application
   * to modify lift's environment
@@ -33,6 +35,11 @@ class Boot {
       Menu(Loc("Control",("admin" :: "control" :: Nil) -> false,"Control")) ::
       Nil
     LiftRules.setSiteMap(SiteMap(entries:_*))
+    
+    //  start Actors
+    ActorPing.schedule(InfoCollector, InfoCollector.DoWork, 1 seconds)
+    
+    
   }
 }
 
