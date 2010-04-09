@@ -24,5 +24,4 @@ object ProcessMaster extends LiftActor with Loggable{
 
 
      case class UpdateStatus(botName: String)
-     
 }

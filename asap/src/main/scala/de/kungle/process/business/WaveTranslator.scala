@@ -12,8 +12,6 @@ import net.liftweb.util.TimeHelpers._
 
 class WaveTranslator(w : Wave) extends Loggable {
 
-  logger.info("Starting Wave Translation at at: %s".format(now))
-  
   w.title_german(WaveTranslator.transExec(w.title_english.is,Language.ENGLISH, Language.GERMAN))
   w.title_french(WaveTranslator.transExec(w.title_english.is,Language.ENGLISH, Language.FRENCH))
 
