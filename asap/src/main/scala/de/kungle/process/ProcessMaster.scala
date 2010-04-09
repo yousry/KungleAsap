@@ -8,20 +8,34 @@ import Helpers._
 import net.liftweb.common._
 import scala.collection.mutable.HashMap
 
+import de.kungle.asap.comet._
+import de.kungle.asap.comet.BotStatus
+
 
 object ProcessMaster extends LiftActor with Loggable{
 
   val bots = new HashMap[String,java.util.Date]()
   
+  var botStats = List[BotStatus]()
   
      protected def messageHandler = {
+       case SubscribeBotStatus(bs) => {
+         botStats ::= bs
+         bs ! BotUpdateMessage(bots.toList)
+         logger.info("Message send to newcommer.")
+       }
+       case UnSubscribeBotStatus(bs) => botStats -= bs
        case UpdateStatus(bot) => {
          bots += (bot -> now)
+         botStats.foreach(b => b ! BotUpdateMessage(bots.toList))
          logger.info("Status of Bot: " + bot + " updated.")
+         logger.info("Message send to: " + botStats.length + " stats.")
        }
        case m => logger.error("Scheduler Unidentified Command: " + m)
     }
 
-
      case class UpdateStatus(botName: String)
+     case class SubscribeBotStatus(bStat: BotStatus)
+     case class UnSubscribeBotStatus(bStat: BotStatus)
+     case object InformStatClients
 }
