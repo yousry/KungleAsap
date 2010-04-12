@@ -27,14 +27,15 @@ class Boot {
     LiftRules.addToPackages("tools")
 
     // DDL
-    Schemifier.schemify(true, Log.infoF _, Comment, User, UserLog, Wave)
+    Schemifier.schemify(true, Schemifier.infoF _, Comment, User, UserLog, Wave)
     
     // Build SiteMap
     val entries = 
       Menu(Loc("Home", List("index"), "Home")) :: 
       Menu(Loc("Control",("admin" :: "control" :: Nil) -> false,"Control")) ::
-      Nil
-    LiftRules.setSiteMap(SiteMap(entries:_*))
+      User.sitemap
+    
+    LiftRules.setSiteMap(SiteMap(entries:_* ))
     
     //  start Actors
     ActorPing.schedule(InfoCollector, InfoCollector.DoWork, 1 seconds)

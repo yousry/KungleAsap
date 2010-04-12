@@ -35,7 +35,7 @@ class SimpleWaveList {
                 "summaryGerman" -> w.summary_german
         )
   
-  val entries = Wave.findAll(OrderBy(Wave.id, Descending ), MaxRows(3)).flatMap(renderEntry)
+  val entries = Wave.findAll(OrderBy(Wave.id, Descending ), MaxRows(5)).flatMap(renderEntry)
       
       bind("query", in, "entries" -> entries)
       
