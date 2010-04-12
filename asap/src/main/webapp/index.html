@@ -85,6 +85,7 @@ Check JQueryUI<br/>
 		
 		//build slider
 		var scrollbar = $(".scroll-bar").slider({
+		    orientation: 'vertical'; 
 			slide:function(e, ui){
 				if( scrollContent.width() > scrollPane.width() ){ scrollContent.css('margin-left', Math.round( ui.value / 100 * ( scrollPane.width() - scrollContent.width() )) + 'px'); }
 				else { scrollContent.css('margin-left', 0); }
