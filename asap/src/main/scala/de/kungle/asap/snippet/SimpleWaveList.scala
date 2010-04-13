@@ -17,6 +17,24 @@ import de.kungle.asap.model._
 
 class SimpleWaveList extends Loggable {
 
+  def smartScrollbar = JsRaw("""
+ $('#target').scroll(function () { 
+  
+  var containerHeight = $('#target').height();
+  var scroll = $('#target').scrollTop();
+  var inners = $('#innerself').height();
+  
+  var result = "ok"
+  
+  // this should generate an ajax call
+  if( containerHeight + scroll >= inners ) {
+   result = "false"
+  };
+  
+  $('#alles').attr({value: containerHeight + '/' + scroll + '/' + inners +' ' + result});
+ });  
+""")
+  
   def blubber : NodeSeq = {
     
     def renderEntry(w: Wave) = <div class="scroll-content-item ui-widget-content"> 
@@ -25,7 +43,7 @@ class SimpleWaveList extends Loggable {
       <b>German: </b>{w.title_german}<br /><br /> 
       <b>English: </b>{w.summary_english}<br /> 
       <b>French: </b>{w.summary_french}<br /> 
-      <b>German: </b>{w.summary_french}<br /><br /> 
+      <b>German: </b>{w.summary_german}<br /><br /> 
      </div>
     
      Wave.findAll(OrderBy(Wave.id, Descending ), MaxRows(25)).flatMap(renderEntry)
@@ -53,7 +71,7 @@ class SimpleWaveList extends Loggable {
       
   bind("query", in, 
        "entries" -> entries,
-       "button" -> queryReload)
-      
+       "button" -> queryReload,
+       "smartScroll" ->  <script type="text/javascript">{smartScrollbar}</script> )
     }
 }

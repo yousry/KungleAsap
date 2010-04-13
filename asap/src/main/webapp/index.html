@@ -34,10 +34,13 @@
   * html .scroll-content-item { display: inline; } /* IE6 float double margin bug */
  </style> 
 
+
+<lift:SimpleWaveList.queryTabel>
+
+
 <div class="span-28 last">
  <div class="scroll-pane ui-widget ui-widget ui-corner-all" id="target"> 
   <div class="scroll-content" id="innerself">
-   <lift:SimpleWaveList.queryTabel>
    
     <query:entries>
      <div class="scroll-content-item ui-widget-content">
@@ -54,28 +57,12 @@
     <query:button/>
     <div id="check-div">DRINK ME</div>
     
-   </lift:SimpleWaveList.queryTabel>
   </div>
  </div> 
 </div>
 
-<script type="text/javascript">
- $('#target').scroll(function () { 
-  
-  var containerHeight = $('#target').height();
-  var scroll = $('#target').scrollTop();
-  var inners = $('#innerself').height();
-  
-  var result = "ok"
-  
-  // this should generate an ajax call
-  if( containerHeight + scroll >= inners ) {
-   result = "false"
-  };
-  
-  $('#alles').attr({value: containerHeight + '/' + scroll + '/' + inners +' ' + result});
- });   
-</script>
+<query:smartScroll/>
+</lift:SimpleWaveList.queryTabel>
 
 
 <!--- *************** EXPERIMENT ********************* -->
