@@ -36,7 +36,7 @@
 
 <div class="span-28 last">
  <div class="scroll-pane ui-widget ui-widget ui-corner-all" id="target"> 
-  <div class="scroll-content">
+  <div class="scroll-content" id="innerself">
    <lift:SimpleWaveList.queryTabel>
     <query:entries>
      <div class="scroll-content-item ui-widget-content">
@@ -55,7 +55,19 @@
 
 <script type="text/javascript">
  $('#target').scroll(function () { 
-  $('#alles').attr({value: 'ok'});
+  
+  var containerHeight = $('#target').height();
+  var scroll = $('#target').scrollTop();
+  var inners = $('#innerself').height();
+  
+  var result = "ok"
+  
+  // this should generate an ajax call
+  if( containerHeight + scroll >= inners ) {
+   result = "false"
+  };
+  
+  $('#alles').attr({value: containerHeight + '/' + scroll + '/' + inners +' ' + result});
  });   
 </script>
 
