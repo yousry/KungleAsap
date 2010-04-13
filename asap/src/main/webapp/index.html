@@ -25,50 +25,20 @@
   <br/><br/>
   
  </div>
- 
- <div id="content" class="span-28 last">
- <br/>
- <lift:SimpleWaveList.queryTabel>
-  <query:entries>
-   <h4>Title</h4>
-   <b>English: </b><entry:titleEnglish/><br/>
-   <b>French: </b><entry:titleFrench/><br/>
-   <b>German: </b><entry:titleGerman/><br/><br/>
-   <h4>Summary</h4>
-   <b>English: </b><entry:summaryEnglish/><br/>
-   <b>French: </b><entry:summaryFrench/><br/>
-   <b>German: </b><entry:summaryGerman/><br/><br/>
-   <it>Kommentar</it>
-   <hr/>
-  </query:entries>
- </lift:SimpleWaveList.queryTabel>
- </div>
-
-<div id="content" class="span-42 last">
-
-<script type="text/javascript">
-$(function(){
-$('#date').datepicker(); 
-});
-</script>
-
-Check JQueryUI<br/>
-<input type="text" name="date" id="date" />
 
 
-</div>
 
-<div id="content" class="span-42 last">
+<!--- *************** EXPERIMENT ********************* -->
 
-<h4>Check Dynamic Scrollbar</h4>
 
-<!-- ************************************** -->
+
+<div id="content" class="span-28 last">
  
  <style type="text/css"> 
 		#demo-frame > div.demo { padding: 10px !important; }
-		.scroll-pane { overflow: auto; width: 99%; float:left; }
-		.scroll-content { width: 2440px; float: left; }
-		.scroll-content-item { width: 100px; height: 100px; float: left; margin: 10px; font-size: 3em; line-height: 96px; text-align: center; }
+		.scroll-pane { overflow: auto; width: 99%; height: 820px; float:left; }
+		.scroll-content { width: 99%; float: left; }
+		.scroll-content-item { width: 99%; height: 100px; float: left; margin: 10px; font-size: 3em; line-height: 96px; text-align: center; }
 		* html .scroll-content-item { display: inline; } /* IE6 float double margin bug */
 		.scroll-bar-wrap { clear: left; padding: 0 4px 0 2px; margin: 0 -1px -1px -1px; }
 		.scroll-bar-wrap .ui-slider { background: none; border:0; height: 2em; margin: 0 auto;  }
@@ -150,7 +120,7 @@ Check JQueryUI<br/>
 	<div class="scroll-content"> 
 		<div class="scroll-content-item ui-widget-header">1</div> 
 		<div class="scroll-content-item ui-widget-header">2</div> 
-		<div class="scroll-content-item ui-widget-header">3</div> 
+		<div class="scroll-content-item ui-widget-header">Bla</div> 
 		<div class="scroll-content-item ui-widget-header">4</div> 
 		<div class="scroll-content-item ui-widget-header">5</div> 
 		<div class="scroll-content-item ui-widget-header">6</div> 
@@ -177,7 +147,43 @@ Check JQueryUI<br/>
  
 
 
-<!-- ************************************** -->
+
+</div>
+
+
+<!--- *************** EXPERIMENT ********************* -->
+
+
+
+ 
+ <div id="content" class="span-28 last">
+ <br/>
+ <lift:SimpleWaveList.queryTabel>
+  <query:entries>
+   <h4>Title</h4>
+   <b>English: </b><entry:titleEnglish/><br/>
+   <b>French: </b><entry:titleFrench/><br/>
+   <b>German: </b><entry:titleGerman/><br/><br/>
+   <h4>Summary</h4>
+   <b>English: </b><entry:summaryEnglish/><br/>
+   <b>French: </b><entry:summaryFrench/><br/>
+   <b>German: </b><entry:summaryGerman/><br/><br/>
+   <it>Kommentar</it>
+   <hr/>
+  </query:entries>
+ </lift:SimpleWaveList.queryTabel>
+ </div>
+
+<div id="content" class="span-42 last">
+
+<script type="text/javascript">
+$(function(){
+$('#date').datepicker(); 
+});
+</script>
+
+Check JQueryUI<br/>
+<input type="text" name="date" id="date" />
 
 
 </div>
