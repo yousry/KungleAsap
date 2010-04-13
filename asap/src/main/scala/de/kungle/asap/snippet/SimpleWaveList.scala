@@ -13,19 +13,6 @@ class SimpleWaveList {
     def queryTabel(in: NodeSeq): NodeSeq = {
 
       
-      
-/*
-   <entry:titleEnglish/><hl/>
-   <entry:titleFrench/><hl/>
-   <entry:titleGerman/><hl/>
-   <h1>Summaries</h1>
-   <entry:summaryEnglish/><hl/>
-   <entry:summaryFrench/><hl/>
-   <entry:summaryGerman/><hl/>
-
- 
-*/
-      
         def renderEntry(w: Wave): NodeSeq = bind("entry", chooseTemplate("query", "entries", in),
                 "titleEnglish" -> w.title_english,
                 "titleFrench" -> w.title_french,
@@ -35,7 +22,7 @@ class SimpleWaveList {
                 "summaryGerman" -> w.summary_german
         )
   
-  val entries = Wave.findAll(OrderBy(Wave.id, Descending ), MaxRows(5)).flatMap(renderEntry)
+  val entries = Wave.findAll(OrderBy(Wave.id, Descending ), MaxRows(50)).flatMap(renderEntry)
       
       bind("query", in, "entries" -> entries)
       
