@@ -1,0 +1,86 @@
+(function($)
+{
+	// This script was written by Steve Fenton
+	// http://www.stevefenton.co.uk/Content/Jquery-Infinite-Scroller/
+	// Feel free to use this jQuery Plugin
+	
+	var timer;
+	var filltimer;
+	
+	var SetupInfiniteScroller = function (obj, config) {
+		jQuery(obj).html("<div id=\"" + config.innerscrollerid + "\">" + jQuery(obj).html() + "</div>");
+		jQuery(obj).css({ width: config.width, height: config.height, overflow: config.overflow });
+
+		FillContainerHeight(obj, config);
+	};
+	
+	var FillContainerHeight = function (obj, config) {
+		var containerHeight = $(obj).height();
+		var height = jQuery("#" + config.innerscrollerid).height();
+		
+		if (height < containerHeight) {
+			GetMoreContent(obj, config);
+		}
+		
+		filltimer = window.setTimeout(function () { FillContainerHeight(obj, config); }, 1000);
+	};
+
+	var ContentReceived = function (html, obj, config) {
+		if (html.length === 0) {
+			jQuery(obj).unbind("scroll");
+		} else {
+			jQuery("#" + config.innerscrollerid).append(html);
+		}
+	};
+
+	var GetMoreContent = function (obj, config) {
+		config.modifier++;
+		var nextUri = config.uri.replace(/#MODIFIER#/g, config.modifier);
+
+		jQuery.ajax({
+			url: nextUri,
+			success: function(data){
+				ContentReceived(data, obj, config)
+			},
+			error: function (xhr, ajaxOptions, thrownError){
+                    alert(xhr.status);
+                    alert(thrownError);
+                }
+		});
+	};
+
+	jQuery.fn.infinitescroller = function (settings) {
+	
+		var config = {
+			"innerscrollerid": "innerscroller",
+			"uri": "infinitefakedata.html?Page=#MODIFIER#",
+			"modifier": "0",
+			"width": "500px",
+			"height": "300px",
+			"overflow": "auto",
+			"offset": "50"
+		};
+		
+		if (settings) $.extend(config, settings);
+
+		return this.each(function () {
+		
+			SetupInfiniteScroller(this, config);
+			
+			jQuery(this).bind("scroll", function (event) {
+				
+				var containerHeight = $(this).height();
+				var height = (jQuery("#" + config.innerscrollerid).height() - containerHeight) - parseInt(config.offset);
+				var scroll = jQuery(this).scrollTop();
+				
+				window.clearTimeout(timer);
+
+				if (scroll > height) {
+					timer = window.setTimeout(function () { GetMoreContent(this, config); }, 500);
+				}
+			});			
+
+		});
+
+	};
+})(jQuery);

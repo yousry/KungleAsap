@@ -1,0 +1,11 @@
+        $("#infinitescroller").infinitescroller( {
+            "innerscrollerid": "innerscroller",
+            "uri": "infinitefakedata.html?Page=#MODIFIER#",
+            "modifier": "0",
+            "width": "500px",
+            "height": "500px",
+            "overflow": "auto",
+            "offset": "100"
+        });
+    });
+
