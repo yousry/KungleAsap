@@ -4,10 +4,68 @@
  <div id="header" class="span-42 last primary-1">
   <h2>kungle asap alpha</h2>
  </div>
+
+ <style type="text/css"> 
+   #menu { color: #FFFFFF; }
+   keng {
+    color: #000000;
+   }
+   
+   kfrn {
+    color: #000000;
+   }
+   
+   kger {
+    color: #000000;
+   }
+
+   
+ </style>
+ 
+ <script type="text/javascript"> 
+  $(document).ready(function() {
+    $('keng').show('slow'); 
+    $('kfrn').hide('slow'); 
+    $('kger').hide('slow'); 
+  });
+   
+ </script> 
  
  <div id="menu" class="span-42 last primary-2">
   <h4>top menu</h4>
+  <lift:SimpleWaveList.languageSelect>
+   <language:buttonOriginal/>
+   <input type="submit" name="BtEng" value="Original" id="BtEng" />
+   <input type="submit" name="BtFrn" value="Français" id="BtFrn" />
+   <input type="submit" name="BtGer" value="Deutsch" id="BtGer" />
+   
+   
+  </lift:SimpleWaveList.languageSelect>
  </div>
+
+ <script type="text/javascript"> 
+
+  $('#BtEng').click( function() {
+    $('keng').show(); 
+    $('kfrn').hide(); 
+    $('kger').hide(); 
+   });
+
+  $('#BtFrn').click( function() {
+    $('keng').hide(); 
+    $('kfrn').show(); 
+    $('kger').hide(); 
+   });
+
+  $('#BtGer').click( function() {
+    $('keng').hide(); 
+    $('kfrn').hide(); 
+    $('kger').show(); 
+   });
+
+   
+ </script> 
+
 
  <style type="text/css"> 
    .left-menu { height: 820px; }
@@ -15,7 +73,6 @@
  
  <div id="leftColumn" class="left-menu span-14 secondary-a-5">
   <h4>side menu</h4>
-		
 		
   <lift:Menu.builder />
   <lift:msgs/>
@@ -26,10 +83,6 @@
    <span>asap alpha at <b:time/></span>
   </lift:helloWorld.howdy>
  </div>
-
-
-
-<!--- *************** EXPERIMENT ********************* -->
 
  <style type="text/css"> 
   .scroll-pane { overflow: auto; width: 100%; height: 820px; float:left; }
@@ -46,12 +99,12 @@
    
     <query:entries>
      <div class="scroll-content-item ui-widget-content">
-      <b>English: </b><entry:titleEnglish/><br/>
-      <b>French: </b><entry:titleFrench/><br/>
-      <b>German: </b><entry:titleGerman/><br/><br/>
-      <b>English: </b><entry:summaryEnglish/><br/>
-      <b>French: </b><entry:summaryFrench/><br/>
-      <b>German: </b><entry:summaryGerman/><br/><br/>
+      <keng><b>English:</b><entry:titleEnglish/><br/><br/></keng>
+      <kfrn><b>French: </b><entry:titleFrench/><br/><br/></kfrn>
+      <kger><b>German: </b><entry:titleGerman/><br/><br/></kger>
+      <keng><b>English: </b><entry:summaryEnglish/><br/></keng>
+      <kfrn><b>French: </b><entry:summaryFrench/><br/></kfrn>
+      <kger><b>German: </b><entry:summaryGerman/><br/></kger>
      </div>
     </query:entries>
     
@@ -62,9 +115,9 @@
 </div>
 
 <query:smartScroll/>
+
 </lift:SimpleWaveList.queryTabel>
 
-<!--- *************** EXPERIMENT ********************* -->
 
 <div id="jqueryexample" class="span-42 last">
  <script type="text/javascript">
@@ -77,10 +130,9 @@
  <input type="text" id="date" />
 </div>
 
- <div id="blubber" class="span-42 last secondary-b-2">
+ <div id="footer" class="span-42 last secondary-b-2">
  footer
  </div>
-
 </div>
 
 </lift:surround>

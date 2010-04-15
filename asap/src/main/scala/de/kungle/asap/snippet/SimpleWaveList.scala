@@ -47,19 +47,19 @@ $('#target').scroll(function () {
     logger.info("PageAppend called for page: " + pageCount)
     
     def renderEntry(w: Wave) = <div class="scroll-content-item ui-widget-content"> 
-      <b>English: </b>{w.title_english}<br /> 
-      <b>French: </b>{w.title_french}<br /> 
-      <b>German: </b>{w.title_german}<br /><br /> 
-      <b>English: </b>{w.summary_english}<br /> 
-      <b>French: </b>{w.summary_french}<br /> 
-      <b>German: </b>{w.summary_german}<br /><br /> 
+      <keng><b>English: </b>{w.title_english}<br /><br /></keng> 
+      <kfrn><b>French: </b>{w.title_french}<br /><br /></kfrn> 
+      <kger><b>German: </b>{w.title_german}<br /><br /></kger> 
+      <keng><b>English: </b>{w.summary_english}<br /></keng> 
+      <kfrn><b>French: </b>{w.summary_french}<br /></kfrn> 
+      <kger><b>German: </b>{w.summary_german}<br /></kger>
      </div>
     
     var nextPage = pageCount + 1
     val newDiv = "check-div" + nextPage
     pageCount = nextPage
 
-    Wave.findAll(OrderBy(Wave.id, Descending ), StartAt(25 * nextPage), MaxRows(25)).flatMap(renderEntry) ++ <div id={newDiv}>actualBlubber</div>
+    Wave.findAll(OrderBy(Wave.id, Descending ), StartAt(25 * nextPage), MaxRows(25)).flatMap(renderEntry) ++ <div id={newDiv}>Loading Data...</div>
   }
 
     def queryTabel(in: NodeSeq): NodeSeq = {
@@ -82,4 +82,10 @@ $('#target').scroll(function () {
   )
     
   }
+    
+    def languageSelect(html: NodeSeq) : NodeSeq = {
+      bind("language", html, 
+           "buttonOriginal" -> <span>Button goes here</span> 
+      )
+    }
 }
