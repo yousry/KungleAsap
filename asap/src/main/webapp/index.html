@@ -35,37 +35,10 @@
   <h4>top menu</h4>
   <lift:SimpleWaveList.languageSelect>
    <language:buttonOriginal/>
-   <input type="submit" name="BtEng" value="Original" id="BtEng" />
-   <input type="submit" name="BtFrn" value="Français" id="BtFrn" />
-   <input type="submit" name="BtGer" value="Deutsch" id="BtGer" />
-   
-   
+   <language:buttonFrench/>
+   <language:buttonGerman/>
   </lift:SimpleWaveList.languageSelect>
  </div>
-
- <script type="text/javascript"> 
-
-  $('#BtEng').click( function() {
-    $('keng').show(); 
-    $('kfrn').hide(); 
-    $('kger').hide(); 
-   });
-
-  $('#BtFrn').click( function() {
-    $('keng').hide(); 
-    $('kfrn').show(); 
-    $('kger').hide(); 
-   });
-
-  $('#BtGer').click( function() {
-    $('keng').hide(); 
-    $('kfrn').hide(); 
-    $('kger').show(); 
-   });
-
-   
- </script> 
-
 
  <style type="text/css"> 
    .left-menu { height: 820px; }

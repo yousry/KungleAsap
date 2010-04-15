@@ -23,6 +23,7 @@ class SimpleWaveList extends Loggable {
 
   // for infinite scroll a imagetive page is calulated.
   private var pageCount = 0
+  private var language = "original" // french, german
 
   // This method creates a ajax call to the server like a button. 
   // But instead of a button press the end of the scrollbar produces an event.
@@ -82,10 +83,20 @@ $('#target').scroll(function () {
   )
     
   }
+
+  def langSel(lang: String) : JsCmd = {
+    logger.info("Language selected:" + lang); 
+    language = lang;
+    if(language == "original") JsRaw("""$('keng').show(); $('kfrn').hide(); $('kger').hide();""")
+    else if(language == "french") JsRaw("""$('keng').hide(); $('kfrn').show(); $('kger').hide();""")
+    else JsRaw("""$('keng').hide(); $('kfrn').hide(); $('kger').show();""")
+  }
     
-    def languageSelect(html: NodeSeq) : NodeSeq = {
-      bind("language", html, 
-           "buttonOriginal" -> <span>Button goes here</span> 
-      )
-    }
+  def languageSelect(html: NodeSeq) : NodeSeq = {
+    bind("language", html, 
+         "buttonOriginal" -> ajaxButton("Eat Me", () => langSel("original")), 
+         "buttonFrench" -> ajaxButton("Eat Me", () => langSel("french")),
+         "buttonGerman" -> ajaxButton("Eat Me", () => langSel("german"))
+    )
+  }
 }
