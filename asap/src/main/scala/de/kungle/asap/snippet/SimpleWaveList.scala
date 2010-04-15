@@ -20,34 +20,31 @@ import de.kungle.asap.model._
 
 
 class SimpleWaveList extends Loggable {
-  
 
-  private var blubberCount = 0
-  
-  
-  
-  def ajaxBlubber(func: () => JsCmd, attrs: (String, String)*): Elem = {
+  // for infinite scroll a imagetive page is calulated.
+  private var pageCount = 0
+
+  // This method creates a ajax call to the server like a button. 
+  // But instead of a button press the end of the scrollbar produces an event.
+  def ajaxPageAppend(func: () => JsCmd, attrs: (String, String)*): Elem = {
     attrs.foldLeft(fmapFunc(contextFuncBuilder(func))(name =>
 <script type="text/javascript">{JsRaw("""
 $('#target').scroll(function () { 
   var containerHeight = $('#target').height();
   var scroll = $('#target').scrollTop();
   var inners = $('#innerself').height();
-  var result = "ok"
   
   if( containerHeight + scroll >= inners ) {
-   result = "false"; 
-
    window.setTimeout(function () { """ + {makeAjaxCall(Str(name + "=true")).toJsCmd + "; return false;"} + """ }, 500);
-
   };
-  $('#alles').attr({value: containerHeight + '/' + scroll + '/' + inners +' ' + result});
  });""")}</script>))(_ % _)
   }
-  
-  def blubber : NodeSeq = {
+
+  // The server reaction by the scrollbar-end-event is to load an 
+  // additional page and add it to the page. 
+  def pageAppend : NodeSeq = {
     
-    logger.info("Blubber Refresh called for page: " + blubberCount)
+    logger.info("PageAppend called for page: " + pageCount)
     
     def renderEntry(w: Wave) = <div class="scroll-content-item ui-widget-content"> 
       <b>English: </b>{w.title_english}<br /> 
@@ -58,11 +55,11 @@ $('#target').scroll(function () {
       <b>German: </b>{w.summary_german}<br /><br /> 
      </div>
     
-    var actualBlubber = blubberCount + 1
-    val newDiv = "check-div" + actualBlubber
-    blubberCount = actualBlubber
+    var nextPage = pageCount + 1
+    val newDiv = "check-div" + nextPage
+    pageCount = nextPage
 
-    Wave.findAll(OrderBy(Wave.id, Descending ), StartAt(25 * actualBlubber), MaxRows(25)).flatMap(renderEntry) ++ <div id={newDiv}>actualBlubber</div>
+    Wave.findAll(OrderBy(Wave.id, Descending ), StartAt(25 * nextPage), MaxRows(25)).flatMap(renderEntry) ++ <div id={newDiv}>actualBlubber</div>
   }
 
     def queryTabel(in: NodeSeq): NodeSeq = {
@@ -81,7 +78,7 @@ $('#target').scroll(function () {
   
   bind("query", in, 
        "entries" -> entries,
-       "smartScroll" -> ajaxBlubber({() => SetHtml("check-div" + {if(blubberCount == 0)"" else  blubberCount}, blubber )})  
+       "smartScroll" -> ajaxPageAppend({() => SetHtml("check-div" + {pageCount}, pageAppend )})  
   )
     
   }
