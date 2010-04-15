@@ -12,7 +12,7 @@ import net.liftweb.http.S._
 import net.liftweb.http.SHtml._
 import net.liftweb.http.js.JE._
 import net.liftweb.http.js.JsCmds._
-import net.liftweb.http.js.JsCmd
+import net.liftweb.http.js.{JsCmd,JsExp}
 import net.liftweb.http.SessionVar
 
 
@@ -28,15 +28,24 @@ class SimpleWaveList extends Loggable {
   // This method creates a ajax call to the server like a button. 
   // But instead of a button press the end of the scrollbar produces an event.
   def ajaxPageAppend(func: () => JsCmd, attrs: (String, String)*): Elem = {
-    attrs.foldLeft(fmapFunc(contextFuncBuilder(func))(name =>
-<script type="text/javascript">{JsRaw("""
-$('#target').scroll(function () { 
+    
+    
+    val blubber = ajaxInvoke(() => langScrollUpdate)
+    
+    logger.info("A: " + blubber._1)
+    logger.info("V: " + blubber._2)
+    
+    attrs.foldLeft(fmapFunc(contextFuncBuilder(func))(name => 
+      <script type="text/javascript">{JsRaw("""$('#target').scroll(function () { 
   var containerHeight = $('#target').height();
   var scroll = $('#target').scrollTop();
   var inners = $('#innerself').height();
   
   if( containerHeight + scroll >= inners ) {
    window.setTimeout(function () { """ + {makeAjaxCall(Str(name + "=true")).toJsCmd + "; return false;"} + """ }, 500);
+   window.setTimeout(function () { """ + {makeAjaxCall(Str(blubber._1 + "=true")).toJsCmd + "; return false;"} + """ }, 1000);
+
+
   };
  });""")}</script>))(_ % _)
   }
@@ -84,6 +93,15 @@ $('#target').scroll(function () {
     
   }
 
+  def langScrollUpdate : JsCmd = {
+    
+    logger.info("LangScrollUpdate called for page: " + pageCount + " with language " + language)
+    
+    if(language == "original") JsRaw("""$('keng').show(); $('kfrn').hide(); $('kger').hide();""")
+    else if(language == "french") JsRaw("""$('keng').hide(); $('kfrn').show(); $('kger').hide();""")
+    else JsRaw("""$('keng').hide(); $('kfrn').hide(); $('kger').show();""")
+  }  
+  
   def langSel(lang: String) : JsCmd = {
     logger.info("Language selected:" + lang); 
     language = lang;
@@ -95,8 +113,8 @@ $('#target').scroll(function () {
   def languageSelect(html: NodeSeq) : NodeSeq = {
     bind("language", html, 
          "buttonOriginal" -> ajaxButton("Eat Me", () => langSel("original")), 
-         "buttonFrench" -> ajaxButton("Eat Me", () => langSel("french")),
-         "buttonGerman" -> ajaxButton("Eat Me", () => langSel("german"))
+         "buttonFrench" -> ajaxButton("Drink Me", () => langSel("french")),
+         "buttonGerman" -> ajaxButton("Follow the Rabbit!", () => langSel("german"))
     )
   }
 }
