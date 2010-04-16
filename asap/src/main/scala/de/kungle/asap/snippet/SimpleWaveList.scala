@@ -109,4 +109,5 @@ class SimpleWaveList extends Loggable {
          "buttonGerman" -> ajaxButton("deutsch", () => langSel("german"))
     )
   }
+  
 }
