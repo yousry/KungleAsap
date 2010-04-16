@@ -29,12 +29,6 @@ class SimpleWaveList extends Loggable {
   // But instead of a button press the end of the scrollbar produces an event.
   def ajaxPageAppend(func: () => JsCmd, attrs: (String, String)*): Elem = {
     
-    
-    val blubber = ajaxInvoke(() => langScrollUpdate)
-    
-    logger.info("A: " + blubber._1)
-    logger.info("V: " + blubber._2)
-    
     attrs.foldLeft(fmapFunc(contextFuncBuilder(func))(name => 
       <script type="text/javascript">{JsRaw("""$('#target').scroll(function () { 
   var containerHeight = $('#target').height();
@@ -43,9 +37,7 @@ class SimpleWaveList extends Loggable {
   
   if( containerHeight + scroll >= inners ) {
    window.setTimeout(function () { """ + {makeAjaxCall(Str(name + "=true")).toJsCmd + "; return false;"} + """ }, 500);
-   window.setTimeout(function () { """ + {makeAjaxCall(Str(blubber._1 + "=true")).toJsCmd + "; return false;"} + """ }, 1000);
-
-
+   window.setTimeout(function () { """ + {makeAjaxCall(Str((ajaxInvoke(() => langScrollUpdate))._1 + "=true")).toJsCmd + "; return false;"} + """ }, 510);
   };
  });""")}</script>))(_ % _)
   }
@@ -112,9 +104,9 @@ class SimpleWaveList extends Loggable {
     
   def languageSelect(html: NodeSeq) : NodeSeq = {
     bind("language", html, 
-         "buttonOriginal" -> ajaxButton("Eat Me", () => langSel("original")), 
-         "buttonFrench" -> ajaxButton("Drink Me", () => langSel("french")),
-         "buttonGerman" -> ajaxButton("Follow the Rabbit!", () => langSel("german"))
+         "buttonOriginal" -> ajaxButton("original", () => langSel("original")), 
+         "buttonFrench" -> ajaxButton("français", () => langSel("french")),
+         "buttonGerman" -> ajaxButton("deutsch", () => langSel("german"))
     )
   }
 }

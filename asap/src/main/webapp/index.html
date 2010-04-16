@@ -32,16 +32,26 @@
  </script> 
  
  <div id="menu" class="span-42 last primary-2">
-  <h4>top menu</h4>
+  <b>top menu</b>
   <lift:SimpleWaveList.languageSelect>
    <language:buttonOriginal/>
    <language:buttonFrench/>
    <language:buttonGerman/>
   </lift:SimpleWaveList.languageSelect>
+  
+  
+  <script type="text/javascript">
+   $(function(){
+    $('#date').datepicker(); 
+   });
+  </script>
+
+  Search <input type="text" id="date" />
+  
  </div>
 
  <style type="text/css"> 
-   .left-menu { height: 820px; }
+   .left-menu { height: 550px; }
  </style>
  
  <div id="leftColumn" class="left-menu span-14 secondary-a-5">
@@ -58,7 +68,7 @@
  </div>
 
  <style type="text/css"> 
-  .scroll-pane { overflow: auto; width: 100%; height: 820px; float:left; }
+  .scroll-pane { overflow: auto; width: 100%; height: 550px; float: left; }
   .scroll-content { width: 99%; float: left; }
   .scroll-content-item { width: 99%; height: 100%; float: left; margin: 4px; font-size: 0.9em; line-height: 12px; text-align: left;}
   * html .scroll-content-item { display: inline; } /* IE6 float double margin bug */
@@ -72,7 +82,7 @@
    
     <query:entries>
      <div class="scroll-content-item ui-widget-content">
-      <keng><b>English:</b><entry:titleEnglish/><br/><br/></keng>
+      <keng><b>English: </b><entry:titleEnglish/><br/><br/></keng>
       <kfrn><b>French: </b><entry:titleFrench/><br/><br/></kfrn>
       <kger><b>German: </b><entry:titleGerman/><br/><br/></kger>
       <keng><b>English: </b><entry:summaryEnglish/><br/></keng>
@@ -93,14 +103,7 @@
 
 
 <div id="jqueryexample" class="span-42 last">
- <script type="text/javascript">
-  $(function(){
-   $('#date').datepicker(); 
-  });
- </script>
 
- Check JQueryUI<br/>
- <input type="text" id="date" />
 </div>
 
  <div id="footer" class="span-42 last secondary-b-2">
