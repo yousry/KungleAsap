@@ -17,20 +17,12 @@
     </script> 
  
     <div id="menu" class="span-42 last primary-2">
-      <b>top menu</b>
-      
-      <select>
-        <option>original</option>
-        <option>français</option>
-        <option>deutsch</option>
-      </select>
-      
-      <lift:SimpleWaveList.languageSelect>
-        <language:buttonOriginal/>
-        <language:buttonFrench/>
-        <language:buttonGerman/>
-      </lift:SimpleWaveList.languageSelect>
-  
+
+    <div class="span-21">
+      Language: <lift:SimpleWaveList.languageSelect/>
+    </div>
+    
+    <div align="right" class="span-21 last"> 
       <script type="text/javascript">
         $(function(){
           $('#date').datepicker(); 
@@ -38,7 +30,8 @@
       </script>
 
       Search <input type="text" id="date" />
-  
+    </div>
+    
     </div> <!-- menu -->
  
  
@@ -49,9 +42,12 @@
       <lift:msgs/>
       <br/><br/>
 
+    <div style="position:  absolute;  bottom:  7%;">
       <lift:helloWorld.howdy>
-        <span>asap alpha at <b:time/></span>
+        <span align="bottom">asap alpha at <b:time/></span>
       </lift:helloWorld.howdy>
+    </div>  
+      
     </div> <!-- leftColumn -->
 
     <lift:SimpleWaveList.queryTabel>

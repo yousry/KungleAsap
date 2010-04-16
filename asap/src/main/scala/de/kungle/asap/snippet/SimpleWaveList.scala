@@ -101,13 +101,11 @@ class SimpleWaveList extends Loggable {
     else if(language == "french") JsRaw("""$('keng').hide(); $('kfrn').show(); $('kger').hide();""")
     else JsRaw("""$('keng').hide(); $('kfrn').hide(); $('kger').show();""")
   }
-    
-  def languageSelect(html: NodeSeq) : NodeSeq = {
-    bind("language", html, 
-         "buttonOriginal" -> ajaxButton("original", () => langSel("original")), 
-         "buttonFrench" -> ajaxButton("français", () => langSel("french")),
-         "buttonGerman" -> ajaxButton("deutsch", () => langSel("german"))
-    )
-  }
-  
+
+ def languageSelect: NodeSeq = ajaxSelect(
+   List(("original", "original"),
+        ("french", "français"),
+        ("german", "deutsch")
+ ), Full(language), (opt: String) =>{logger.info(opt); langSel(opt)}) 
+ 
 }
