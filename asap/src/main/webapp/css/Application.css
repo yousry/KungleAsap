@@ -1,0 +1,74 @@
+@CHARSET "ISO-8859-1";
+
+html {
+    height: 100%; 
+	min-height: 100%;
+}
+
+body {
+  height: 93%;
+  min-height: 93%;
+}
+
+#content { 
+  height: 100%;
+  min-height: 100%;
+}
+
+#container { 
+  height: 100%;
+  min-height: 100%;
+}
+
+#leftColumn {
+  height: 85%;
+  min-height: 85%;
+}
+
+#news-column {
+  height: 85%;
+  min-height: 85%;
+}
+
+
+.scroll-pane { 
+  overflow: auto; 
+  width: 100%;
+  min-height: 100%;
+  height: 100%; 
+  float: left; 
+}
+.scroll-content { 
+  width: 99%; 
+  float: left; 
+}
+
+.scroll-content-item { 
+  width: 99%; 
+  height: 100%; 
+  float: left; 
+  margin: 4px; 
+  font-size: 0.9em; 
+  line-height: 12px; 
+  text-align: left;
+}
+
+* html .scroll-content-item { 
+display: inline; 
+} /* IE6 float double margin bug */
+
+#menu { 
+  color: #FFFFFF; 
+}
+  
+keng {
+  color: #000000;
+}
+   
+kfrn {
+  color: #000000;
+}
+   
+kger {
+  color: #000000;
+}
