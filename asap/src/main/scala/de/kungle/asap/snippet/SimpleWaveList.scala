@@ -66,10 +66,17 @@ class SimpleWaveList extends Loggable {
 
     def queryTabel(in: NodeSeq): NodeSeq = {
       
+      // <a href="http://www.indiavision.com/news/article/entertainment/46056/">Sandra Bullock's murder plot bogus</a>
+      def renderTitle(lang: String, w: Wave)= lang match {
+        case "french" => <a href="{w.url}">{w.title_french}</a>;
+        case "german" => <a href="{w.url}">{w.title_german}</a>;
+        case _ => <a href="{w.url}">{w.title_english}</a>;
+      }
+      
         def renderEntry(w: Wave): NodeSeq = bind("entry", chooseTemplate("query", "entries", in),
-                "titleEnglish" -> w.title_english,
-                "titleFrench" -> w.title_french,
-                "titleGerman" -> w.title_german,
+                "titleEnglish" -> {renderTitle("english", w)},
+                "titleFrench" -> {renderTitle("french", w)},
+                "titleGerman" -> {renderTitle("german", w)},
 	            "summaryEnglish" -> w.summary_english,
                 "summaryFrench" -> w.summary_french,
                 "summaryGerman" -> w.summary_german
