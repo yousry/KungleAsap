@@ -1,7 +1,6 @@
 <lift:surround with="default" at="content">
 
 <div id="content"> 
-
   <div id="container"  class="container">
  
     <div id="header" class="span-42 last primary-1">
@@ -24,10 +23,23 @@
 
     <div class="span-14">
       <div id="droppable" class="ui-widget-header">
-	    <p>Drop here</p>
+       <p>Drop your articles here.</p>
       </div>
     </div>
+    
+    <script type="text/javascript">
+	  $(function() {
+        $("#droppable").droppable({
+		  drop: function(event, ui) {
 
+        	var blub = ui.draggable.attr("id");
+    		  
+		    $(this).addClass('ui-state-highlight').find('p').html(  blub  );
+	      }
+		});
+	  });
+	</script>
+    
     
     <div align="right" class="span-14 last"> 
       <script type="text/javascript">
@@ -36,7 +48,7 @@
         });
       </script>
 
-      Search <input type="text" id="date" />
+      <p>Search <input type="text" id="date" /></p>
     </div>
     
     </div> <!-- menu -->

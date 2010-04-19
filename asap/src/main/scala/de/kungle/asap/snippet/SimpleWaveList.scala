@@ -34,7 +34,7 @@ class SimpleWaveList extends Loggable {
   var containerHeight = $('#target').height();
   var scroll = $('#target').scrollTop();
   var inners = $('#innerself').height();
-  var offset = 50
+  var offset = 15
   
   if( containerHeight + scroll + 50 >= inners ) {
    window.setTimeout(function () { """ + {makeAjaxCall(Str(name + "=true")).toJsCmd + "; return false;"} + """ }, 500);
@@ -83,11 +83,10 @@ class SimpleWaveList extends Loggable {
 
         val waves = Wave.findAll(OrderBy(Wave.id, Descending ), MaxRows(25))
 
-      
         def dragImgs : JsRaw = {
-          def sigh(w: Wave) : String = "$(\"#pic_" + w.id.is + "\").draggable({ revert: true; appendTo: 'body'}); "
+          def sigh(w: Wave) : String = "$(\"#pic_"+ w.id.is +"\").draggable({revert: true, helper: 'clone', appendTo: 'body', opacity: 0.4, tolerance: 'touch'});"  //  "$(\"#pic_" + w.id.is + "\").draggable({ revert: true, appendTo: 'body', opacity: 0.5});"
           val v = waves.map{ s => sigh(s)}.mkString
-          JsRaw("$(function() {" +{v}+"});") 
+          JsRaw("$(function() {"  +{v}+ "});") 
         }
         
         def renderEntry(w: Wave): NodeSeq = bind("entry", chooseTemplate("query", "entries", in),
