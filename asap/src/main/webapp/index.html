@@ -65,16 +65,16 @@
    
           <query:entries>
             <div class="scroll-content-item ui-widget-content">
-              <div class="span-4">
-                <img src="/gfx/thumbnails/text3592.png" alt="PROCESS DATA" />
-              </div>  
+              <entry:renderPic/>
               <div class="span-22 last">
-                <keng><entry:titleEnglish/><br/><br/></keng>
-                <kfrn><entry:titleFrench/><br/><br/></kfrn>
-                <kger><entry:titleGerman/><br/><br/></kger>
-                Publisher: <b><entry:publisher/></b>
+                <keng><entry:titleEnglish/></keng>
+                <kfrn><entry:titleFrench/></kfrn>
+                <kger><entry:titleGerman/></kger>
+                <br/>
+                Publisher: <b><entry:publisher/></b><br/>
+                <entry:published/><hr/>
               </div> 
-              <div class="span-27 last">
+              <div class="summary span-26 last">
                 <keng><entry:summaryEnglish/><br/></keng>
                 <kfrn><entry:summaryFrench/><br/></kfrn>
                 <kger><entry:summaryGerman/><br/></kger>
@@ -88,6 +88,9 @@
       </div> <!-- news-column -->
 
       <query:smartScroll/>
+      
+      <query:dragImgs/>
+      
     </lift:SimpleWaveList.queryTabel>
 
     <div id="footer" class="span-42 last secondary-b-2">

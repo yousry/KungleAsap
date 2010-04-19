@@ -67,29 +67,47 @@ class SimpleWaveList extends Loggable {
 
     def queryTabel(in: NodeSeq): NodeSeq = {
       
-      // <a href="http://www.indiavision.com/news/article/entertainment/46056/">Sandra Bullock's murder plot bogus</a>
+      def renderPic(w: Wave) : NodeSeq = {
+        val picID = "pic_" + w.id.is 
+        <div class="span-4" id={picID} >
+                <img src="/gfx/thumbnails/text3592.png" alt="PROCESS DATA" />
+        </div> 
+      }
+      
       def renderTitle(lang: String, w: Wave)= lang match {
         case "french" => <a href={w.url.is}>{w.title_french}</a>;
         case "german" => <a href={w.url.is}>{w.title_german}</a>;
         case _ => <a href={w.url.is}>{w.title_english}</a>;
       }
       
+
+        val waves = Wave.findAll(OrderBy(Wave.id, Descending ), MaxRows(25))
+
+      
+        def dragImgs : JsRaw = {
+          def sigh(w: Wave) : String = "$(\"#pic_" + w.id.is + "\").draggable({ revert: true; appendTo: 'body'}); "
+          val v = waves.map{ s => sigh(s)}.mkString
+          JsRaw("$(function() {" +{v}+"});") 
+        }
+        
         def renderEntry(w: Wave): NodeSeq = bind("entry", chooseTemplate("query", "entries", in),
                 "titleEnglish" -> {renderTitle("english", w)},
                 "titleFrench" -> {renderTitle("french", w)},
                 "titleGerman" -> {renderTitle("german", w)},
                 "publisher" -> w.publisher,
+                "published" -> w.publishingDate,
 	            "summaryEnglish" -> w.summary_english,
                 "summaryFrench" -> w.summary_french,
-                "summaryGerman" -> w.summary_german
+                "summaryGerman" -> w.summary_german,
+                "renderPic" -> renderPic(w)
         )
   
-  val entries = Wave.findAll(OrderBy(Wave.id, Descending ), MaxRows(25)).flatMap(renderEntry)
-  
+  val entries = waves.flatMap(renderEntry)
   
   bind("query", in, 
        "entries" -> entries,
-       "smartScroll" -> ajaxPageAppend({() => SetHtml("check-div" + {pageCount}, pageAppend )})  
+       "smartScroll" -> ajaxPageAppend({() => SetHtml("check-div" + {pageCount}, pageAppend )}),
+       "dragImgs" -> <script type="text/javascript">{dragImgs}</script> 
   )
     
   }

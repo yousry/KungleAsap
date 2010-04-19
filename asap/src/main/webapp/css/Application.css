@@ -30,7 +30,6 @@ body {
   min-height: 85%;
 }
 
-
 .scroll-pane { 
   overflow: auto; 
   width: 100%;
@@ -47,8 +46,8 @@ body {
   width: 99%; 
   height: 100%; 
   float: left; 
-  /* margin: 4px; 
-     font-size: 0.9em; 
+  margin: 4px; 
+  /*   font-size: 0.9em; 
      line-height: 12px; */
   text-align: left;
 }
@@ -71,4 +70,8 @@ kfrn {
    
 kger {
   color: #000000;
+}
+
+.summary {
+	margin: 4px; 
 }
