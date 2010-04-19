@@ -34,8 +34,9 @@ class SimpleWaveList extends Loggable {
   var containerHeight = $('#target').height();
   var scroll = $('#target').scrollTop();
   var inners = $('#innerself').height();
+  var offset = 50
   
-  if( containerHeight + scroll >= inners ) {
+  if( containerHeight + scroll + 50 >= inners ) {
    window.setTimeout(function () { """ + {makeAjaxCall(Str(name + "=true")).toJsCmd + "; return false;"} + """ }, 500);
    window.setTimeout(function () { """ + {makeAjaxCall(Str((ajaxInvoke(() => langScrollUpdate))._1 + "=true")).toJsCmd + "; return false;"} + """ }, 510);
   };
@@ -68,15 +69,16 @@ class SimpleWaveList extends Loggable {
       
       // <a href="http://www.indiavision.com/news/article/entertainment/46056/">Sandra Bullock's murder plot bogus</a>
       def renderTitle(lang: String, w: Wave)= lang match {
-        case "french" => <a href="{w.url}">{w.title_french}</a>;
-        case "german" => <a href="{w.url}">{w.title_german}</a>;
-        case _ => <a href="{w.url}">{w.title_english}</a>;
+        case "french" => <a href={w.url.is}>{w.title_french}</a>;
+        case "german" => <a href={w.url.is}>{w.title_german}</a>;
+        case _ => <a href={w.url.is}>{w.title_english}</a>;
       }
       
         def renderEntry(w: Wave): NodeSeq = bind("entry", chooseTemplate("query", "entries", in),
                 "titleEnglish" -> {renderTitle("english", w)},
                 "titleFrench" -> {renderTitle("french", w)},
                 "titleGerman" -> {renderTitle("german", w)},
+                "publisher" -> w.publisher,
 	            "summaryEnglish" -> w.summary_english,
                 "summaryFrench" -> w.summary_french,
                 "summaryGerman" -> w.summary_german
@@ -111,8 +113,8 @@ class SimpleWaveList extends Loggable {
 
  def languageSelect: NodeSeq = ajaxSelect(
    List(("original", "original"),
-        ("french", "français"),
+        ("french", "fran\u00E7ais"),
         ("german", "deutsch")
- ), Full(language), (opt: String) =>{logger.info(opt); langSel(opt)}) 
+ ), Full(language), (lang: String) =>{logger.info("Language " + lang + "selected."); langSel(lang)}) 
  
 }

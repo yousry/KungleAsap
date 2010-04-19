@@ -18,11 +18,18 @@
  
     <div id="menu" class="span-42 last primary-2">
 
-    <div class="span-21">
+    <div class="span-14">
       Language: <lift:SimpleWaveList.languageSelect/>
     </div>
+
+    <div class="span-14">
+      <div id="droppable" class="ui-widget-header">
+	    <p>Drop here</p>
+      </div>
+    </div>
+
     
-    <div align="right" class="span-21 last"> 
+    <div align="right" class="span-14 last"> 
       <script type="text/javascript">
         $(function(){
           $('#date').datepicker(); 
@@ -42,7 +49,7 @@
       <lift:msgs/>
       <br/><br/>
 
-    <div style="position:  absolute;  bottom:  7%;">
+    <div style="position:  absolute;  top:  86%;">
       <lift:helloWorld.howdy>
         <span align="bottom">asap alpha at <b:time/></span>
       </lift:helloWorld.howdy>
@@ -65,6 +72,7 @@
                 <keng><entry:titleEnglish/><br/><br/></keng>
                 <kfrn><entry:titleFrench/><br/><br/></kfrn>
                 <kger><entry:titleGerman/><br/><br/></kger>
+                Publisher: <b><entry:publisher/></b>
               </div> 
               <div class="span-27 last">
                 <keng><entry:summaryEnglish/><br/></keng>
