@@ -12,12 +12,21 @@ import scala.xml.NodeSeq
 
 object XNews {
   def unapply(in: Any): Option[String] = in match {
-    case s: String => Some(s)
+    case s: String => {
+      val ents = WorkbenchNews.get
+      if( ents.contains(s) )
+        Some("News already Selected")
+      else {
+        WorkbenchNews(s :: ents) 
+        Some("%s News in your Box".format(ents.length + 1) )
+      }
+    }
+                       
     case _ => None
   }
 }
 
-
+object WorkbenchNews extends SessionVar[List[String]](List())
 
 object WaveJasonHandler extends SessionVar[JsonHandler](
   new JsonHandler {

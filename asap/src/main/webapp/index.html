@@ -34,14 +34,14 @@
 		  drop: function(event, ui) {
 
         	var picId = ui.draggable.attr("id");
-    		addNews("stringCallback", picId);  
+    		addNews("newsCallback", picId);  
 	      }
 		});
 	  });
 	</script>
 
     <script type="text/javascript">
-        function stringCallback(what) {
+        function newsCallback(what) {
 
           $("#droppable").addClass('ui-state-highlight').find('p').html(  what  );
 

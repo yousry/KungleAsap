@@ -60,7 +60,7 @@ class SimpleWaveList extends Loggable {
   }
 
   def dragImgs(ws: List[Wave]) : JsRaw = {
-    def sigh(w: Wave) : String = "$(\"#pic_"+ w.id.is +"\").draggable({revert: true, helper: 'clone', appendTo: 'body', opacity: 0.4, tolerance: 'touch'});"  //  "$(\"#pic_" + w.id.is + "\").draggable({ revert: true, appendTo: 'body', opacity: 0.5});"
+    def sigh(w: Wave) : String = "$(\"#pic_"+ w.id.is +"\").draggable({revert: true, helper: 'clone', appendTo: 'body', opacity: 0.5, tolerance: 'touch'});"  
     val v = ws.map{ s => sigh(s)}.mkString
     JsRaw("$(function() {"  +{v}+ "});") 
   }
