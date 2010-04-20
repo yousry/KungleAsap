@@ -25,7 +25,7 @@ class BotStatus extends CometActor with Loggable{
       Text("Waiting for ProcessMaster sync.")
     } else {
       <table>
-      <tr><th>Bot</th><th>Last Execution</th></tr>
+      <tr><th>Imp</th><th>Walk Abroad</th></tr>
       {latestBots.map(x => <tr><td>{x._1}</td><td>{x._2}</td></tr>  )}
       </table>
     }
