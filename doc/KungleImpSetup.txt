@@ -1,0 +1,18 @@
+Rechner IP: vserver3066.vserver-on.de
+
+Install Java
+
+apt-get install sun-java6-bin sun-java6-jre
+
+vserver3066:/etc# diff /etc/profile /etc/profile_100420 
+25,27d24
+< 
+< JAVA_HOME="/usr/lib/jvm/java-6-sun"
+< export JAVA_HOME
+
+
+Benutzer: yousry
+pass: 7(nb_.=<uT,P
+
+Benutzer: root
+pass: 8b525d3c
