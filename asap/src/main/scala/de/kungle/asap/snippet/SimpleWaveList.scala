@@ -53,10 +53,15 @@ class SimpleWaveList extends Loggable {
     </div> 
   }
         
-  def renderTitle(lang: String, w: Wave)= lang match {
-    case "french" => <a href={w.url.is} target="_blank">{w.title_french}</a>;
-    case "german" => <a href={w.url.is} target="_blank">{w.title_german}</a>;
-    case _ => <a href={w.url.is} target="_blank">{w.title_english}</a>;
+  def renderTitle(lang: String, w: Wave)= {
+    val frTitle = if(w.title_french.is == "") "L'entrée est manquante." else w.title_french.is
+    val deTitle = if(w.title_german.is == "") "Eintrag fehlt." else w.title_german.is
+
+    lang match {
+      case "french" => <a href={w.url.is} target="_blank">{w.title_french}</a>;
+      case "german" => <a href={w.url.is} target="_blank">{w.title_german}</a>;
+      case _ => <a href={w.url.is} target="_blank">{w.title_english}</a>;
+    }
   }
 
   def dragImgs(ws: List[Wave]) : JsRaw = {
