@@ -2,6 +2,7 @@
 
 <div id="content"> 
   <div id="container"  class="container">
+  <lift:WaveJason/> 
  
     <div id="header" class="span-42 last primary-1">
       <h2>kungle asap alpha</h2>
@@ -32,13 +33,21 @@
         $("#droppable").droppable({
 		  drop: function(event, ui) {
 
-        	var blub = ui.draggable.attr("id");
-    		  
-		    $(this).addClass('ui-state-highlight').find('p').html(  blub  );
+        	var picId = ui.draggable.attr("id");
+    		addNews("stringCallback", picId);  
 	      }
 		});
 	  });
 	</script>
+
+    <script type="text/javascript">
+        function stringCallback(what) {
+
+          $("#droppable").addClass('ui-state-highlight').find('p').html(  what  );
+
+        }
+	</script>
+
     
     
     <div align="right" class="span-14 last"> 

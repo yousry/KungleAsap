@@ -11,6 +11,8 @@ import de.kungle.asap.model._
 
 import de.kungle.process.business.{InfoCollector, TranslationCollector}
 
+import de.kungle.asap.snippet.WaveJason
+
 /**
   * A class that's instantiated early and run.  It allows the application
   * to modify lift's environment
@@ -36,6 +38,10 @@ class Boot {
       User.sitemap
     
     LiftRules.setSiteMap(SiteMap(entries:_* ))
+    
+        
+    LiftRules.snippetDispatch.append((Map("WaveJason" -> WaveJason)))
+
     
     //  start Actors
     ActorPing.schedule(InfoCollector, InfoCollector.DoWork, 1 seconds)
