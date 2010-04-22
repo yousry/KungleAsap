@@ -13,8 +13,20 @@ body {
 
 #header {
  background-image: url(../gfx/slice/header.png);
- height: 80px;
+ height: 100px;
 }
+
+#menu {
+ color: #FFFFFF; 
+ background-image: url(../gfx/slice/topmenu.png);
+ height: 40px;
+}
+
+#footer {
+ background-image: url(../gfx/slice/footer.png);
+ height: 30px;
+}
+
 
 #content { 
   height: 100%;
@@ -27,11 +39,15 @@ body {
 }
 
 #leftColumn {
+  background-image: url(../gfx/slice/leftmenu.png);
+  background-repeat:repeat-y;
   height: 85%;
   min-height: 85%;
 }
 
 #news-column {
+  background-image: url(../gfx/slice/rightcolumn.png);
+  background-repeat:repeat-y;
   height: 85%;
   min-height: 85%;
 }
@@ -62,9 +78,6 @@ body {
 display: inline; 
 } /* IE6 float double margin bug */
 
-#menu { 
-  color: #FFFFFF; 
-}
   
 keng {
   color: #000000;

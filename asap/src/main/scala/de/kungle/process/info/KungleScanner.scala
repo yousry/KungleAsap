@@ -23,8 +23,16 @@ class KungleScanner extends Loggable {
           w.save
   }
   
+  def checkNewsAge(age: java.util.Date) : Boolean = {
+    val actualM = (new java.util.Date).getTime
+    val ageM = age.getTime
+    val timeSpan = actualM - ageM
+    val timeLimit = (1000 * 60) * 60 * 5
+    if(timeSpan > timeLimit) false else true
+  }
+  
   def checkForWave(e: KungleNews) : Boolean =  Wave.find(By(Wave.orignId, e.KungleId)) match {
-    case Empty => createWave(e); true
+    case Empty => if(checkNewsAge(e.published)){createWave(e); true} else false
     case _ => false
   }
   

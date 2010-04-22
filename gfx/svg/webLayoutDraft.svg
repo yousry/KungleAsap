@@ -242,10 +242,11 @@
     <filter
        inkscape:collect="always"
        id="filter3758"
-       x="-0.00625"
+       x="-0.0062500001"
        width="1.0125"
-       y="-0.15"
-       height="1.3">
+       y="-0.15000001"
+       height="1.3"
+       color-interpolation-filters="sRGB">
       <feGaussianBlur
          inkscape:collect="always"
          stdDeviation="2.5"
@@ -260,23 +261,24 @@
        sodipodi:type="inkscape:persp3d" />
     <filter
        inkscape:collect="always"
-       id="filter3760">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="12.9"
-         id="feGaussianBlur3762" />
-    </filter>
-    <filter
-       inkscape:collect="always"
        id="filter5214"
-       x="-0.006125"
-       width="1.01225"
+       x="-0.0061249998"
+       width="1.0122499"
        y="-0.294"
-       height="1.588">
+       height="1.5880001"
+       color-interpolation-filters="sRGB">
       <feGaussianBlur
          inkscape:collect="always"
          stdDeviation="2.45"
          id="feGaussianBlur5216" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter3701">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.15"
+         id="feGaussianBlur3703" />
     </filter>
   </defs>
   <sodipodi:namedview
@@ -287,11 +289,11 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="437.58717"
-     inkscape:cy="450.80757"
+     inkscape:cx="403.58717"
+     inkscape:cy="400.80757"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
-     showgrid="true"
+     showgrid="false"
      inkscape:window-width="1600"
      inkscape:window-height="1150"
      inkscape:window-x="-8"
@@ -460,6 +462,26 @@
        inkscape:export-filename="D:\src\KungleAsap\gfx\svg\body.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <rect
+       y="500"
+       x="0"
+       height="10"
+       width="316"
+       id="rect3137"
+       style="fill:#00ffff;fill-opacity:1;stroke:none;display:inline"
+       inkscape:export-filename="D:\src\KungleAsap\gfx\svg\leftmenu.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="500"
+       x="320"
+       height="10"
+       width="640"
+       id="rect3139"
+       style="fill:#008080;fill-opacity:1;stroke:none;display:inline"
+       inkscape:export-filename="D:\src\KungleAsap\gfx\svg\rightcolumn.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -475,7 +497,7 @@
        x="0"
        y="0" />
     <rect
-       style="fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter3760)"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter3701)"
        id="rect3730"
        width="920"
        height="800"
@@ -504,7 +526,7 @@
        id="rect3752"
        style="fill:none;stroke:#000000;stroke-opacity:1;filter:url(#filter3758)" />
     <rect
-       style="fill:#35d4a4;fill-opacity:0.96078431;stroke:none"
+       style="fill:#35d4a4;fill-opacity:0.87843137;stroke:none"
        id="rect3742"
        width="960"
        height="40"
@@ -532,7 +554,7 @@
        id="rect5204"
        style="fill:none;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter5214)" />
     <rect
-       style="fill:#35d4a4;fill-opacity:0.96078431;stroke:none"
+       style="fill:#35d4a4;fill-opacity:0.87843137;stroke:none"
        id="rect3764"
        width="960"
        height="20"
@@ -543,8 +565,7 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="logo"
-     style="display:inline"
-     sodipodi:insensitive="true">
+     style="display:none">
     <g
        id="g3696"
        transform="matrix(0.5168516,0,0,0.5168516,17.677154,8.663152)">

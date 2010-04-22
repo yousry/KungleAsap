@@ -4,6 +4,15 @@
   <div id="container"  class="container">
   <lift:WaveJason/> 
  
+ <style>
+ body {
+   background-image: url(../gfx/slice/headergradient.png);
+   background-repeat:repeat-x;
+   background-color: #efefef;
+   background-position: 0px 24px; 
+ }
+ </style>
+ 
     <div id="header" class="span-42 last primary-1">
     <span/>x
     </div> <!-- header -->
@@ -18,7 +27,7 @@
  
     <div id="menu" class="span-42 last primary-2">
 
-    <div class="span-14">
+    <div class="span-13 prepend-1">
       Language: <lift:SimpleWaveList.languageSelect/>
     </div>
 
@@ -50,7 +59,7 @@
 
     
     
-    <div align="right" class="span-14 last"> 
+    <div align="right" class="span-13 append-1 last"> 
       <script type="text/javascript">
         $(function(){
           $('#date').datepicker(); 
@@ -63,16 +72,18 @@
     </div> <!-- menu -->
  
  
-    <div id="leftColumn" class="left-menu span-14 secondary-a-5">
-      <h4>side menu</h4>
-		
+    <div id="leftColumn" class="left-menu span-13 prepend-1">
+      <h5>User Menu</h5>
       <lift:Menu.builder />
+      <br/>
       <lift:msgs/>
-      <br/><br/>
+      <hr/>
+		
+      
 
-    <div style="position:  absolute;  top:  86%;">
+    <div style="position: absolute; top: 93%;">
       <lift:helloWorld.howdy>
-        <span align="bottom">asap alpha at <b:time/></span>
+        <span align="bottom">KungleImp at <b:time/></span>
       </lift:helloWorld.howdy>
     </div>  
       
@@ -114,8 +125,12 @@
       
     </lift:SimpleWaveList.queryTabel>
 
-    <div id="footer" class="span-42 last secondary-b-2">
-      <a href="http://www.kungle.de/Trend/about">About/Impressum</a> 
+<style>
+
+</style>
+
+    <div id="footer" class="span-42 last">
+      <p style="padding-top: 8px"><a href="http://www.kungle.de/Trend/about">About/Impressum</a></p> 
     </div> <!-- footer -->
   </div> <!-- container -->
 </div> <!-- content -->
