@@ -1,6 +1,9 @@
 Rechner IP: vserver3066.vserver-on.de
 
-Install Java
+*** vim installieren ***
+apt-get install vim
+
+*** Install Java ***
 
 apt-get install sun-java6-bin sun-java6-jre
 
@@ -10,9 +13,120 @@ vserver3066:/etc# diff /etc/profile /etc/profile_100420
 < JAVA_HOME="/usr/lib/jvm/java-6-sun"
 < export JAVA_HOME
 
+Benutzer anlegen:  adduser [name]
 
 Benutzer: yousry
 pass: 7(nb_.=<uT,P
 
 Benutzer: root
 pass: 8b525d3c
+
+*** MySQL installieren ***
+
+apt-get install mysql-server mysql-client
+
+Passwort für db user root:
+4U_b9-2(csiOq
+
+Database Setup --->
+
+
+*** nginx installieren ***
+
+aptitude install nginx
+
+/etc/init.d/nginx start
+
+vserver3066:/etc/nginx# diff nginx.conf nginx.conf_100421 
+2c2
+< worker_processes  5;
+---
+> worker_processes  1;
+21c21
+<     keepalive_timeout   2;
+---
+>     keepalive_timeout  65;
+
+
+
+
+vserver3066:/etc/nginx/sites-enabled# diff default /root/default_nginx_100421
+9c9
+<       server_name  kungleimp.de www.kungleimp.de;
+---
+>       server_name  localhost;
+12a13,16
+>       location / {
+>               root   /var/www/nginx-default;
+>               index  index.html index.htm;
+>       }
+14,20c18,28
+<         location / {
+<               proxy_pass http://127.0.0.1:8080;
+<               proxy_set_header  X-Real-IP  $remote_addr;
+<               proxy_read_timeout 700;
+<               proxy_set_header Host $http_host;
+<               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+<         }
+---
+>       location /doc {
+>               root   /usr/share;
+>               autoindex on;
+>               allow 127.0.0.1;
+>               deny all;
+>       }
+> 
+>       location /images {
+>               root   /usr/share;
+>               autoindex on;
+>       }
+49,51c57,59
+<       location ~ /\.ht {
+<               deny  all;
+<       }
+---
+>       #location ~ /\.ht {
+>               #deny  all;
+>       #}
+
+
+
+
+*** install jetty7 ***
+
+as root
+
+cd
+vserver3066:~# mkdir install
+vserver3066:~# cd install/
+vserver3066:~/install# wget http://download.eclipse.org/jetty/stable-7/dist/jetty-distribution-7.0.2.v20100331.tar.gz
+
+mv jetty-distribution-7.0.2.v20100331 /opt/
+ cd /opt/
+ ln -s jetty-distribution-7.0.2.v20100331 jetty
+ 
+ cp /opt/jetty/bin/jetty.sh /etc/init.d/
+ 
+ 
+chmod 755 /etc/init.d/jetty.sh 
+update-rc.d jetty.sh defaults
+/etc/init.d/jetty.sh start
+
+ 
+ 
+ *** Uhrzeit Kunfigurieren: ***
+ 
+ dpkg-reconfigure tzdata
+ 
+ *** exim Konfigurieren ***
+ 
+ dpkg-reconfigure exim4-config
+ 
+ Frozen Messages danach löschen:
+ 
+ exiqgrep -z -i | xargs exim4 -Mrm
+ 
+ 
+ 
+ 
+ 
