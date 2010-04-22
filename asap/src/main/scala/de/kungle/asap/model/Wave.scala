@@ -33,6 +33,11 @@ class Wave extends LongKeyedMapper[Wave] with IdPK {
   object orignId extends MappedLong(this) 
   object markedBanned extends MappedInt(this)
   
+  
+  object picUrl extends MappedPoliteString(this, 200) {
+    override def defaultValue = "/thumbnails/text3592.png"
+  }
+  
 }
 
 object Wave extends Wave with LongKeyedMetaMapper[Wave] {
@@ -43,5 +48,6 @@ object Wave extends Wave with LongKeyedMetaMapper[Wave] {
   publisher, publishingDate,
   geoCode,url,topic,originalLanguage,
   orignId, 
-  markedBanned)
+  markedBanned,
+  picUrl)
 }

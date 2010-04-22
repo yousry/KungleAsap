@@ -1,0 +1,19 @@
+ssh -L 3307:localhost:3306 yousry@kungle.de
+
+
+Picture URL:
+
+update wave
+set picurl = "/thumbnails/text3592.png"
+
+
+update wave
+set picurl = '/thumbnails/person/obama.png'
+where 
+title_english like '%obama%' or
+summary_english like '%obama%';
+
+
+update wave
+set picurl = '/thumbnails/topic/sport.png'
+where topic = 'Sport'
