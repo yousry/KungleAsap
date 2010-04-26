@@ -9,7 +9,7 @@ import Helpers._
 import _root_.net.liftweb.mapper._
 import de.kungle.asap.model._
 
-import de.kungle.process.business.{InfoCollector, TranslationCollector}
+import de.kungle.process.business.{InfoCollector, TranslationCollector, SimpleCategorize }
 
 import de.kungle.asap.snippet.WaveJason
 
@@ -41,12 +41,11 @@ class Boot {
     
         
     LiftRules.snippetDispatch.append((Map("WaveJason" -> WaveJason)))
-
     
     //  start Actors
     ActorPing.schedule(InfoCollector, InfoCollector.DoWork, 1 seconds)
     ActorPing.schedule(TranslationCollector, TranslationCollector.DoWork, 1 seconds)
-    
+    ActorPing.schedule(SimpleCategorize, SimpleCategorize.DoWork, 1 seconds)
     
   }
 }
