@@ -56,17 +56,13 @@
 
         }
 	</script>
-
-    
     
     <div align="right" class="span-13 append-1 last"> 
-      <script type="text/javascript">
-        $(function(){
-          $('#date').datepicker(); 
-        });
-      </script>
-
-      <p>Search <input type="text" id="date" /></p>
+    
+    <p><lift:SimpleWaveList.ajaxSearch form="Post">
+      Filter: <autocomplete:box/>
+    </lift:SimpleWaveList.ajaxSearch></p>
+    
     </div>
     
     </div> <!-- menu -->

@@ -8,6 +8,8 @@ import _root_.scala.xml.NodeSeq
 import _root_.net.liftweb.util.Helpers
 import Helpers._
 import _root_.net.liftweb.mapper._
+import net.liftweb.http.jquery.JqSHtml
+import net.liftweb.http.RequestVar
 import net.liftweb.http.S._
 import net.liftweb.http.SHtml._
 import net.liftweb.http.js.JE._
@@ -15,16 +17,47 @@ import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js.{JsCmd,JsExp}
 import net.liftweb.http.SessionVar
 
+import _root_.net.liftweb.widgets.autocomplete._
+
 
 import de.kungle.asap.model._
-
+import de.kungle.process.ProcessMaster
 
 class SimpleWaveList extends Loggable {
+
+  object queryFilter extends RequestVar[Box[String]](Empty)
+
   
   // for infinite scroll a imagetive page is calulated.
   private var pageCount = 0
   private var language = "original" // french, german
 
+  
+  
+  def buildQuery(current: String, limit: Int) : Seq[String] = {
+    logger.info("Current: " + current + " Limit: " + limit)
+    val blub : List[DictionaryEntry] = DictionaryEntry.findAll(Like(DictionaryEntry.englishTerm, current.toLowerCase + "%"), 
+                                                               OrderBy(DictionaryEntry.occurrences, Descending) ,
+                                                               MaxRows(limit)) 
+    logger.info("Found: " + blub.length)
+    blub.map(x => x.englishTerm.is)
+  }
+  
+
+  def autocompSubmit(s: String) = {
+    logger.info("Filter changed to: " + s)
+        
+    if(s.length >= 2 && s.length <= 20) queryFilter(Full(s)) else queryFilter(Empty)
+    ProcessMaster ! ProcessMaster.UpdateMessage("Last Search: " + s)
+    
+  }
+  
+
+  def ajaxSearch(xhtml: NodeSeq): NodeSeq = {
+    bind("autocomplete", xhtml,
+         "box" -> AutoComplete("", buildQuery(_,_), autocompSubmit(_)))
+}
+  
   // This method creates a ajax call to the server like a button. 
   // But instead of a button press the end of the scrollbar produces an event.
   def ajaxPageAppend(func: () => JsCmd, attrs: (String, String)*): Elem = {
@@ -39,7 +72,8 @@ class SimpleWaveList extends Loggable {
   if( containerHeight + scroll + 50 >= inners ) {
    window.setTimeout(function () { """ + {makeAjaxCall(Str(name + "=true")).toJsCmd + "; return false;"} + """ }, 500);
    window.setTimeout(function () { """ + {makeAjaxCall(Str((ajaxInvoke(() => langScrollUpdate))._1 + "=true")).toJsCmd + "; return false;"} + """ }, 510);
-   window.setTimeout(function () { """ + {makeAjaxCall(Str((ajaxInvoke(() => draggableUpdate(Wave.findAll(OrderBy(Wave.id, Descending ), StartAt(25 * pageCount), MaxRows(25)))))._1 + "=true")).toJsCmd + "; return false;"} + """ }, 520);
+   window.setTimeout(function () { """ + {makeAjaxCall(Str((ajaxInvoke(() => draggableUpdate(
+     Wave.findAll(OrderBy(Wave.id, Descending ), StartAt(25 * pageCount), MaxRows(25)))))._1 + "=true")).toJsCmd + "; return false;"} + """ }, 520);
   };
  });""")}</script>))(_ % _)
   }
@@ -97,15 +131,26 @@ class SimpleWaveList extends Loggable {
     val newDiv = "check-div" + nextPage
     pageCount = nextPage
     
-    val waves = Wave.findAll(OrderBy(Wave.id, Descending ), StartAt(25 * nextPage), MaxRows(25))
+    val waves = queryFilter.get match {
+      case Full(s) => Wave.findAll(BySql("title_english REGEXP '[[:<:]]" + s + "[[:>:]]' or summary_english REGEXP '[[:<:]]" + s + "[[:>:]]'",
+                                         IHaveValidatedThisSQL("nobody","2010-04-27")), 
+                                   OrderBy(Wave.id, Descending ), 
+                                   StartAt(25 * nextPage), MaxRows(25))
+      case _ => Wave.findAll(OrderBy(Wave.id, Descending ), StartAt(25 * nextPage), MaxRows(25))
+    }
     
     waves.flatMap(renderEntry) ++ 
       <div id={newDiv}>Loading Data...</div> 
   }
 
     def queryTabel(in: NodeSeq): NodeSeq = {
-
-        val waves = Wave.findAll(OrderBy(Wave.id, Descending ), MaxRows(25))
+      
+        val waves = queryFilter.get match {
+          case Full(s) => Wave.findAll(BySql("title_english REGEXP '[[:<:]]" + s + "[[:>:]]' or summary_english REGEXP '[[:<:]]" + s + "[[:>:]]'",
+                                         IHaveValidatedThisSQL("nobody","2010-04-27")), 
+                                       OrderBy(Wave.id, Descending ), MaxRows(25))
+          case _ => Wave.findAll(OrderBy(Wave.id, Descending ), MaxRows(25))
+        }
         
         def renderEntry(w: Wave): NodeSeq = bind("entry", chooseTemplate("query", "entries", in),
                 "titleEnglish" -> {renderTitle("english", w)},

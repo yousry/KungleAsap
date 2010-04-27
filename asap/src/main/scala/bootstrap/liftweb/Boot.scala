@@ -9,6 +9,9 @@ import Helpers._
 import _root_.net.liftweb.mapper._
 import de.kungle.asap.model._
 
+import _root_.net.liftweb.widgets.autocomplete._
+
+
 import de.kungle.process.business.{InfoCollector, TranslationCollector, SimpleCategorize, SimpleDictionaryUpdate }
 
 import de.kungle.asap.snippet.WaveJason
@@ -38,8 +41,9 @@ class Boot {
       User.sitemap
     
     LiftRules.setSiteMap(SiteMap(entries:_* ))
+
+    AutoComplete.init
     
-        
     LiftRules.snippetDispatch.append((Map("WaveJason" -> WaveJason)))
     
     //  start Actors
