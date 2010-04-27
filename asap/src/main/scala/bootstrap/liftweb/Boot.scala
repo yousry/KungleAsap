@@ -9,7 +9,7 @@ import Helpers._
 import _root_.net.liftweb.mapper._
 import de.kungle.asap.model._
 
-import de.kungle.process.business.{InfoCollector, TranslationCollector, SimpleCategorize }
+import de.kungle.process.business.{InfoCollector, TranslationCollector, SimpleCategorize, SimpleDictionaryUpdate }
 
 import de.kungle.asap.snippet.WaveJason
 
@@ -29,7 +29,7 @@ class Boot {
     LiftRules.addToPackages("tools")
 
     // DDL
-    Schemifier.schemify(true, Schemifier.infoF _, Comment, User, UserLog, Wave)
+    Schemifier.schemify(true, Schemifier.infoF _, Comment, User, UserLog, Wave, DictionaryEntry)
     
     // Build SiteMap
     val entries = 
@@ -44,8 +44,9 @@ class Boot {
     
     //  start Actors
     ActorPing.schedule(InfoCollector, InfoCollector.DoWork, 1 seconds)
-    ActorPing.schedule(TranslationCollector, TranslationCollector.DoWork, 1 seconds)
-    ActorPing.schedule(SimpleCategorize, SimpleCategorize.DoWork, 1 seconds)
+    ActorPing.schedule(TranslationCollector, TranslationCollector.DoWork, 10 seconds)
+    ActorPing.schedule(SimpleCategorize, SimpleCategorize.DoWork, 20 seconds)
+    ActorPing.schedule(SimpleDictionaryUpdate, SimpleDictionaryUpdate.DoWork, 30 seconds)
     
   }
 }

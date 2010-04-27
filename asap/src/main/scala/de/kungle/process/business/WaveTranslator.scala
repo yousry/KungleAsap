@@ -25,7 +25,7 @@ class WaveTranslator(w : Wave) extends Loggable {
 object WaveTranslator extends Loggable {
 
   // Say Hello to Google
-  GoogleAPI.setHttpReferrer("http://distdev.net/");
+ GoogleAPI.setHttpReferrer("http://kungleImp.de/");
     
   // get rid of the EXCEPTION LOGIC
   def transExec(i: String, s: Language, d: Language) : String = {
@@ -35,9 +35,7 @@ object WaveTranslator extends Loggable {
       } catch {
         case ex : Exception => {
           translation = "Tranlation not possible"
-          logger.info("Google translation exception: " + ex.getStackTraceString )
-          ex.printStackTrace
-
+          logger.info("Google translation exception: " + ex.getMessage )
         }
       }
       translation

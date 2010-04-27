@@ -17,3 +17,6 @@ summary_english like '%obama%';
 update wave
 set picurl = '/thumbnails/topic/sport.png'
 where topic = 'Sport'
+
+update wave set
+dictionaryindexed = 0

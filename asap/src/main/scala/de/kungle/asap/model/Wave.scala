@@ -21,7 +21,6 @@ class Wave extends LongKeyedMapper[Wave] with IdPK {
     override def defaultValue = "none"
   }
   
-  
   object publisher extends MappedPoliteString(this, 200)
   object publishingDate extends MappedDateTime(this)
 
@@ -33,9 +32,12 @@ class Wave extends LongKeyedMapper[Wave] with IdPK {
   object orignId extends MappedLong(this) 
   object markedBanned extends MappedInt(this)
   
-  
   object picUrl extends MappedPoliteString(this, 200) {
     override def defaultValue = "/thumbnails/text3592.png"
+  }
+  
+  object DictionaryIndexed extends MappedBoolean(this) {
+    override def defaultValue = false
   }
   
 }
@@ -49,5 +51,6 @@ object Wave extends Wave with LongKeyedMetaMapper[Wave] {
   geoCode,url,topic,originalLanguage,
   orignId, 
   markedBanned,
-  picUrl)
+  picUrl,
+  DictionaryIndexed)
 }
