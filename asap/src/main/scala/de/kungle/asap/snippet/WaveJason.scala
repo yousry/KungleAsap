@@ -8,7 +8,12 @@ import js._
 import JsCmds._
 import JE._
 
+import de.kungle.process.StrokeMaster
+
 import scala.xml.NodeSeq
+
+object myStrokeId extends SessionVar[Box[Long]](Empty)
+
 
 object XNews {
   def unapply(in: Any): Option[String] = in match {
@@ -29,7 +34,10 @@ object XNews {
 object XStroke extends Loggable{
   def unapply(in: Any): Option[String] = in match {
     case s: String => {
-      logger.info(s)
+      myStrokeId.get match {
+        case Full(x) => StrokeMaster ! StrokeMaster.StrokeUpdate(x, s)
+        case _ => ()
+      }
       Empty
     }
                        
@@ -41,25 +49,12 @@ object WorkbenchNews extends SessionVar[List[String]](List())
 
 object WaveJasonHandler extends SessionVar[JsonHandler](
   new JsonHandler {
-    
-    println("-------------------------------------")
-    println("R:" + this + " created." )
-    println("-------------------------------------")
-    
-    def apply(in: Any): JsCmd =  {
-                  
-      println("-------------------------------------")
-      println("Called:" + this + " with " + in )
-      println("-------------------------------------")
-
-      in match {
+    def apply(in: Any): JsCmd =  in match {
         case JsonCmd("addNews", resp, XNews(s), _) => Call(resp, s)
         case JsonCmd("addStroke", resp, XStroke(s), _) => Call(resp, s)
         case myCmd : String => Call("resp", "s")
         case _ => Noop
       }
-    }
-    
   }
 )
 
