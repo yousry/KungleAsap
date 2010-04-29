@@ -72,6 +72,7 @@ body {
   /*   font-size: 0.9em; 
      line-height: 12px; */
   text-align: left;
+  border: 1px solid #dddddd;
 }
 
 * html .scroll-content-item { 

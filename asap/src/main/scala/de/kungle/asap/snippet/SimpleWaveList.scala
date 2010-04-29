@@ -110,7 +110,7 @@ class SimpleWaveList extends Loggable {
     
     logger.info("PageAppend called for page: " + pageCount)
     
-    def renderEntry(w: Wave) = <div class="scroll-content-item ui-widget-content">
+    def renderEntry(w: Wave) = <div class="scroll-content-item">
       {renderPic(w)}
       <div class="span-22 last">
         <keng>{renderTitle("english", w)}</keng>
