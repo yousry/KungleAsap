@@ -26,17 +26,42 @@ object XNews {
   }
 }
 
+object XStroke extends Loggable{
+  def unapply(in: Any): Option[String] = in match {
+    case s: String => {
+      logger.info(s)
+      Empty
+    }
+                       
+    case _ => None
+  }
+}
+
 object WorkbenchNews extends SessionVar[List[String]](List())
 
 object WaveJasonHandler extends SessionVar[JsonHandler](
   new JsonHandler {
-    def apply(in: Any): JsCmd = in match {
-      case JsonCmd("addNews", resp, XNews(s), _) => Call(resp, s)
-      case _ => Noop
-    }  
+    
+    println("-------------------------------------")
+    println("R:" + this + " created." )
+    println("-------------------------------------")
+    
+    def apply(in: Any): JsCmd =  {
+                  
+      println("-------------------------------------")
+      println("Called:" + this + " with " + in )
+      println("-------------------------------------")
+
+      in match {
+        case JsonCmd("addNews", resp, XNews(s), _) => Call(resp, s)
+        case JsonCmd("addStroke", resp, XStroke(s), _) => Call(resp, s)
+        case myCmd : String => Call("resp", "s")
+        case _ => Noop
+      }
+    }
+    
   }
 )
-
 
 object WaveJason extends DispatchSnippet{
 
@@ -44,8 +69,9 @@ object WaveJason extends DispatchSnippet{
 
   def buildFuncs(in: NodeSeq): NodeSeq = {
     Script(WaveJasonHandler.is.jsCmd &
-      Function("addNews", List("callback", "str"), WaveJasonHandler.is.call("addNews", JsVar("callback"),JsVar("str")))
-           )
+      Function("addNews", List("callback", "str"), WaveJasonHandler.is.call("addNews", JsVar("callback"),JsVar("str"))) &
+      Function("addStroke", List("callback", "str"), WaveJasonHandler.is.call("addStroke", JsVar("callback"),JsVar("str")))
+    )
   }
 
 }

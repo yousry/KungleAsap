@@ -38,7 +38,7 @@
 				colors:        [ 'black', 'blue' ],
 				// Clearing options
 				showClear:     true,
-				clearLabel:    'Clear Canvas',
+				clearLabel:    'Clear Note',
 				clearStyle:    'button' // or 'link'
 			}
 
@@ -134,6 +134,7 @@
 
 						$('#' + id + '-clear').click(function(e)
 						{
+                            addStroke("newsCallback", "CLEARCONTENT");
 							context.save();
 							context.beginPath();
 							context.closePath();
@@ -223,6 +224,7 @@
 								svg_data = svg_data + '" style="fill:' + context.fillStyle + ';stroke:' + context.strokeStyle + ';stroke-width:' + context.lineWidth + '" /></svg>';
 							}
 
+                            addStroke("addStroke", type + ": " + x + "/" + y);
 							element.val(svg_data);
 						}
 
