@@ -90,7 +90,7 @@
       <div class="span-28 last" id="news-column">
         <div class="scroll-pane ui-widget ui-widget ui-corner-all" id="target"> 
           <div class="scroll-content" id="innerself">
-   
+
           <query:entries>
             <div class="scroll-content-item">
               <entry:renderPic/>
@@ -130,6 +130,39 @@
     </div> <!-- footer -->
   </div> <!-- container -->
 </div> <!-- content -->
+
+<!-- UI Todo -->
+
+<head>
+<script type="text/javascript"> 
+	$(function() {
+		$("#dialog").dialog({height: 448, width: 297, position:[5 ,180], resizable: false});
+	});
+</script>
+<script type="text/javascript" src="js/jquery.drawbox.js"></script>
+</head>
+
+
+ <div id="dialog" title="Notebook">
+  <canvas id="drawbox" width="270" height="370" style="background: white;"> 
+   <p>Your browser does not support &lt;canvas&gt;</p> 
+  </canvas> 
+ </div> 
+
+
+<script type="text/javascript">
+ $(document).ready(function() {
+  $('#drawbox').drawbox({caption:'This is a caption',lineWidth:3,lineCap:'round',lineJoin:'round',colorSelector:true});
+  $('#view-output').click(function() {
+   var svgOutput = window.open('data:image/svg+xml,' + $('#drawbox-data').val());
+    svgOutput.document.close();
+    return false;
+  });
+ });
+</script>
+
+
+
 
 </lift:surround>
 
