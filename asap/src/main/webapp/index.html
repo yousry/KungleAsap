@@ -134,6 +134,49 @@
 
 <!-- UI Todo -->
 
+<script type="text/javascript">
+
+    var prevx = 0;
+    var prevy = 0;
+
+ function remoteStroke(what) {
+  
+  var canvas = document.getElementById("drawbox");
+  var context = canvas.getContext("2d");
+  
+  var whats = what.split(" ");
+  
+  var wcmd = whats[0]
+  var xpos = whats[1]
+  var ypos = whats[2]
+  
+  if(wcmd == 'start') {
+    prevx = xpos;
+    prevy = ypos;
+  }
+
+  if(wcmd == 'move') {
+   context.beginPath();
+   context.moveTo(prevx,prevy);
+   context.lineTo(xpos,ypos);
+   context.stroke();
+   prevx = xpos;
+   prevy = ypos;
+  }
+
+
+  if(wcmd == 'clear') {
+   context.save();
+   context.beginPath();
+   context.closePath();
+   context.restore();
+   context.clearRect(0, 0, $(canvas).width(), $(canvas).height());
+  }
+ }
+</script>
+
+
+
 <head>
 <script type="text/javascript"> 
 	$(function() {
@@ -144,7 +187,7 @@
 </head>
 
 
- <div id="dialog" title="Notebook">
+ <div id="dialog" title="Note4All">
   <canvas id="drawbox" width="270" height="370" style="background: white;"> 
    <p>Your browser does not support &lt;canvas&gt;</p> 
   </canvas> 
@@ -153,12 +196,8 @@
 
 <script type="text/javascript">
  $(document).ready(function() {
-  $('#drawbox').drawbox({caption:'This is a caption',lineWidth:3,lineCap:'round',lineJoin:'round',colorSelector:true});
-  $('#view-output').click(function() {
-   var svgOutput = window.open('data:image/svg+xml,' + $('#drawbox-data').val());
-    svgOutput.document.close();
-    return false;
-  });
+  $('#drawbox').drawbox({caption:'Leeave your message',lineWidth:1,lineCap:'round',lineJoin:'round',colorSelector:false});
+  addStroke("addStroke", "init 0 0");
  });
 </script>
 

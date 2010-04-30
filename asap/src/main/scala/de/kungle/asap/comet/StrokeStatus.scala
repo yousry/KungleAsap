@@ -12,6 +12,8 @@ import de.kungle.asap.snippet.myStrokeId
 
 import de.kungle.process.StrokeMaster
 
+import JE._
+
 class StrokeStatus extends CometActor with Loggable{
   
   override def defaultPrefix = Full("stroke")
@@ -33,15 +35,21 @@ class StrokeStatus extends CometActor with Loggable{
     super.localShutdown
   }
   
-     
    override def lowPriority : PartialFunction[Any, Unit] = {
      case InitSubscriptionId(newId) => {
        myStrokeId(Full(newId))
      }
-     
+     case AddStroke(subscr, command) =>  if(myStrokeId.is != subscr) partialUpdate(OnLoad(JsRaw("remoteStroke('"+ command +"');")))
+     case InitStrokes(subscr,commands) =>  {
+       if(myStrokeId.is == subscr) { 
+         val allcomms = commands.reverse.map(command =>" remoteStroke('"+ command +"');" ).mkString;  
+         partialUpdate(OnLoad(JsRaw(allcomms)))
+       }
+     }
    }
-
    
 }
 
-   case class InitSubscriptionId(id: Long)    
+   case class InitSubscriptionId(id: Long)
+   case class AddStroke(fromSubscriber: Long, command: String)
+   case class InitStrokes(fromSubscriber: Long, strokes: List[String])

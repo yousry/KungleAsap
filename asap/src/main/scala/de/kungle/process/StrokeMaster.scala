@@ -15,25 +15,37 @@ import scala.collection.mutable.HashMap
 object StrokeMaster extends LiftActor with Loggable {
   
   var subscriptionId : Long = 0
-  val strokeClients = new HashMap[StrokeStatus,long]()
+  var strokeClients = List[StrokeStatus]()
+  var strokes : List[String] = List()
   
   var activeStrokes = List[String]() 
   
   protected def messageHandler = {
     case SubscribeStrokeStatus(sstat) => {
          subscriptionId += 1
-         strokeClients += (sstat -> subscriptionId)
+         strokeClients ::= sstat
          sstat ! InitSubscriptionId(subscriptionId)
        }
     case UnSubscribeStrokeStatus(sstat) => strokeClients -= sstat
-    case StrokeUpdate(sid,scmd) => logger.info("Stroke update from: " + sid + " Command: " + scmd )
+    case StrokeUpdate(sid,scmd) => {
+      
+      if(strokes.length > 10000) {
+        strokes = List()
+      }
+      
+      if(scmd.contains("init")) {
+         strokeClients.foreach( sc => sc !  InitStrokes(sid, strokes))
+      } else {
+        if(scmd.contains("clear")) strokes = List()
+        strokeClients.foreach(sc => sc ! AddStroke(sid, scmd))
+        strokes ::= scmd
+      } 
+    }      
     case m => logger.error("Scheduler Unidentified Command: " + m)
   }
-
        
   case class SubscribeStrokeStatus(sStat: StrokeStatus)
   case class UnSubscribeStrokeStatus(sStat: StrokeStatus)
   case class StrokeUpdate(sId: Long, sCmd : String)
-
   
 }

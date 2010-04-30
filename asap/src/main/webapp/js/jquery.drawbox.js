@@ -27,7 +27,7 @@
 				lineCap:       'butt',
 				lineJoin:      'miter',
 				miterLimit:    10,
-				strokeStyle:   'black',
+				strokeStyle:   'blue',
 				fillStyle:     'transparent',
 				shadowOffsetX: 0.0,
 				shadowOffsetY: 0.0,
@@ -35,7 +35,7 @@
 				shadowColor:   'transparent black', 
 				// Color selector options
 				colorSelector: false,
-				colors:        [ 'black', 'blue' ],
+				colors:        [ 'blue', 'black' ],
 				// Clearing options
 				showClear:     true,
 				clearLabel:    'Clear Note',
@@ -62,7 +62,7 @@
 						context.underInteractionEnabled = true;
 
 						// Overrides with passed options
-						/*
+						
 						context.lineWidth     = options.lineWidth;
 						context.lineCap       = options.lineCap;
 						context.lineJoin      = options.lineJoin;
@@ -73,8 +73,7 @@
 						context.shadowOffsetY = options.shadowOffsetY;
 						context.shadowBlur    = options.shadowBlur;
 						context.shadowColor   = options.shadowColor;
-						*/
-
+						
 						// Adds the color selector
 						if (options.colorSelector == true)
 						{
@@ -134,7 +133,7 @@
 
 						$('#' + id + '-clear').click(function(e)
 						{
-                            addStroke("newsCallback", "CLEARCONTENT");
+                            addStroke("addStroke", "clear 0 0");
 							context.save();
 							context.beginPath();
 							context.closePath();
@@ -223,8 +222,8 @@
 								// Closes the polyline (with style info) and adds the closing svg tag
 								svg_data = svg_data + '" style="fill:' + context.fillStyle + ';stroke:' + context.strokeStyle + ';stroke-width:' + context.lineWidth + '" /></svg>';
 							}
-
-                            addStroke("addStroke", type + ": " + x + "/" + y);
+                                                    
+                            addStroke("addStroke", type + " " + Math.ceil(x) + " " + Math.ceil(y) );
 							element.val(svg_data);
 						}
 

@@ -14,7 +14,6 @@ import scala.xml.NodeSeq
 
 object myStrokeId extends SessionVar[Box[Long]](Empty)
 
-
 object XNews {
   def unapply(in: Any): Option[String] = in match {
     case s: String => {
@@ -52,7 +51,6 @@ object WaveJasonHandler extends SessionVar[JsonHandler](
     def apply(in: Any): JsCmd =  in match {
         case JsonCmd("addNews", resp, XNews(s), _) => Call(resp, s)
         case JsonCmd("addStroke", resp, XStroke(s), _) => Call(resp, s)
-        case myCmd : String => Call("resp", "s")
         case _ => Noop
       }
   }
