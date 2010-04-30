@@ -140,30 +140,38 @@
     var prevy = 0;
 
  function remoteStroke(what) {
-  
+
   var canvas = document.getElementById("drawbox");
   var context = canvas.getContext("2d");
   
   var whats = what.split(" ");
   
-  var wcmd = whats[0]
-  var xpos = whats[1]
-  var ypos = whats[2]
+  var wcmd = whats.splice(0,1);
   
   if(wcmd == 'start') {
-    prevx = xpos;
-    prevy = ypos;
+	  alert("error start");
   }
 
   if(wcmd == 'move') {
-   context.beginPath();
-   context.moveTo(prevx,prevy);
-   context.lineTo(xpos,ypos);
-   context.stroke();
-   prevx = xpos;
-   prevy = ypos;
+	  alert("error stop");
   }
 
+  if(wcmd == 'stop') {
+	  
+	  context.beginPath();
+	  
+	  for(x in whats) {
+		  var oneP = whats[x].split(",")
+		  if(x == 0) {
+		    context.moveTo(oneP[0],oneP[1]);
+		  } else  {
+           context.lineTo(oneP[0],oneP[1]);
+		  }
+	  } 
+	  
+	   context.stroke();
+	  }
+	  
 
   if(wcmd == 'clear') {
    context.save();

@@ -53,6 +53,7 @@
 
 					if (this.getContext)
 					{
+						var pointList = "";
 						var canvas  = this;
 						var context = this.getContext('2d');
 						var id = $(this).attr('id');
@@ -134,6 +135,7 @@
 						$('#' + id + '-clear').click(function(e)
 						{
                             addStroke("addStroke", "clear 0 0");
+                            pointList = "";
 							context.save();
 							context.beginPath();
 							context.closePath();
@@ -167,28 +169,14 @@
 						function draw(type)
 						{
 							var element = $('#' + data_input);
-							var svg_data = element.val();
 							
 							if (type == 'start')
 							{
-							
-								// Adds the SVG header tags
-								if (svg_data == '')
-								{
-									svg_data = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg width="' + $('#' + id).width() + '" height="' + $('#' + id).height() + '" version="1.1" xmlns="http://www.w3.org/2000/svg">';
-								}
-								else
-								{
-									svg_data = svg_data.substring(0, svg_data.length - 6);
-								}
+								pointList = "";
 							}
 
 							if (type != 'stop')
 							{
-								if (svg_data.length > 0)
-								{
-									svg_data = svg_data + ' ';
-								}
 
 								if (type == 'start')
 								{
@@ -198,7 +186,6 @@
 									context.beginPath();
 									context.moveTo(x, y);
 
-									svg_data = svg_data + '<polyline points="';
 								}
 								else if (type == 'move')
 								{
@@ -213,18 +200,16 @@
 								}
 
 								context.stroke();
-								svg_data = svg_data + x + ',' + y + ' ';
+								pointList += " " + Math.ceil(x + 1) + "," + Math.ceil(y + 1);
+
 							}
 							else
 							{
+	                            addStroke("addStroke", type + pointList );
+	                            pointList = "";
 								draw('move');
-
-								// Closes the polyline (with style info) and adds the closing svg tag
-								svg_data = svg_data + '" style="fill:' + context.fillStyle + ';stroke:' + context.strokeStyle + ';stroke-width:' + context.lineWidth + '" /></svg>';
 							}
                                                     
-                            addStroke("addStroke", type + " " + Math.ceil(x) + " " + Math.ceil(y) );
-							element.val(svg_data);
 						}
 
 						function drawingStart(e)
