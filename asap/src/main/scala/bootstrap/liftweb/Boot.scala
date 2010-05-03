@@ -16,6 +16,8 @@ import de.kungle.process.business.{InfoCollector, TranslationCollector, SimpleCa
 
 import de.kungle.asap.snippet.WaveJason
 
+import tools.AvatarProcessing
+
 /**
   * A class that's instantiated early and run.  It allows the application
   * to modify lift's environment
@@ -32,7 +34,7 @@ class Boot {
     LiftRules.addToPackages("tools")
 
     // DDL
-    Schemifier.schemify(true, Schemifier.infoF _, Comment, User, UserLog, Wave, DictionaryEntry)
+    Schemifier.schemify(true, Schemifier.infoF _, Comment, User, UserLog, Wave, DictionaryEntry, Avatar)
     
     // Build SiteMap
     val entries = 
@@ -45,6 +47,9 @@ class Boot {
     AutoComplete.init
     
     LiftRules.snippetDispatch.append((Map("WaveJason" -> WaveJason)))
+    
+    // Avatar Processor as Dispatcher
+    LiftRules.dispatch.append(AvatarProcessing.matcher)
     
     //  start Actors
     ActorPing.schedule(InfoCollector, InfoCollector.DoWork, 1 seconds)
