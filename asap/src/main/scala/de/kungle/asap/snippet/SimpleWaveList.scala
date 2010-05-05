@@ -19,7 +19,6 @@ import net.liftweb.http.SessionVar
 
 import _root_.net.liftweb.widgets.autocomplete._
 
-
 import de.kungle.asap.model._
 import de.kungle.process.ProcessMaster
 

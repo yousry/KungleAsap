@@ -38,8 +38,8 @@ class Boot {
     
     // Build SiteMap
     val entries = 
-      Menu(Loc("Home", List("index"), "Home")) :: 
-      Menu(Loc("Control",("admin" :: "control" :: Nil) -> false,"Control")) ::
+      Menu(Loc("Home", List("index"), "Home", LocGroup("default"))) :: 
+      Menu(Loc("Control",("admin" :: "control" :: Nil) -> false,"Control", LocGroup("default"))) ::
       User.sitemap
     
     LiftRules.setSiteMap(SiteMap(entries:_* ))
@@ -47,6 +47,10 @@ class Boot {
     AutoComplete.init
     
     LiftRules.snippetDispatch.append((Map("WaveJason" -> WaveJason)))
+    
+//    LiftRules.useXhtmlMimeType = false
+    
+    // LiftRules.jsArtifacts = net.liftweb.http.js.jquery.JQuery14Artifacts
     
     // Avatar Processor as Dispatcher
     LiftRules.dispatch.append(AvatarProcessing.matcher)
