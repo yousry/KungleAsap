@@ -1,75 +1,46 @@
 <lift:surround with="default" at="content">
 
+<head>
+ <script type="text/javascript" src="js/jquery.drawbox.js"></script>
+ <script type="text/javascript" src="js/wave.js"></script>
+ <link href="/css/Wave.css" type="text/css" rel="stylesheet" media="screen" />
+</head>
+
 <div id="content"> 
   <div id="container"  class="container">
   <lift:WaveJason/> 
  
- <style>
- body {
-   background-image: url(../gfx/slice/headergradient.png);
-   background-repeat:repeat-x;
-   background-color: #efefef;
-   background-position: 0px 24px; 
- }
- </style>
- 
     <div id="header" class="span-42 last primary-1">
-     <div style="text-align:right; margin-right: 30px; color: black">(c)2010 Yousry Abdallah</div>
+     <div style="text-align:right; margin-right: 30px; color: black">
+      &copy;2010 Yousry Abdallah<br/>
+      V:85:957dbb3cba70
+     </div>
     </div> <!-- header -->
   
-    <script type="text/javascript"> 
-      $(document).ready(function() {
-        $('keng').show('slow'); 
-        $('kfrn').hide('slow'); 
-        $('kger').hide('slow'); 
-      });
-    </script> 
  
     <div id="menu" class="span-42 last primary-2">
 
-    <div class="span-13 prepend-1">
-      Language: <lift:SimpleWaveList.languageSelect/>
-    </div>
-
-    <div align="center" class="span-14">
-      <div id="droppable" class="ui-widget-header">
-       <p>Drop your articles here.</p>
+      <div class="span-13 prepend-1">
+        Language: <lift:SimpleWaveList.languageSelect/>
       </div>
-    </div>
-    
-    <script type="text/javascript">
-	  $(function() {
-        $("#droppable").droppable({
-		  drop: function(event, ui) {
 
-        	var picId = ui.draggable.attr("id");
-    		addNews("newsCallback", picId);  
-	      }
-		});
-	  });
-	</script>
-
-    <script type="text/javascript">
-        function newsCallback(what) {
-
-          $("#droppable").addClass('ui-state-highlight').find('p').html(  what  );
-
-        }
-	</script>
+      <div align="center" class="span-14">
+        <div id="droppable" class="ui-widget-header">
+         <p>Drop your articles here.</p>
+        </div>
+      </div>
     
-    <div align="right" class="span-13 append-1 last"> 
-    
-    <p><lift:SimpleWaveList.ajaxSearch form="Post">
-      Filter: <autocomplete:box/>
-    </lift:SimpleWaveList.ajaxSearch></p>
-    
-    </div>
+      <div align="right" class="span-13 append-1 last"> 
+        <p>
+          <lift:SimpleWaveList.ajaxSearch form="Post">
+            Filter: <autocomplete:box/>
+          </lift:SimpleWaveList.ajaxSearch>
+        </p>
+      </div>
     
     </div> <!-- menu -->
  
- 
     <div id="leftColumn" class="left-menu span-13 prepend-1">
-    
 	
       <h5>Sitemap Menu</h5>
       <lift:Menu.builder group="default" ul:id="sitemapMenu" />
@@ -83,45 +54,17 @@
       <hr/>
       <lift:UserMgt.loginStatus/>
 
+      <div style="visibility:hidden;">
+        <div id="forUserDialog"><center><lift:UserMgt.loginDialog/></center></div>
+      </div>
 
-<!-- *************** -->
-
-
-<div style="visibility:hidden;">
-<div id="forUserDialog"><center><lift:UserMgt.loginDialog/></center></div>
-</div>
-<script type="text/javascript"> 
-
-	$(document).ready(function() {
-		$('#userMenu li a').each(function() {
-		
-			if($(this).attr('href') == "/user_mgt/login") {
-			var $userdialog = $('#forUserDialog'); 
-			var $link = $(this).one('click', function() {
-			 $userdialog.dialog({title: $link.html(),width: 300,height: 160});
-             $link.click(function() {$userdialog.dialog('open');return false;});
-		     return false;
-			}); // var $link = $(this).one('click', function()
-			
-			}
-			
-			
-		}); // $('#sitemapMenu li a').each(function()
-
-	}); // $(document).ready(function()
-
-</script> 
-
-
-
-<!-- *************** -->
-
-
-    <div style="position: absolute; top: 93%;">
-      <lift:helloWorld.howdy>
-        <span align="bottom">KungleImp at <b:time/></span>
-      </lift:helloWorld.howdy>
-    </div>  
+      <div style="position: absolute; top: 93%;">
+        <lift:helloWorld.howdy>
+          <span align="bottom">
+            KungleImp build:<br/><b:time/>
+          </span>
+        </lift:helloWorld.howdy>
+      </div>  
       
     </div> <!-- leftColumn -->
 
@@ -161,10 +104,6 @@
       
     </lift:SimpleWaveList.queryTabel>
 
-<style>
-
-</style>
-
     <div id="footer" class="span-42 last">
       <p style="padding-top: 8px"><a href="http://www.kungle.de/Trend/about">About/Impressum</a></p> 
     </div> <!-- footer -->
@@ -172,92 +111,18 @@
   </div> <!-- container -->
 </div> <!-- content -->
 
-<!-- UI Todo -->
 
-<script type="text/javascript">
-
-    var prevx = 0;
-    var prevy = 0;
-
- function remoteStroke(what) {
-
-  var canvas = document.getElementById("drawbox");
-  var context = canvas.getContext("2d");
-  
-  var whats = what.split(" ");
-  
-  var wcmd = whats.splice(0,1);
-  
-  if(wcmd == 'start') {
-	  alert("error start");
-  }
-
-  if(wcmd == 'move') {
-	  alert("error stop");
-  }
-
-  if(wcmd == 'stop') {
-	  
-	  context.beginPath();
-	  
-	  for(x in whats) {
-		  var oneP = whats[x].split(",")
-		  if(x == 0) {
-		    context.moveTo(oneP[0],oneP[1]);
-		  } else  {
-           context.lineTo(oneP[0],oneP[1]);
-		  }
-	  } 
-	  
-	   context.stroke();
-	  }
-	  
-
-  if(wcmd == 'clear') {
-   context.save();
-   context.beginPath();
-   context.closePath();
-   context.restore();
-   context.clearRect(0, 0, $(canvas).width(), $(canvas).height());
-  }
- }
-</script>
-
-
-
-<head>
-<script type="text/javascript"> 
-	$(function() {
-		$("#dialog").dialog({height: 448, width: 297, position:[5 ,180], resizable: false});
-	});
-</script>
-<script type="text/javascript" src="js/jquery.drawbox.js"></script>
-</head>
-
-
- <div id="dialog" title="Note4All">
+<div id="dialog" title="Note4All">
   <canvas id="drawbox" width="270" height="370" style="background: white;"> 
-   <p>Your browser does not support &lt;canvas&gt;</p> 
+    <p>Your browser does not support &lt;canvas&gt;</p> 
   </canvas> 
- </div> 
-
-
-<script type="text/javascript">
- $(document).ready(function() {
-  $('#drawbox').drawbox({caption:'Leeave your message',lineWidth:1,lineCap:'round',lineJoin:'round',colorSelector:false});
-  addStroke("addStroke", "init 0 0");
- });
-</script>
-
+</div> 
     
-    
-<div style="visibility: hidden;">  
- <lift:comet type="StrokeStatus" name="Other">
- <stroke:status>UNDEFINED</stroke:status>
- </lift:comet>
+<div style="visibility: hidden;">   
+  <lift:comet type="StrokeStatus" name="Other">
+    <stroke:status>UNDEFINED</stroke:status>
+  </lift:comet>
 </div>
-    
-
 
 </lift:surround>
 

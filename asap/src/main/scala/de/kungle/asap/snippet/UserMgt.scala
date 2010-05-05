@@ -21,18 +21,21 @@ import de.kungle.process.ProcessMaster
 
 class UserMgt {
 
-  def logged_in_? = S.get("user_name").isDefined
 
   def loginStatus = {
-    if(logged_in_?) {
-      val yourName = S.get("user_name") getOrElse "error"
+    
+    if(User.loggedIn_?) {
+      val yourName = User.currentUser match {
+        case Full(u) => u.userName.is
+        case _ => "error"
+      }
       <div>
       <h5>You are: {yourName}</h5>
       <p>{Avatar.findAll(By(Avatar.lookup, "1")).head.imageUrl}</p>
       </div>
     } else {
       <div>
-      <h5>You are: anonym</h5>
+      <h5>You are: anonymous</h5>
       <p>{Avatar.findAll(By(Avatar.lookup, "2")).head.imageUrl}</p>
       </div>
     }
@@ -42,15 +45,15 @@ class UserMgt {
             
     var username = ""
     var pwd = ""
-
-            
+    
+    
+    
     def testPwd {
       User.find(By(User.userName, username)).filter(_.password.match_?(pwd)).map{
-        u => S.set("user_name", u.userName)
+        u => {logUserIn(u); println("LOGIN CALLED")}
         S.redirectTo("/")
       }.openOr(S.error("Invalid Username/Password"))
     }
-
     
     <form method="post" action={S.uri}>
       <table>
