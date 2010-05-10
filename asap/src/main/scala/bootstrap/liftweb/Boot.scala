@@ -14,7 +14,7 @@ import _root_.net.liftweb.widgets.autocomplete._
 
 import de.kungle.process.business.{InfoCollector, TranslationCollector, SimpleCategorize, SimpleDictionaryUpdate }
 
-import de.kungle.asap.snippet.WaveJason
+import de.kungle.asap.snippet.{WaveJason, PerfectNumberCom}
 
 import tools.AvatarProcessing
 
@@ -34,12 +34,13 @@ class Boot {
     LiftRules.addToPackages("tools")
 
     // DDL
-    Schemifier.schemify(true, Schemifier.infoF _, Comment, User, UserLog, Wave, DictionaryEntry, Avatar)
+    Schemifier.schemify(true, Schemifier.infoF _, Comment, User, UserLog, Wave, DictionaryEntry, Avatar, PerfectNumber)
     
     // Build SiteMap
     val entries = 
       Menu(Loc("Home", List("index"), "Home", LocGroup("default"))) :: 
       Menu(Loc("Control",("admin" :: "control" :: Nil) -> false,"Control", LocGroup("default"))) ::
+      Menu(Loc("Perfect Number", List("perfectnumber"), "Perfect Number", LocGroup("default"))) :: 
       User.sitemap
     
     LiftRules.setSiteMap(SiteMap(entries:_* ))
@@ -47,6 +48,8 @@ class Boot {
     AutoComplete.init
     
     LiftRules.snippetDispatch.append((Map("WaveJason" -> WaveJason)))
+    LiftRules.snippetDispatch.append((Map("PerfectNumberCom" -> PerfectNumberCom)))
+
     
 //    LiftRules.useXhtmlMimeType = false
     

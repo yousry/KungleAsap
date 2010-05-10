@@ -41,7 +41,7 @@ object StrokeMaster extends LiftActor with Loggable {
         strokes ::= scmd
       } 
     }      
-    case m => logger.error("Scheduler Unidentified Command: " + m)
+    case m => logger.error("StrokeMaster Unidentified Command: " + m)
   }
        
   case class SubscribeStrokeStatus(sStat: StrokeStatus)
