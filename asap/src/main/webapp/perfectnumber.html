@@ -3,18 +3,25 @@
   <script type="text/javascript" src="js/perfectNumber.js"></script>
 </head>
 
+
   <div class="container">
- <lift:PerfectNumberCom/> 
-   <div id="header" class="span-42 last">
-     <h1>Perfect Number: Distributed Computing Demo</h1> 
-   </div>
-   <lift:comet type="PerfectNumberStatus" name="Other">
-   </lift:comet>
-   
-   <div id="content" class="span-42 last">
-		<lift:Menu.builder group="default"/>
-		<lift:msgs/>
-   </div>
+    <lift:PerfectNumberCom/> 
+    <div id="header" class="span-42 last">
+      <h1>Demonstration of Distributed Computations with lift/scala</h1>
+     </div> <!-- header -->
+     <div id="content" class="span-42 last">
+       <h2>Perfect Number</h2> 
+       <lift:comet type="PerfectNumberStatus" name="Other">
+              Last Perfect Number:<pfn:lastPerfect>UNDEFINED</pfn:lastPerfect><br/>
+              Actual Number:<pfn:lastNumber>UNDEFINED</pfn:lastNumber><br/>
+              Donated Calcualtions:<pfn:allDonation>UNDEFINED</pfn:allDonation><br/> 
+              My Donation:<pfn:myDonation>UNDEFINED</pfn:myDonation> 
+       </lift:comet>
+       
+       <lift:Menu.builder group="default"/>
+	   <lift:msgs/>
+     </div> <!-- content -->
+     
   
   </div> <!-- container -->
 

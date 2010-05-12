@@ -59,23 +59,32 @@ object PerfectNumberMaster extends LiftActor with Loggable{
     logger.info("old entry removed " + pstat)
     val nextCrunch = calcCrunchy
     logger.info("delegate job to " + pstat)
-    pstat ! DoCrunch(nextCrunch)
+    
+    val crunch = nextCrunch
+    pstat ! DoCrunch(crunch)
+        
+    lastPerfectNumber.DonatedCalculations( lastPerfectNumber.DonatedCalculations.get + (Math.min(crunch.end, crunch.master ) -  crunch.start ).toLong  )
+    lastPerfectNumber.save
+
     logger.info("DONE")
     perfectNumberClients += (pstat -> nextCrunch.ticket)
   }
     
   def checkAndNext() = {
-    val genFactors  = factors.remove(x => x == newNumber)
+    
+    
+    val genFactors  = factors.remove(x => x == newNumber).removeDuplicates
+    
     if((0.0 /: genFactors) {(sum, x) => x + sum} == newNumber) { // newPerfectNumber Found
       lastPerfectNumber.save
       val nextPerfectNumber = new PerfectNumber
-      nextPerfectNumber.MyNumber(newNumber)
-      nextPerfectNumber.DonatedCalculations(lastPerfectNumber.DonatedCalculations.get)
+      nextPerfectNumber.MyNumber(newNumber) LastCheckedNumber(newNumber) DonatedCalculations(lastPerfectNumber.DonatedCalculations.get)
       lastPerfectNumber = nextPerfectNumber
     } else {// just update
       lastPerfectNumber.LastCheckedNumber(newNumber)
       lastPerfectNumber.save 
     }
+    factors = List()
     calcTickets
   }
   
@@ -83,8 +92,6 @@ object PerfectNumberMaster extends LiftActor with Loggable{
     
     logger.info("Try to ReEmploy")
     
-    lastPerfectNumber.DonatedCalculations( lastPerfectNumber.DonatedCalculations.get + CALCULATIONS_PER_TICKET)
-    lastPerfectNumber.save
     tickets -= (employeTicket) // remove or nothing
     factors ++= employeResult
     factors.removeDuplicates
