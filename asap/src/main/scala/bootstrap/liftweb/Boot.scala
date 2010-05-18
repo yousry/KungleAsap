@@ -14,7 +14,7 @@ import _root_.net.liftweb.widgets.autocomplete._
 
 import de.kungle.process.business.{InfoCollector, TranslationCollector, SimpleCategorize, SimpleDictionaryUpdate }
 
-import de.kungle.asap.snippet.{WaveJason}
+import de.kungle.asap.snippet.{WaveJson}
 
 import tools.AvatarProcessing
 
@@ -46,7 +46,7 @@ class Boot {
 
     AutoComplete.init
     
-    LiftRules.snippetDispatch.append((Map("WaveJason" -> WaveJason)))
+    LiftRules.snippetDispatch.append((Map("WaveJson" -> WaveJson)))
     
     // LiftRules.jsArtifacts = net.liftweb.http.js.jquery.JQuery14Artifacts
     

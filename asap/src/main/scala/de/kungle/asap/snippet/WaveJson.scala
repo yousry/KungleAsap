@@ -46,7 +46,7 @@ object XStroke extends Loggable{
 
 object WorkbenchNews extends SessionVar[List[String]](List())
 
-object WaveJasonHandler extends SessionVar[JsonHandler](
+object WaveJsonHandler extends SessionVar[JsonHandler](
   new JsonHandler {
     def apply(in: Any): JsCmd =  in match {
         case JsonCmd("addNews", resp, XNews(s), _) => Call(resp, s)
@@ -56,14 +56,14 @@ object WaveJasonHandler extends SessionVar[JsonHandler](
   }
 )
 
-object WaveJason extends DispatchSnippet{
+object WaveJson extends DispatchSnippet{
 
   val dispatch = Map("render" -> buildFuncs _)
 
   def buildFuncs(in: NodeSeq): NodeSeq = {
-    Script(WaveJasonHandler.is.jsCmd &
-      Function("addNews", List("callback", "str"), WaveJasonHandler.is.call("addNews", JsVar("callback"),JsVar("str"))) &
-      Function("addStroke", List("callback", "str"), WaveJasonHandler.is.call("addStroke", JsVar("callback"),JsVar("str")))
+    Script(WaveJsonHandler.is.jsCmd &
+      Function("addNews", List("callback", "str"), WaveJsonHandler.is.call("addNews", JsVar("callback"),JsVar("str"))) &
+      Function("addStroke", List("callback", "str"), WaveJsonHandler.is.call("addStroke", JsVar("callback"),JsVar("str")))
     )
   }
 

@@ -25,9 +25,29 @@ $(document).ready(function() {
              	$link.click(function() {$userdialog.dialog('open');return false;});
 		     	return false;
 			}); // var $link = $(this).one('click', function()
-		} // if
+		} else if($(this).attr('href') == "/user_mgt/sign_up") {
+			var $userdialog = $('#forRegisterDialog'); 
+			var $link = $(this).one('click', function() {
+				$userdialog.dialog({title: $link.html(),width: 300,height: 160});
+             	$link.click(function() {$userdialog.dialog('open');return false;});
+		     	return false;
+			}); // var $link = $(this).one('click', function()
+		} else if($(this).attr('href') == "/user_mgt/lost_password") {
+			var $userdialog = $('#forSendPassDialog'); 
+			var $link = $(this).one('click', function() {
+				$userdialog.dialog({title: $link.html(),width: 300,height: 160});
+             	$link.click(function() {$userdialog.dialog('open');return false;});
+		     	return false;
+			}); // var $link = $(this).one('click', function()
+		} else if($(this).attr('href') == "/user_mgt/logout") {
+			var $userdialog = $('#forSendPassDialog'); 
+			var $link = $(this).one('click', function() {
+				$userdialog.dialog({title: $link.html(),width: 300,height: 160});
+             	$link.click(function() {$userdialog.dialog('open');return false;});
+		     	return false;
+			}); // var $link = $(this).one('click', function()
+		} // if else if
 	}); // $('#sitemapMenu li a').each(function()
-
 
     // Init the drawing canvas
 	$('#drawbox').drawbox({caption:'Leave your message',lineWidth:1,lineCap:'round',lineJoin:'round',colorSelector:false});

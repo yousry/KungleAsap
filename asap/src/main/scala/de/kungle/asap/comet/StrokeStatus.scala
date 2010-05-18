@@ -7,7 +7,7 @@ import net.liftweb.http._
 import net.liftweb.http.js._
 import net.liftweb.http.js.JsCmds._
 
-import de.kungle.asap.snippet.WaveJasonHandler
+import de.kungle.asap.snippet.WaveJsonHandler
 import de.kungle.asap.snippet.myStrokeId
 
 import de.kungle.process.StrokeMaster
@@ -23,7 +23,7 @@ class StrokeStatus extends CometActor with Loggable{
   )
 
     def status = <span id="status">{jsonStat}</span>
-    def jsonStat : NodeSeq = <p>{ Text("Test: " + (WaveJasonHandler.get) ) }</p>
+    def jsonStat : NodeSeq = <p>{ Text("Test: " + (WaveJsonHandler.get) ) }</p>
       
     override def localSetup {
      StrokeMaster ! new StrokeMaster.SubscribeStrokeStatus(this)
