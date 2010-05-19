@@ -38,11 +38,10 @@ $('#forRegisterDialog').dialog({title: '""" + S.??("sign.up") + """', width: 600
     def userLogout() : JsCmd = {User.logUserOut; JsRaw("");} 
     def userRegister() : JsCmd = JsRaw("$('#forRegisterDialog').dialog('open')")
     
-    <ul>
-    <li>{a(() => userLogin, Text(S.??("login")))}</li>
-    <li>{a(() => userLogout, Text(S.??("logout")))}</li>
-    <li>{a(() => userRegister, Text(S.??("sign.up")))}</li>
-    </ul>
+    if(User.loggedIn_?) <ul><li>{a(() => userLogout, Text(S.??("logout")))}</li></ul>
+    else <ul><li>{a(() => userLogin, Text(S.??("login")))}</li><li>{a(() => userRegister, Text(S.??("sign.up")))}</li></ul>
+    
+    
   }
 
   def loginStatus = {

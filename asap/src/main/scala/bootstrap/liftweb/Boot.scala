@@ -48,7 +48,7 @@ class Boot {
     
     LiftRules.snippetDispatch.append((Map("WaveJson" -> WaveJson)))
     
-    // LiftRules.jsArtifacts = net.liftweb.http.js.jquery.JQuery14Artifacts
+    LiftRules.jsArtifacts = net.liftweb.http.js.jquery.JQuery14Artifacts
     
     // Avatar Processor as Dispatcher
     LiftRules.dispatch.append(AvatarProcessing.matcher)

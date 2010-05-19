@@ -8,7 +8,11 @@ $(function() {
 	$("#dialog").dialog({height: 448, width: 297, position:[5 ,180], resizable: false});
 });
 
+
 $(document).ready(function() {
+
+$("#animenu").show("bounce",{direction: "right", distance: 40, times: 5},"normal");
+
 
 // Switch news language via js
 	$('keng').show('slow'); 

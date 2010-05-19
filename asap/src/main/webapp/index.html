@@ -41,18 +41,30 @@
     </div> <!-- menu -->
  
     <div id="leftColumn" class="left-menu span-13 prepend-1">
-	
-      <h5>Sitemap Menu</h5>
-      <lift:Menu.builder group="default" ul:id="sitemapMenu" />
-      <br/>
-      <lift:msgs/>
-      <hr/>
+	  
+	  <div class="left-menu span-13 prepend-1 last">
+	    <br/>
+        <h5>Sitemap</h5>
+        <lift:Menu.builder group="default" ul:id="sitemapMenu" />
+        <br/>
+        <lift:msgs/>
+      </div>
       
-      <h5>User Menu</h5>
-      <lift:UserMgt.userMenu/>
       <hr/>
-      <lift:UserMgt.loginStatus/>
-
+	  
+	  <div class="left-menu span-13 prepend-1 last">
+        <h5>User</h5>
+        <div id="animenu" style="height:50px">
+          <lift:UserMgt.userMenu/>
+        </div>
+      </div>
+      
+      	  
+      <div class="left-menu span-13 prepend-1 last">
+        <hr/>
+        <lift:UserMgt.loginStatus/>
+      </div>  
+	        
       <div style="position: absolute; top: 93%;">
         <lift:helloWorld.howdy>
           <span align="bottom">
