@@ -14,13 +14,36 @@ import _root_.net.liftweb.util._
 import _root_.net.liftweb.common._
 import _root_.de.kungle.asap.model._
 import _root_.de.kungle.asap.model.User._
-
+import net.liftweb.http.js.JE._
+import net.liftweb.http.js._
+import JsCmds._
 
 import de.kungle.asap.model._
 import de.kungle.process.ProcessMaster
 
 class UserMgt {
+  
+  def initUserDialogs : NodeSeq = {
+    def initDlgs() : JsCmd = JsRaw(
+"""
+$('#forUserDialog').dialog({title: '""" + S.??("login") + """', width: 300, height: 160, autoOpen: false });
+$('#forRegisterDialog').dialog({title: '""" + S.??("sign.up") + """', width: 600, height: 200, autoOpen: false });
+""" 
+    )
+    Script(OnLoad(initDlgs))
+  }
 
+  def userMenu : NodeSeq = {
+    def userLogin() : JsCmd = JsRaw("$('#forUserDialog').dialog('open')")
+    def userLogout() : JsCmd = {User.logUserOut; JsRaw("");} 
+    def userRegister() : JsCmd = JsRaw("$('#forRegisterDialog').dialog('open')")
+    
+    <ul>
+    <li>{a(() => userLogin, Text(S.??("login")))}</li>
+    <li>{a(() => userLogout, Text(S.??("logout")))}</li>
+    <li>{a(() => userRegister, Text(S.??("sign.up")))}</li>
+    </ul>
+  }
 
   def loginStatus = {
     
@@ -40,13 +63,17 @@ class UserMgt {
       </div>
     }
   } 
+
+  
+  def signUpDialog : NodeSeq = {
+    User.signup
+  }
+  
   
   def loginDialog : NodeSeq = {
             
     var username = ""
     var pwd = ""
-    
-    
     
     def testPwd {
       User.find(By(User.userName, username)).filter(_.password.match_?(pwd)).map{

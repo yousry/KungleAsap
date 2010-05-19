@@ -38,9 +38,9 @@ class Boot {
     
     // Build SiteMap
     val entries = 
-      Menu(Loc("Home", List("index"), "Home", LocGroup("default"))) :: 
-      Menu(Loc("Control",("admin" :: "control" :: Nil) -> false,"Control", LocGroup("default"))) ::
-      User.sitemap
+      Menu(Loc("Home", List("index"), S.??("Home"), LocGroup("default"))) :: 
+      Menu(Loc("Control",("admin" :: "control" :: Nil) -> false, S.??("Control"), LocGroup("default"))) ::
+      Nil
     
     LiftRules.setSiteMap(SiteMap(entries:_* ))
 

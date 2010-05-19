@@ -49,8 +49,7 @@
       <hr/>
       
       <h5>User Menu</h5>
-      <lift:Menu.builder group="user" ul:id="userMenu"/>
-      
+      <lift:UserMgt.userMenu/>
       <hr/>
       <lift:UserMgt.loginStatus/>
 
@@ -116,13 +115,12 @@
   
 <div style="visibility: hidden;">   
   <div id="forUserDialog"><center><lift:UserMgt.loginDialog/></center></div>
-  <div id="forRegisterDialog"><center><lift:UserMgt.loginDialog/></center></div>
-  <div id="forSendPassDialog"><center><lift:UserMgt.loginDialog/></center></div>
-  <div id="forLogOutDialog"><center><lift:UserMgt.logoutDialog/></center></div>
-  	
+  <div id="forRegisterDialog"><center><lift:UserMgt.signUpDialog/></center></div>
   <lift:comet type="StrokeStatus" name="Other">
     <stroke:status>UNDEFINED</stroke:status>
   </lift:comet>
+  
+  <lift:UserMgt.initUserDialogs/>
 </div>
 
 </lift:surround>
