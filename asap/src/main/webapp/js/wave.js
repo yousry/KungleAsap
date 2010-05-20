@@ -4,15 +4,15 @@
 */
 
 // Dialog for Note4All
+/*
 $(function() {
 	$("#dialog").dialog({height: 448, width: 297, position:[5 ,180], resizable: false});
 });
-
+*/
 
 $(document).ready(function() {
 
 $("#animenu").show("bounce",{direction: "right", distance: 40, times: 5},"normal");
-
 
 // Switch news language via js
 	$('keng').show('slow'); 
@@ -20,12 +20,13 @@ $("#animenu").show("bounce",{direction: "right", distance: 40, times: 5},"normal
     $('kger').hide('slow'); 
 
     // Init the drawing canvas
+/*    
 	$('#drawbox').drawbox({caption:'Leave your message',lineWidth:1,lineCap:'round',lineJoin:'round',colorSelector:false});
   	addStroke("addStroke", "init 0 0");
-
+*/
 });
 
-// Define drppable space for newsicons
+// Define droppable space for newsicons
 $(function() {
 	$("#droppable").droppable({
 		drop: function(event, ui) {
@@ -41,9 +42,10 @@ function newsCallback(what) {
 }
 
 
-
+/*
 var prevx = 0;
 var prevy = 0;
+
 
 function remoteStroke(what) {
 
@@ -82,3 +84,4 @@ function remoteStroke(what) {
    		context.clearRect(0, 0, $(canvas).width(), $(canvas).height());
   }
 }
+*/

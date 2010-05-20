@@ -2,9 +2,12 @@
 <lift:html5/> 
 <head>
  <meta charset="UTF-8" /> 
- <script type="text/javascript" src="js/jquery.drawbox.js"></script>
+ <!-- <script type="text/javascript" src="js/jquery.drawbox.js"></script> -->
  <script type="text/javascript" src="js/wave.js"></script>
  <link href="/css/Wave.css" type="text/css" rel="stylesheet" media="screen" />
+ 
+ <!-- Google Font API -->
+ <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css' />
 </head>
 
 <div id="content"> 
@@ -12,10 +15,17 @@
   <lift:WaveJson/> 
  
     <div id="header" class="span-42 last primary-1">
-     <div style="text-align:right; margin-right: 30px; color: black">
-      &copy;2010 Yousry Abdallah<br/>
-      V:90:16fcabd6f3e0
+     
+     <div class="span-15 prepend-6" style="margin-top:0px;">
+       <h1>Kungle Imp</h1>
      </div>
+
+     <!-- style="text-align:right; margin-right: 30px; color: black" -->
+     <div class="span-20  last" style="text-align:right; color: black">
+      &copy;2010 Yousry Abdallah<br/>
+      93:2885de1b6486
+     </div>
+     
     </div> <!-- header -->
  
     <div id="menu" class="span-42 last primary-2">
@@ -59,9 +69,9 @@
         </div>
       </div>
       
+	  <hr/>
       	  
       <div class="left-menu span-13 prepend-1 last">
-        <hr/>
         <lift:UserMgt.loginStatus/>
       </div>  
 	        
@@ -80,7 +90,6 @@
       <div class="span-28 last" id="news-column">
         <div class="scroll-pane ui-widget ui-widget ui-corner-all" id="target"> 
           <div class="scroll-content" id="innerself">
-
           <query:entries>
             <div class="scroll-content-item">
               <entry:renderPic/>
@@ -118,21 +127,24 @@
   </div> <!-- container -->
 </div> <!-- content -->
 
-
+<!--
 <div id="dialog" title="Note4All">
   <canvas id="drawbox" width="270" height="370" style="background: white;"> 
     <p>Your browser does not support &lt;canvas&gt;</p> 
   </canvas> 
 </div> 
-  
+-->
+
 <div style="visibility: hidden;">   
   <div id="forUserDialog"><center><lift:UserMgt.loginDialog/></center></div>
   <div id="forRegisterDialog"><center><lift:UserMgt.signUpDialog/></center></div>
+  <lift:UserMgt.initUserDialogs/>
+  
+<!--
   <lift:comet type="StrokeStatus" name="Other">
     <stroke:status>UNDEFINED</stroke:status>
   </lift:comet>
-  
-  <lift:UserMgt.initUserDialogs/>
+-->
 </div>
 
 </lift:surround>
