@@ -3,6 +3,13 @@
  * (c)2010 Yousry Abdallah
 */
 
+
+// Dialog for what happens next machine.
+$(function() {
+	$("#whatNext").dialog({height: 400, width: 600, position:[500 ,180], resizable: false});
+});
+
+
 // Dialog for Note4All
 /*
 $(function() {

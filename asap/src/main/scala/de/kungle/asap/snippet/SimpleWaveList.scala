@@ -192,13 +192,13 @@ class SimpleWaveList extends Loggable {
   def langSel(lang: String) : JsCmd = {
     logger.info("Language selected:" + lang); 
     language = lang;
-    if(language == "original") JsRaw("""$('keng').show(); $('kfrn').hide(); $('kger').hide();""")
+    if(language == "english") JsRaw("""$('keng').show(); $('kfrn').hide(); $('kger').hide();""")
     else if(language == "french") JsRaw("""$('keng').hide(); $('kfrn').show(); $('kger').hide();""")
     else JsRaw("""$('keng').hide(); $('kfrn').hide(); $('kger').show();""")
   }
 
  def languageSelect: NodeSeq = ajaxSelect(
-   List(("original", "original"),
+   List(("english", "english"),
         ("french", "fran\u00E7ais"),
         ("german", "deutsch")
  ), Full(language), (lang: String) =>{logger.info("Language " + lang + "selected."); langSel(lang)}) 

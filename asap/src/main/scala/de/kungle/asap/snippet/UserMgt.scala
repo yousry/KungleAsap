@@ -35,7 +35,7 @@ $('#forRegisterDialog').dialog({title: '""" + S.??("sign.up") + """', width: 600
 
   def userMenu : NodeSeq = {
     def userLogin() : JsCmd = JsRaw("$('#forUserDialog').dialog('open')")
-    def userLogout() : JsCmd = {User.logUserOut; JsRaw("");} 
+    def userLogout() : JsCmd = User.logout 
     def userRegister() : JsCmd = JsRaw("$('#forRegisterDialog').dialog('open')")
     
     if(User.loggedIn_?) <ul><li>{a(() => userLogout, Text(S.??("logout")))}</li></ul>
