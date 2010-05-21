@@ -75,15 +75,7 @@
       <div class="left-menu span-13 prepend-1 last">
         <lift:UserMgt.loginStatus/>
       </div>  
-	        
-      <div style="position: absolute; top: 93%;">
-        <lift:helloWorld.howdy>
-          <span align="bottom">
-            KungleImp build:<br/><b:time/>
-          </span>
-        </lift:helloWorld.howdy>
-      </div>  
-      
+
     </div> <!-- leftColumn -->
 
     <lift:SimpleWaveList.queryTabel>
@@ -136,49 +128,34 @@
 </div> 
 -->
 
-<div id="whatNext" title="What happens next machine">
+<div style="visibility: hidden;">   
 
+<div id="whatNext" title="What happens next machine" class="ui-widget">
 
-<div style="float:left; width:285px; height: 350px; background-color: #EEEEEE;">
-<div style="text-align: center; background-color: #DDDDDD;">Time Left: 00:00:00</div>
+  <div style="float:left; width:293px; height: 350px; background-color: #FFFFFF; margin-right: 2px">
+    <div style="text-align: center; height: 25px" class="ui-widget-header ui-corner-top">Time Left: 00:00:00</div>
+    <div style="position: absolute; bottom: 5px;">
+      <form action="input_text.htm">
+        Your Prediction:<br/>
+        <textarea style="resize: none; width:260px; height:30px;" name="user_eingabe" cols="2" rows="2"></textarea>
+      </form>
+    </div>
+  </div>
 
-<div style="position: absolute; bottom: 5px;">
-<form action="input_text.htm">
-  Your Prediction:<br/>
-  <textarea style="width:273px; height:30px;" name="user_eingabe" cols="2" rows="2"></textarea>
-</form>
-</div>
-
-</div>
-
-<div style="float:left; width:285px; height: 350px; background-color: #BBBB00;">
-<style>xx { font-family: 'Reenie Beanie', arial, serif; font-size: 30px;}</style>
-<video src="/video/WhatHappensNext.ogv" controls="controls" width="285" />
-<center><xx>The "What happens next" machine!</xx></center>
-Introduction:
-
-</div>
-
-
-
-
-<!--
-<div style="float:left; width:200px;">test</div>
-<div style="width:200px; border: solid;">test</div>
--->
-<!--
-  <style>p { font-family: 'Reenie Beanie', arial, serif; font-size: 20px;}</style>
-  <p>
-    The "What happens next" machine!
-    <video src="/video/WhatHappensNext.ogv" controls="controls" width="280" />
-  </p>
--->
-
-
+  <div style="float:left; width:300px; height: 350px; margin-left: 2px;" class="ui-widget">
+    <style>xx {font-family: 'Reenie Beanie', arial, serif; font-size: 23px; line-height: 1.0em;}</style> 
+    <div style="text-align: center; height: 25px" class="ui-widget-header ui-corner-top"><xx>Instruction</xx></div>
+    <div style="overflow-y: auto; padding-right: 5px; padding-left: 5px; padding-top: 5px; height: 90%" class="ui-widget-content ui-corner-bottom">
+      <video src="/video/WhatHappensNext.ogv" controls="controls" width="270" /> 
+      <xx>Predict what will happen in the next 20 days. You can drop your message in the left textfield anonymous or log-in before you participate. 
+      For example try to predict your local weather in 20 days or which volcano will erupt next.   
+      Like Kermit is trying to predict the function of his machine you will most probably fail.</xx>   
+    </div>
+  </div>
 </div> 
 
 
-<div style="visibility: hidden;">   
+
   <div id="forUserDialog"><center><lift:UserMgt.loginDialog/></center></div>
   <div id="forRegisterDialog"><center><lift:UserMgt.signUpDialog/></center></div>
   <lift:UserMgt.initUserDialogs/>

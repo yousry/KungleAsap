@@ -4,10 +4,6 @@
 */
 
 
-// Dialog for what happens next machine.
-$(function() {
-	$("#whatNext").dialog({height: 400, width: 600, position:[500 ,180], resizable: false});
-});
 
 
 // Dialog for Note4All
@@ -18,6 +14,13 @@ $(function() {
 */
 
 $(document).ready(function() {
+
+
+// Dialog for what happens next machine.
+$(function() {
+	$("#whatNext").dialog({height: 400, width: 700, position:[500 ,180], resizable: false});
+});
+
 
 $("#animenu").show("bounce",{direction: "right", distance: 40, times: 5},"normal");
 
