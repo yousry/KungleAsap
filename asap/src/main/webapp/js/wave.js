@@ -18,7 +18,7 @@ $(document).ready(function() {
 
 // Dialog for what happens next machine.
 $(function() {
-	$("#whatNext").dialog({height: 400, width: 700, position:[500 ,180], resizable: false});
+	$("#whatNext").dialog({height: 400, width: 682, position:[500 ,180], resizable: false});
 });
 
 

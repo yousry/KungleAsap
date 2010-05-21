@@ -132,24 +132,45 @@
 
 <div id="whatNext" title="What happens next machine" class="ui-widget">
 
-  <div style="float:left; width:293px; height: 350px; background-color: #FFFFFF; margin-right: 2px">
+  <div style="float:left; width:350px; height: 350px; background-color: #FFFFFF; margin-right: 2px">
     <div style="text-align: center; height: 25px" class="ui-widget-header ui-corner-top">Time Left: 00:00:00</div>
-    <div style="position: absolute; bottom: 5px;">
+  
+  
+  <div style="overflow-y: auto; padding-right: 5px; padding-left: 5px; padding-top: 5px; height: 90%" class="ui-widget-content ui-corner-bottom">
+  
+  
+  	<div style="width:327px; height: 205px;"> 
+  	</div>
+    <div style="width:327px;">
       <form action="input_text.htm">
         Your Prediction:<br/>
-        <textarea style="resize: none; width:260px; height:30px;" name="user_eingabe" cols="2" rows="2"></textarea>
+        <textarea style="resize: none; width:100%; height:30px;" name="user_eingabe" cols="2" rows="2"></textarea><br/>
+        Your Language: <select>
+        <option>english</option>
+        <option>french</option>
+        <option>german</option>
+        </select>
+        <button type="button">Submit</button>
       </form>
     </div>
+  
+  </div>
+  
   </div>
 
   <div style="float:left; width:300px; height: 350px; margin-left: 2px;" class="ui-widget">
     <style>xx {font-family: 'Reenie Beanie', arial, serif; font-size: 23px; line-height: 1.0em;}</style> 
     <div style="text-align: center; height: 25px" class="ui-widget-header ui-corner-top"><xx>Instruction</xx></div>
     <div style="overflow-y: auto; padding-right: 5px; padding-left: 5px; padding-top: 5px; height: 90%" class="ui-widget-content ui-corner-bottom">
+      <xx>Predict what will happen in the next 20 days. You can write your message in the left textfield anonymous or log-in before you participate. 
+      For example try to predict your local weather in 20 days or which volcano will erupt next.<br/>   
+      Like Kermit is trying to predict the function of his machine you will most probably fail.</xx>
       <video src="/video/WhatHappensNext.ogv" controls="controls" width="270" /> 
-      <xx>Predict what will happen in the next 20 days. You can drop your message in the left textfield anonymous or log-in before you participate. 
-      For example try to predict your local weather in 20 days or which volcano will erupt next.   
-      Like Kermit is trying to predict the function of his machine you will most probably fail.</xx>   
+      <xx>The best predictions will be presented after expiration of the 20 days period.<br/>
+      <p><b>Regards, Yousry</b></p>
+      Ps. There is a deadline for new entries! The Clock in the upper left shows you the remainig time.   
+      </xx>
+         
     </div>
   </div>
 </div> 

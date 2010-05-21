@@ -26,8 +26,8 @@ class UserMgt {
   def initUserDialogs : NodeSeq = {
     def initDlgs() : JsCmd = JsRaw(
 """
-$('#forUserDialog').dialog({title: '""" + S.??("login") + """', width: 300, height: 160, autoOpen: false });
-$('#forRegisterDialog').dialog({title: '""" + S.??("sign.up") + """', width: 600, height: 200, autoOpen: false });
+$('#forUserDialog').dialog({title: '""" + S.??("login") + """', width: 332, height: 167, autoOpen: false, resizable: false });
+$('#forRegisterDialog').dialog({title: '""" + S.??("sign.up") + """', width: 600, height: 200, autoOpen: false, resizable: false });
 """ 
     )
     Script(OnLoad(initDlgs))
