@@ -132,8 +132,9 @@
 <div id="whatNext" title="What happens next machine" class="ui-widget">
 
   <div style="float:left; width:350px; height: 350px; background-color: #FFFFFF; margin-right: 2px">
-    <div style="text-align: center; height: 25px" class="ui-widget-header ui-corner-top">Time Left: 00:00:00</div>
-  
+    <lift:comet type="WhatHappensNextStatus" name="Other">
+    <div style="text-align: center; height: 25px" class="ui-widget-header ui-corner-top">Time Left: <whn:time>00:00</whn:time>(hh:mm)</div>
+    </lift:comet> 
   
   <div style="overflow-y: auto; padding-right: 5px; padding-left: 5px; padding-top: 5px; height: 90%" class="ui-widget-content ui-corner-bottom">
   
@@ -141,11 +142,13 @@
   	<div style="width:327px; height: 205px;"> 
   	</div>
     <div style="width:327px;">
-      <form action="input_text.htm">
-        Your Prediction:<br/>
-        <textarea style="resize: none; width:100%; height:30px;" name="user_eingabe" cols="2" rows="2"></textarea><br/>
-        <button type="button">Submit</button>
-      </form>
+        <keng>Your prediction:</keng><kger>Ihre Vorhersage:</kger><kfrn>Votre pronostic:</kfrn>
+        <br/>
+        <lift:WhatHappensNext.comment>
+        <preditction:cmnt/>
+        <br/>
+        <preditction:submit/>
+        </lift:WhatHappensNext.comment>
     </div>
   
   </div>
@@ -171,7 +174,7 @@
       
       <keng>The best predictions will be presented after expiration of the 20 days period.</keng>
       <kger>The best predictions will be presented after expiration of the 20 days period.</kger>
-      <kfra>Les meilleures prévisions seront présentées après l'expiration de la période de 20 jours.</kfra>
+      <kfrn>Les meilleures prévisions seront présentées après l'expiration de la période de 20 jours.</kfrn>
       <br/>
       <p><keng>Regards, Yousry</keng><kger>Bis bald, Yousry</kger><kfrn>@+, Yousry</kfrn></p>
       
