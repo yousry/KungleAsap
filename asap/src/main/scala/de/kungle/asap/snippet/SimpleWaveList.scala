@@ -21,17 +21,17 @@ import _root_.net.liftweb.widgets.autocomplete._
 
 import de.kungle.asap.model._
 import de.kungle.process.ProcessMaster
+  
+object actualLanguage extends SessionVar[String]("english")
+
 
 class SimpleWaveList extends Loggable {
 
   object queryFilter extends RequestVar[Box[String]](Empty)
-
   
   // for infinite scroll a imagetive page is calulated.
   private var pageCount = 0
-  private var language = "original" // french, german
-
-  
+  private var language = "english" 
   
   def buildQuery(current: String, limit: Int) : Seq[String] = {
     logger.info("Current: " + current + " Limit: " + limit)
@@ -192,6 +192,7 @@ class SimpleWaveList extends Loggable {
   def langSel(lang: String) : JsCmd = {
     logger.info("Language selected:" + lang); 
     language = lang;
+    actualLanguage(language)
     if(language == "english") JsRaw("""$('keng').show(); $('kfrn').hide(); $('kger').hide();""")
     else if(language == "french") JsRaw("""$('keng').hide(); $('kfrn').show(); $('kger').hide();""")
     else JsRaw("""$('keng').hide(); $('kfrn').hide(); $('kger').show();""")

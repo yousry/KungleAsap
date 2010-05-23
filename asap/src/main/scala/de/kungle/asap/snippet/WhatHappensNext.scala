@@ -18,23 +18,56 @@ import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js.{JsCmd,JsExp}
 import net.liftweb.http.SessionVar
 
-import _root_.de.kungle.asap.model.User
-
+import de.kungle.asap.model.User
 import de.kungle.asap.model.Comment
 
-class WhatHappensNext extends Loggable {
+import tools.com.google.api.GoogleAPI;
+import tools.com.google.api.translate.Language
+import tools.com.google.api.translate.Translate
 
+class WhatHappensNext extends Loggable {
       
+  GoogleAPI.setHttpReferrer("http://kungleImp.de/"); // secure init
   private var nana : String = ""
   
   private def storePrediction = {
     
+    def LanguageString(l: String) = l match  {
+      case "english" => Language.ENGLISH
+      case "french" => Language.FRENCH
+      case "german" => Language.GERMAN} 
+    
+    val language = actualLanguage.get
+
     val comment = Comment.create
+    comment.originalLanguage(language)
     
-    val user = User.currentUser 
+    val destLanguages = List("english","french", "german").filter(x => x != language)
     
-    ()
+    for(l <- destLanguages) {
+
+      def translate : String = {
+        var translation = ""
+        logger.info("Dest Language: " + LanguageString(l))
+        try {
+        	translation = Translate.execute(nana, LanguageString(language),  LanguageString(l))
+        } catch {
+        	case ex : Exception => {logger.info("WHN - Google translation exception: " + ex.getMessage ); translation = nana}
+        }
+        translation
+      }
+      
+      if(language == "english") comment.summary_english(nana) else comment.summary_english(translate)
+      if(language == "french") comment.summary_french(nana) else comment.summary_french(translate)
+      if(language == "german") comment.summary_german(nana) else comment.summary_german(translate)
+    }
     
+    User.currentUser match {
+      case Full(u) => comment.author(u) 
+      case _ => ()
+    } 
+    
+    comment.save
   }
   
   def comment(environs: NodeSeq) : NodeSeq = { 
@@ -42,13 +75,13 @@ class WhatHappensNext extends Loggable {
     val blargh : () => JsCmd = 
       () => {logger.info("New Prediction: " + nana)
              storePrediction
-             JsRaw("$(\"#commentText\").val('');")
+             JsRaw("$(\"#commentText\").val('');") // Clear area
       }
     
     val blub = Helpers.bind(
     "preditction", environs, "cmnt" -> textarea("Type your message here!", 
                                                 gaga => {nana = gaga}) % ("id" -> "commentText")
-                                                                       % ("cols" -> "2") 
+                                                                       % ("cols" -> "40") 
                                                 					   % ("rows" -> "2")
                                                                        % ("style" -> "resize: none; width:100%; height:30px;"),
     "submit" ->  SHtml.ajaxSubmit("Submit", blargh)
@@ -56,4 +89,5 @@ class WhatHappensNext extends Loggable {
     
     ajaxForm(blub)
   }
+  
 }
