@@ -15,6 +15,7 @@ class Comment extends LongKeyedMapper[Comment] with IdPK {
   object summary_german extends MappedPoliteString(this, 200)
 
   object markedBanned extends MappedInt(this)
+  object originalLanguage extends MappedPoliteString(this, 30)
   
 }
 

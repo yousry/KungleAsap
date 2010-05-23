@@ -35,8 +35,7 @@ class Boot {
 
     // DDL
     Schemifier.schemify(true, Schemifier.infoF _, Comment, User, UserLog, Wave, DictionaryEntry, Avatar)
-    
-    
+
     val loggedIn = If(() => User.loggedIn_?,
               () => RedirectResponse("/login"))
     
