@@ -38,29 +38,23 @@ class WhatHappensNext extends Loggable {
       case "german" => Language.GERMAN} 
     
     val language = actualLanguage.get
-
+    
     val comment = Comment.create
     comment.originalLanguage(language)
-    
-    val destLanguages = List("english","french", "german").filter(x => x != language)
-    
-    for(l <- destLanguages) {
-
-      def translate : String = {
-        var translation = ""
-        logger.info("Dest Language: " + LanguageString(l))
-        try {
-        	translation = Translate.execute(nana, LanguageString(language),  LanguageString(l))
-        } catch {
-        	case ex : Exception => {logger.info("WHN - Google translation exception: " + ex.getMessage ); translation = nana}
-        }
-        translation
-      }
       
-      if(language == "english") comment.summary_english(nana) else comment.summary_english(translate)
-      if(language == "french") comment.summary_french(nana) else comment.summary_french(translate)
-      if(language == "german") comment.summary_german(nana) else comment.summary_german(translate)
+    def translate(l: String) : String = {
+      var translation = ""
+      try {
+        translation = Translate.execute(nana, LanguageString(language),  LanguageString(l))
+      } catch {
+        case ex : Exception => {logger.info("WHN - Google translation exception: " + ex.getMessage ); translation = nana}
+      }
+      translation
     }
+      
+      if(language == "english") comment.summary_english(nana) else comment.summary_english(translate("english"))
+      if(language == "french") comment.summary_french(nana) else comment.summary_french(translate("french"))
+      if(language == "german") comment.summary_german(nana) else comment.summary_german(translate("german"))
     
     User.currentUser match {
       case Full(u) => comment.author(u) 
@@ -86,8 +80,7 @@ class WhatHappensNext extends Loggable {
                                                                        % ("style" -> "resize: none; width:100%; height:30px;"),
     "submit" ->  SHtml.ajaxSubmit("Submit", blargh)
     )
-    
+
     ajaxForm(blub)
   }
-  
 }
