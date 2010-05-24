@@ -21,6 +21,8 @@ import net.liftweb.http.SessionVar
 import de.kungle.asap.model.User
 import de.kungle.asap.model.Comment
 
+import de.kungle.asap.comet.{WhatHappensNextStatus, WhatHappensNextObj, SendPrediction}
+
 import tools.com.google.api.GoogleAPI;
 import tools.com.google.api.translate.Language
 import tools.com.google.api.translate.Translate
@@ -69,7 +71,12 @@ class WhatHappensNext extends Loggable {
     val blargh : () => JsCmd = 
       () => {logger.info("New Prediction: " + nana)
              storePrediction
-             JsRaw("$(\"#commentText\").val('');") // Clear area
+             WhatHappensNextObj.is match {
+               case Full(o) => o ! SendPrediction
+               case _       => logger.info("[WhatHappensNext] Comet Not Active")
+             }
+               
+             JsRaw("$(\"#commentText\").val('Thank you for your submission!');") // Clear area
       }
     
     val blub = Helpers.bind(
@@ -77,7 +84,7 @@ class WhatHappensNext extends Loggable {
                                                 gaga => {nana = gaga}) % ("id" -> "commentText")
                                                                        % ("cols" -> "40") 
                                                 					   % ("rows" -> "2")
-                                                                       % ("style" -> "resize: none; width:100%; height:30px;"),
+                                                                       % ("style" -> "background-color: #fafafa; resize: none; width:306px; height:30px; border: none;"),
     "submit" ->  SHtml.ajaxSubmit("Submit", blargh)
     )
 
