@@ -26,7 +26,9 @@ object WhatHappensNextObj extends SessionVar[Box[WhatHappensNextStatus]](Empty)
 class WhatHappensNextStatus extends CometActor with Loggable {
   
   override def defaultPrefix = Full("whn")
-  val eventEndTime =  new java.util.Date(110,4,25)
+  val eventEndTime =  new java.util.Date(110,4,31)
+  
+  // Läuft bis zum 14 Juni
   
   var activeMessage = 0 
   
@@ -37,7 +39,7 @@ class WhatHappensNextStatus extends CometActor with Loggable {
   WhatHappensNextObj(Full(this))
   
   def render = bind(
-    "time" -> <span id="evntTime">{rndTime}</span>,
+    "evntTime" -> <span id="evntTime">{rndTime}</span>,
     "pillar" -> <span id="pillar">{rndPillar}</span>
   )
 
@@ -84,7 +86,8 @@ class WhatHappensNextStatus extends CometActor with Loggable {
     val remainingHours = duration / hours
     val remainingMinutes = (duration - remainingHours * hours) / minutes
     
-    Text(remainingHours+":"+remainingMinutes)
+    
+    Text("%d:%02d".format(remainingHours, remainingMinutes))
   }
 
   
@@ -94,9 +97,9 @@ class WhatHappensNextStatus extends CometActor with Loggable {
     ActorPing.schedule(this, Revoke, 10 seconds)
     partialUpdate(
       SetHtml("pillar", <span id="pillar">{rndPillar}</span>) &
+      SetHtml("evntTime", <span id="evntTime">{rndTime}</span>) &
       JsRaw("$(\"#pillarDiv\").show(\"blind\",{direction: \"right\", distance: 40, times: 5},\"normal\");")
     )
-    logger.info("WHN revoce called")
   }
   
   override def lowPriority : PartialFunction[Any, Unit] = {
