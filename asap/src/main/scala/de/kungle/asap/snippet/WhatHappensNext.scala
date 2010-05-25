@@ -84,6 +84,7 @@ class WhatHappensNext extends Loggable {
                                                 gaga => {nana = gaga}) % ("id" -> "commentText")
                                                                        % ("cols" -> "40") 
                                                 					   % ("rows" -> "2")
+                                                                       % ("onclick" -> "$(this).val('')")
                                                                        % ("style" -> "background-color: #fafafa; resize: none; width:306px; height:30px; border: none;"),
     "submit" ->  SHtml.ajaxSubmit("Submit", blargh)
     )

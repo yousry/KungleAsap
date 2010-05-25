@@ -23,7 +23,10 @@ import de.kungle.asap.snippet.actualLanguage
 
 object WhatHappensNextObj extends SessionVar[Box[WhatHappensNextStatus]](Empty)
 
+
 class WhatHappensNextStatus extends CometActor with Loggable {
+  
+  var isInit = true
   
   override def defaultPrefix = Full("whn")
   val eventEndTime =  new java.util.Date(110,4,31)
@@ -33,7 +36,7 @@ class WhatHappensNextStatus extends CometActor with Loggable {
   var activeMessage = 0 
   
   // during construction start a self awake timer
-  ActorPing.schedule(this, Revoke, 10 seconds)
+  ActorPing.schedule(this, Revoke, 2 seconds)
   
   // Everyone in this session should know me
   WhatHappensNextObj(Full(this))
@@ -95,6 +98,15 @@ class WhatHappensNextStatus extends CometActor with Loggable {
   
   def revoke = {
     ActorPing.schedule(this, Revoke, 10 seconds)
+          
+    if(isInit) {
+      isInit = false
+      // open the dialog
+      partialUpdate(
+        JsRaw("$(\"#whatNext\").dialog({height: 400, width: 660, position:[500 ,180], resizable: false, show: 'blind'});")
+      )
+    }
+    
     partialUpdate(
       SetHtml("pillar", <span id="pillar">{rndPillar}</span>) &
       SetHtml("evntTime", <span id="evntTime">{rndTime}</span>) &

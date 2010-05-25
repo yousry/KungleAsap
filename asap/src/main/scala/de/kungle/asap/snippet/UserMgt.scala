@@ -51,15 +51,9 @@ $('#forRegisterDialog').dialog({title: '""" + S.??("sign.up") + """', width: 600
         case Full(u) => u.userName.is
         case _ => "error"
       }
-      <div>
-      <h5>You are: {yourName}</h5>
-      <p>{Avatar.findAll(By(Avatar.lookup, "1")).head.imageUrl}</p>
-      </div>
+      <h5>You are: {yourName}</h5><div id="loginico" style="width:68; height:68;">{Avatar.findAll(By(Avatar.lookup, "1")).head.imageUrl}</div>
     } else {
-      <div>
-      <h5>You are: anonymous</h5>
-      <p>{Avatar.findAll(By(Avatar.lookup, "2")).head.imageUrl}</p>
-      </div>
+      <h5>You are: anonymous</h5><div id="loginico" style="width:68; height:68;">{Avatar.findAll(By(Avatar.lookup, "2")).head.imageUrl}</div>
     }
   } 
 

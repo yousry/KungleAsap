@@ -3,9 +3,6 @@
  * (c)2010 Yousry Abdallah
 */
 
-
-
-
 // Dialog for Note4All
 /*
 $(function() {
@@ -15,12 +12,32 @@ $(function() {
 
 $(document).ready(function() {
 
-
+// animate icon
+	var thing = $("#loginico");
+	thing.animate({rotate: '45deg', skewX: '25deg', scale: '+=.4 +=.4', origin: [34, 34]}, {
+		duration: 800,
+		easing: 'easeOutCirc',
+		complete: function() {
+			thing.animate({rotate: '-45deg', skewX: '-25deg', scale: '+=.8 +=.8', origin: [34, 34]}, {
+				duration: 800,
+				easing: 'easeOutBack',
+				complete: function() {
+					thing.animate({rotate: '+=405', skewX: '0', scale: '1 1', origin: [34, 34]}, {
+						duration: 800,
+						easing: 'easeOutElastic'
+					});
+				}
+			});
+		}
+	});
+	
 // Dialog for what happens next machine.
+	
+/*	
 $(function() {
 	$("#whatNext").dialog({height: 400, width: 660, position:[500 ,180], resizable: false});
 });
-
+*/
 
 $("#animenu").show("bounce",{direction: "right", distance: 40, times: 5},"normal");
 
