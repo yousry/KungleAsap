@@ -22,11 +22,11 @@ import de.kungle.asap.model.{Comment => KungleComment, User}
 import de.kungle.asap.snippet.actualLanguage
 
 object WhatHappensNextObj extends SessionVar[Box[WhatHappensNextStatus]](Empty)
+object WhatHappensNextInit extends SessionVar[Boolean](true)
 
 
 class WhatHappensNextStatus extends CometActor with Loggable {
   
-  var isInit = true
   
   override def defaultPrefix = Full("whn")
   val eventEndTime =  new java.util.Date(110,4,31)
@@ -99,8 +99,8 @@ class WhatHappensNextStatus extends CometActor with Loggable {
   def revoke = {
     ActorPing.schedule(this, Revoke, 10 seconds)
           
-    if(isInit) {
-      isInit = false
+    if(WhatHappensNextInit.get == true) {
+      WhatHappensNextInit(false)
       // open the dialog
       partialUpdate(
         JsRaw("$(\"#whatNext\").dialog({height: 400, width: 660, position:[500 ,180], resizable: false, show: 'blind'});")

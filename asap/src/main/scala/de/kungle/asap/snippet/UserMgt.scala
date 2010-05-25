@@ -20,8 +20,10 @@ import JsCmds._
 
 import de.kungle.asap.model._
 import de.kungle.process.ProcessMaster
+import de.kungle.asap.comet.WhatHappensNextInit
 
-class UserMgt {
+
+class UserMgt extends Loggable {
   
   def initUserDialogs : NodeSeq = {
     def initDlgs() : JsCmd = JsRaw(
@@ -70,7 +72,7 @@ $('#forRegisterDialog').dialog({title: '""" + S.??("sign.up") + """', width: 600
     
     def testPwd {
       User.find(By(User.userName, username)).filter(_.password.match_?(pwd)).map{
-        u => {logUserIn(u); println("LOGIN CALLED")}
+        u => {logUserIn(u); logger.info("LOGIN CALLED"); WhatHappensNextInit(false)}
         S.redirectTo("/")
       }.openOr(S.error("Invalid Username/Password"))
     }
