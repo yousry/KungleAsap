@@ -93,7 +93,7 @@ class SimpleWaveList extends Loggable {
         
   def renderPic(w: Wave) : NodeSeq = {
     val picID = "pic_" + w.id.is 
-    <div class="span-4" id={picID} >
+    <div style="z-index:2;" class="span-4" id={picID} >
       <img src={"/gfx" + w.picUrl.is} alt="PROCESS DATA" />
     </div> 
   }
