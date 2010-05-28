@@ -41,11 +41,6 @@ $(function() {
 
 $("#animenu").show("bounce",{direction: "right", distance: 40, times: 5},"normal");
 
-// Switch news language via js
-	$('keng').show('slow'); 
-    $('kfrn').hide('slow'); 
-    $('kger').hide('slow'); 
-
     // Init the drawing canvas
 /*    
 	$('#drawbox').drawbox({caption:'Leave your message',lineWidth:1,lineCap:'round',lineJoin:'round',colorSelector:false});

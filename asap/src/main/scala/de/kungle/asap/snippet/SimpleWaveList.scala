@@ -31,15 +31,31 @@ class SimpleWaveList extends Loggable {
   
   // for infinite scroll a imagetive page is calulated.
   private var pageCount = 0
-  private var language = "english" 
   
   def buildQuery(current: String, limit: Int) : Seq[String] = {
     logger.info("Current: " + current + " Limit: " + limit)
-    val blub : List[DictionaryEntry] = DictionaryEntry.findAll(Like(DictionaryEntry.englishTerm, current.toLowerCase + "%"), 
-                                                               OrderBy(DictionaryEntry.occurrences, Descending) ,
-                                                               MaxRows(limit)) 
-    logger.info("Found: " + blub.length)
-    blub.map(x => x.englishTerm.is)
+    
+    val getQueryByLang = actualLanguage.get match {
+      case "english" => DictionaryEntry.englishTerm
+      case "french" => DictionaryEntry.frenchTerm
+      case "german" => DictionaryEntry.germanTerm
+
+    }
+    
+    val result : List[DictionaryEntry] = 
+      DictionaryEntry.findAll(Like(getQueryByLang, current.toLowerCase + "%"), 
+                              OrderBy(DictionaryEntry.occurrences, Descending) ,
+                              MaxRows(limit)) 
+    
+    logger.info("Found: " + result.length)
+    
+    val termMap = (x : DictionaryEntry) => actualLanguage.get match {
+      case "english" => x.englishTerm.is 
+      case "french" => x.frenchTerm.is 
+      case "german" => x.germanTerm.is 
+    }
+      
+    result.map(termMap)
   }
   
 
@@ -48,14 +64,10 @@ class SimpleWaveList extends Loggable {
         
     if(s.length >= 2 && s.length <= 20) queryFilter(Full(s)) else queryFilter(Empty)
     ProcessMaster ! ProcessMaster.UpdateMessage("Last Search: " + s)
-    
   }
-  
 
-  def ajaxSearch(xhtml: NodeSeq): NodeSeq = {
-    bind("autocomplete", xhtml,
-         "box" -> AutoComplete("", buildQuery(_,_), autocompSubmit(_)))
-}
+  def ajaxSearch(xhtml: NodeSeq): NodeSeq =  bind("autocomplete", xhtml,
+                                                  "box" -> AutoComplete("", buildQuery(_,_), autocompSubmit(_)))
   
   // This method creates a ajax call to the server like a button. 
   // But instead of a button press the end of the scrollbar produces an event.
@@ -130,8 +142,14 @@ class SimpleWaveList extends Loggable {
     val newDiv = "check-div" + nextPage
     pageCount = nextPage
     
+    val buildBySqlString = (s: String) => actualLanguage.get match {
+      case "english" => "title_english REGEXP '[[:<:]]" + s + "[[:>:]]' or summary_english REGEXP '[[:<:]]" + s + "[[:>:]]'"
+      case "french" => "title_french REGEXP '[[:<:]]" + s + "[[:>:]]' or summary_french REGEXP '[[:<:]]" + s + "[[:>:]]'"
+      case "german" => "title_german REGEXP '[[:<:]]" + s + "[[:>:]]' or summary_german REGEXP '[[:<:]]" + s + "[[:>:]]'"
+    }
+    
     val waves = queryFilter.get match {
-      case Full(s) => Wave.findAll(BySql("title_english REGEXP '[[:<:]]" + s + "[[:>:]]' or summary_english REGEXP '[[:<:]]" + s + "[[:>:]]'",
+      case Full(s) => Wave.findAll(BySql(buildBySqlString(s),
                                          IHaveValidatedThisSQL("nobody","2010-04-27")), 
                                    OrderBy(Wave.id, Descending ), 
                                    StartAt(25 * nextPage), MaxRows(25))
@@ -144,12 +162,18 @@ class SimpleWaveList extends Loggable {
 
     def queryTabel(in: NodeSeq): NodeSeq = {
       
-        val waves = queryFilter.get match {
-          case Full(s) => Wave.findAll(BySql("title_english REGEXP '[[:<:]]" + s + "[[:>:]]' or summary_english REGEXP '[[:<:]]" + s + "[[:>:]]'",
-                                         IHaveValidatedThisSQL("nobody","2010-04-27")), 
-                                       OrderBy(Wave.id, Descending ), MaxRows(25))
-          case _ => Wave.findAll(OrderBy(Wave.id, Descending ), MaxRows(25))
-        }
+      val buildBySqlString = (s: String) => actualLanguage.get match {
+        case "english" => "title_english REGEXP '[[:<:]]" + s + "[[:>:]]' or summary_english REGEXP '[[:<:]]" + s + "[[:>:]]'"
+        case "french" => "title_french REGEXP '[[:<:]]" + s + "[[:>:]]' or summary_french REGEXP '[[:<:]]" + s + "[[:>:]]'"
+        case "german" => "title_german REGEXP '[[:<:]]" + s + "[[:>:]]' or summary_german REGEXP '[[:<:]]" + s + "[[:>:]]'"
+      }
+        
+      val waves = queryFilter.get match {
+        case Full(s) => Wave.findAll(BySql(buildBySqlString(s),
+                                     IHaveValidatedThisSQL("nobody","2010-04-27")), 
+                                     OrderBy(Wave.id, Descending ), MaxRows(25))
+        case _ => Wave.findAll(OrderBy(Wave.id, Descending ), MaxRows(25))
+      }
         
         def renderEntry(w: Wave): NodeSeq = bind("entry", chooseTemplate("query", "entries", in),
                 "titleEnglish" -> {renderTitle("english", w)},
@@ -182,26 +206,28 @@ class SimpleWaveList extends Loggable {
     
   def langScrollUpdate : JsCmd = {
     
-    logger.info("LangScrollUpdate called for page: " + pageCount + " with language " + language)
+    logger.info("LangScrollUpdate called for page: " + pageCount + " with language " + actualLanguage.get)
     
-    if(language == "original") JsRaw("""$('keng').show(); $('kfrn').hide(); $('kger').hide();""")
-    else if(language == "french") JsRaw("""$('keng').hide(); $('kfrn').show(); $('kger').hide();""")
+    if(actualLanguage.get == "english") JsRaw("""$('keng').show(); $('kfrn').hide(); $('kger').hide();""")
+    else if(actualLanguage.get == "french") JsRaw("""$('keng').hide(); $('kfrn').show(); $('kger').hide();""")
     else JsRaw("""$('keng').hide(); $('kfrn').hide(); $('kger').show();""")
   }  
   
   def langSel(lang: String) : JsCmd = {
     logger.info("Language selected:" + lang); 
-    language = lang;
-    actualLanguage(language)
-    if(language == "english") JsRaw("""$('keng').show(); $('kfrn').hide(); $('kger').hide();""")
-    else if(language == "french") JsRaw("""$('keng').hide(); $('kfrn').show(); $('kger').hide();""")
+    actualLanguage(lang)
+    if(actualLanguage.get == "english") JsRaw("""$('keng').show(); $('kfrn').hide(); $('kger').hide();""")
+    else if(actualLanguage.get == "french") JsRaw("""$('keng').hide(); $('kfrn').show(); $('kger').hide();""")
     else JsRaw("""$('keng').hide(); $('kfrn').hide(); $('kger').show();""")
   }
 
+
+ def languageInit: NodeSeq = Script(OnLoad(langSel(actualLanguage.get)))
+  
  def languageSelect: NodeSeq = ajaxSelect(
    List(("english", "english"),
         ("french", "fran\u00E7ais"),
         ("german", "deutsch")
- ), Full(language), (lang: String) =>{logger.info("Language " + lang + "selected."); langSel(lang)}) 
+ ), Full(actualLanguage.get), (lang: String) =>{logger.info("Language " + lang + "selected."); langSel(lang)}) 
  
 }

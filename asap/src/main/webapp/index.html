@@ -12,7 +12,7 @@
  <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css' />
 </head>
 
-<div id="content"> 
+<div id="content" style="position:absolute; left: 50%; margin-left: -480px; top:0px; z-index: 1;"> 
   <div id="container" class="container">
   <lift:WaveJson/> 
  
@@ -113,23 +113,26 @@
       <query:dragImgs/>
       
     </lift:SimpleWaveList.queryTabel>
-
+    
+    <lift:SimpleWaveList.languageInit />
+    
     <div id="footer" class="span-42 last">
       <p style="padding-top: 8px"><a href="http://www.kungle.de/Trend/about">About/Impressum</a></p> 
     </div> <!-- footer -->
     
   </div> <!-- container -->
+
 </div> <!-- content -->
 
-<!--
-<div id="dialog" title="Note4All">
-  <canvas id="drawbox" width="270" height="370" style="background: white;"> 
-    <p>Your browser does not support &lt;canvas&gt;</p> 
-  </canvas> 
-</div> 
--->
+<div style="visibility: hidden; position:absolute; left: 0px; top:0px; z-index:2;">   
 
-<div style="visibility: hidden;">   
+<!--
+  <div id="dialog" title="Note4All">
+    <canvas id="drawbox" width="270" height="370" style="background: white;"> 
+      <p>Your browser does not support &lt;canvas&gt;</p> 
+    </canvas> 
+  </div> 
+-->
   
   <div id="whatNext" title="What happens next machine" class="ui-widget">
     
@@ -159,10 +162,7 @@
         </lift:WhatHappensNext.comment>
       </div>
       
-      
-      
       </lift:comet>
-      
        
     </div> <!-- left column -->
      
