@@ -72,7 +72,7 @@ $('#forRegisterDialog').dialog({title: '""" + S.??("sign.up") + """', width: 600
     
     def testPwd {
       User.find(By(User.userName, username)).filter(_.password.match_?(pwd)).map{
-        u => {logUserIn(u); logger.info("LOGIN CALLED"); WhatHappensNextInit(false)}
+        u => {logUserIn(u); logger.info("LOGIN CALLED"); WhatHappensNextInit(true)}
         S.redirectTo("/")
       }.openOr(S.error("Invalid Username/Password"))
     }
