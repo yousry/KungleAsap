@@ -99,7 +99,7 @@ class WhatHappensNextStatus extends CometActor with Loggable {
   def revoke = {
     ActorPing.schedule(this, Revoke, 10 seconds)
           
-    if(WhatHappensNextInit.get == true) {
+    if(WhatHappensNextInit.get == true && isActive ) {  
       WhatHappensNextInit(false)
       // open the dialog
       partialUpdate(
