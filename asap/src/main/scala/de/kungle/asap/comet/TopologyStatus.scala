@@ -37,7 +37,7 @@ class TopologyStatus extends CometActor with Loggable {
         map(x => x.title_english.get)
       
        val searchResult =  new FingerPrintSearch(newsTitles)
-       val resultWaves = Wave.findAll(ByList(Wave.id, searchResult.neighbours))
+       val resultWaves = Wave.findAll(ByList(Wave.id, searchResult.neighbours)).reverse
        <ul>{resultWaves.map(w => <li><a href={w.url.is} target="_blank">{w.title_english}</a>({w.publisher})</li>)}</ul>
       }
 

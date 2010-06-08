@@ -174,8 +174,12 @@ update-rc.d jetty.sh defaults
  Frozen Messages danach löschen:
  
  exiqgrep -z -i | xargs exim4 -Mrm
+
+>------------------------------------------------------------------
  
- 
+We need more memory: 
+export JAVA_OPTIONS="-Xms64m -Xmx512m -Drun.mode=production"
+
  
  
  
