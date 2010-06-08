@@ -39,11 +39,6 @@ class Wave extends LongKeyedMapper[Wave] with IdPK {
   object DictionaryIndexed extends MappedBoolean(this) {
     override def defaultValue = false
   }
-  
-  object FingerPringLongitude extends MappedDouble(this)
-  object FingerPringLatitude extends MappedDouble(this)
-  
-  
 }
 
 object Wave extends Wave with LongKeyedMetaMapper[Wave] {
@@ -56,7 +51,6 @@ object Wave extends Wave with LongKeyedMetaMapper[Wave] {
   orignId, 
   markedBanned,
   picUrl,
-  DictionaryIndexed,
-  FingerPringLongitude,
-  FingerPringLatitude)
+  DictionaryIndexed
+  )
 }

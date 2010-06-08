@@ -36,18 +36,20 @@ class ShortTermFingerPrint(source: String*) {
   def toList = fingerPrint.toList
   def get(x: String) = fingerPrint.get(x)
   
-  def distance(other: ShortTermFingerPrint) : Float = {
-    val divisor : Float = Math.max(this.transitions, other.transitions)
+  def distance(other: ShortTermFingerPrint) : Double = {
+    val divisor : Double = Math.max(this.transitions, other.transitions)
     val (fromFiPr, toFiPr) = if(this.size <= other.size)(this, other)else(other,this)
     
     def calcCoincidence(r: Int,comp:(String,Int))= 
       r + Math.min(comp._2 , (toFiPr.get(comp._1) getOrElse 0))
     
-    val coincidences : Float = 
+    val coincidences : Double = 
       fromFiPr.toList.
       foldLeft(0: Int)(calcCoincidence)
     
-    if(divisor == 0) 1 else 1 - coincidences / divisor
+     if(divisor == 0) 1 else 1 - coincidences / divisor
+    
+  
   }
   
 }
