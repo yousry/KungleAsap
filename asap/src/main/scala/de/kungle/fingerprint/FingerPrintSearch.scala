@@ -11,11 +11,11 @@ class FingerPrintSearch(search: List[String]) {
   val searchTerms = search.take(MAX_TERMS)
   val searchTermsFP = searchTerms.map(x => new ShortTermFingerPrint(x))
   
-  val neighbours = FingerPrintSearch.waves.
+  val neighbours : List[Long] = FingerPrintSearch.waves.
     map(w => (w._1,searchTermsFP.foldLeft(0d)((s, st) => s + st.distance(w._2)))).
     sort((x,y) => x._2 <= y._2).
     take(MAX_TERMS). 
-    map(x => x._1)
+    map(x => x._1.is)
 }
 
 object FingerPrintSearch {

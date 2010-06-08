@@ -2,7 +2,6 @@
 <lift:html5/> 
 <head>
  <meta charset="UTF-8" /> 
- <!-- <script type="text/javascript" src="js/jquery.drawbox.js"></script> -->
  <script type="text/javascript" src="js/wave.js"></script>
  <script type="text/javascript" src="js/jquery.transform-0.6.1.min.js"></script>
  
@@ -37,9 +36,7 @@
       </div>
 
       <div align="center" class="span-14">
-        <div id="droppable" class="ui-widget-header">
-         <p>Drop your articles here.</p>
-        </div>
+        <lift:SimpleWaveList.dropBoxInit/>
       </div>
     
       <div align="right" class="span-13 append-1 last"> 
@@ -126,82 +123,24 @@
 
 <div style="visibility: hidden; position:absolute; left: 0px; top:0px; z-index:3;">   
 
-<!--
-  <div id="dialog" title="Note4All">
-    <canvas id="drawbox" width="270" height="370" style="background: white;"> 
-      <p>Your browser does not support &lt;canvas&gt;</p> 
-    </canvas> 
-  </div> 
--->
-  
-  <div id="whatNext" title="What happens next machine" class="ui-widget">
-    
-    <div style="float:left; width:320px; height: 350px; background-color: #FFFFFF; margin-right: 2px">
-    
-      <lift:comet type="WhatHappensNextStatus" name="Other">
-      
-      <div>
-        <div style="text-align: center; height: 25px" class="ui-widget-header ui-corner-top">
-          <keng>Time Left</keng><kger>Verbleibende Zeit</kger><kfrn>Temps restant</kfrn>
-          <whn:evntTime>00:00</whn:evntTime>
-        </div>
-        <div id="pillarDiv" style="word-wrap: break-word; padding-right: 8px; padding-left: 5px; padding-top: 5px; height: 199px;" class="ui-widget-content ui-corner-bottom">
-          <div style="padding: 2px; width:316px; 100%;">
-            <whn:pillar>initialize</whn:pillar>
-          </div>
-        </div>
-      </div>
-        
-      <div style="margin-top: 5px; text-align: center; height: 25px" class="ui-widget-header ui-corner-top">
-        <keng>Your prediction</keng><kger>Ihre Vorhersage</kger><kfrn>Votre pronostic</kfrn>
-      </div>
-        
-      <div style="height: 82px;" class="ui-widget-content ui-corner-bottom">
-        <lift:WhatHappensNext.comment>
-          <preditction:cmnt/><preditction:submit/>
-        </lift:WhatHappensNext.comment>
-      </div>
-      
+<!-- TODO: Replace with dynamic update -->
+
+  <div id="newstopology" style="background-color: #D7F970;" title="News Topology">
+    <div style="padding: 4px; margin-right: -8px; margin-left: -8px; height: 355px; overflow:auto;" class="ui-widget-content ui-corner-all">
+      <lift:comet type="TopologyStatus" name="Other">
+        <topology:related>UNDEFINED</topology:related>
       </lift:comet>
-       
-    </div> <!-- left column -->
+    </div>
+    <div style="padding: 4px; margin-right: -8px; margin-left: -8px; height: 25px;" class="ui-widget-content ui-corner-all">
+    	<lift:SimpleWaveList.clearButton />
+    </div> 
      
-    <div style="float:left; width:300px; height: 350px; margin-left: 2px;">
-      <div style="text-align: center; height: 25px" class="ui-widget-header ui-corner-top">
-      <keng>Instruction</keng><kger>Anleitung</kger><kfrn>Instruction</kfrn>
-      
-      </div>
-      <div style="overflow-y: auto; padding-right: 5px; padding-left: 5px; padding-top: 5px; height: 90%" class="ui-widget-content ui-corner-bottom">
-        <keng>Predict what will happen during the next 20 days. You can write your prediction in the left textfield. 
-        For example: Try to predict your local weather or the stock index in 20 days.</keng>
-        <kger>Sagen Sie vorher, was in den nächsten 20 Tagen geschehen wird. Sie können Ihre Nachricht in das Textfeld auf der linken Seite schreiben. 
-        Zum Beispiel: Versuchen Sie ihr lokales Wetter vorherzusagen, oder den Aktienindex in 20 Tagen.</kger>
-        <kfrn>Prédire ce qui se passera au cours des 20 prochains jours. Vous pouvez écrire votre prédiction dans le champ de texte à gauche. Par exemple: 
-        Essayez de prévoir votre météo locale ou l'indice boursier en 20 jours.</kfrn><br/>   
-        <keng>Like Kermit is trying to predict the function of his machine you will be surprised by the outcome.</keng>
-        <kger>Wie Kermit versucht, die Funktion seiner Maschine vorauszusagen, werden auch Sie von den Ergebnissen überrascht sein.</kger>
-        <kfrn>Comme Kermit tente de prédire la fonction de sa machine, et vous serez surpris par les résultats.</kfrn>
-        <video poster="/video/poster.png" src="/video/WhatHappensNext.ogv" controls="controls" width="270" /> 
-        <keng>The best predictions will be presented after expiration of the 20 days period.</keng>
-        <kger>Die besten Vorhersagen werden nach Ablauf der 20 Tage-Frist vorgestellt werden.</kger>
-        <kfrn>Les meilleures prévisions seront présentées après l'expiration de la période de 20 jours.</kfrn><br/>
-        <p><keng>Regards, Yousry</keng><kger>Bis bald, Yousry</kger><kfrn>@+, Yousry</kfrn></p>
-        <keng>Ps. There is a deadline for new entries! The Clock in the upper left shows you the remainig time.</keng>       
-        <kger>Ps. Es gibt eine Frist für neue Einträge! Die Uhr in der oberen linken Seite zeigt Ihnen die verbleibende Zeit.</kger> 
-        <kfrn>Ps. Il ya une date limite pour les nouvelles entrées! L'horloge en haut à gauche vous indique le temps remainig.</kfrn>
-      </div>
-    </div> <!-- right column -->
-  </div> <!-- whatNext -->
+  </div> 
 
   <div id="forUserDialog"><center><lift:UserMgt.loginDialog/></center></div>
   <div id="forRegisterDialog"><center><lift:UserMgt.signUpDialog/></center></div>
-  <lift:UserMgt.initUserDialogs/>
-  
-<!--
-  <lift:comet type="StrokeStatus" name="Other">
-    <stroke:status>UNDEFINED</stroke:status>
-  </lift:comet>
--->
+  <lift:UserMgt.initUserDialogs/>	
+
 </div> <!-- hidden -->
 
 </lift:surround>

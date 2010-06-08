@@ -9,7 +9,7 @@ import JsCmds._
 import JE._
 
 import de.kungle.process.StrokeMaster
-
+import de.kungle.asap.comet._
 import scala.xml.NodeSeq
 
 object myStrokeId extends SessionVar[Box[Long]](Empty)
@@ -22,6 +22,12 @@ object XNews {
         Some("News already Selected")
       else {
         WorkbenchNews(s :: ents) 
+        
+        TopologyStatusObj.get match {
+          case Full(obj) => obj  ! new TopologyUpdate()
+          case _ =>  ()
+        }
+        
         Some("%s News in your Box".format(ents.length + 1) )
       }
     }

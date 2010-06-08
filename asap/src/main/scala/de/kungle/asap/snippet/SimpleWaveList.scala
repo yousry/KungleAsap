@@ -21,7 +21,9 @@ import _root_.net.liftweb.widgets.autocomplete._
 
 import de.kungle.asap.model._
 import de.kungle.process.ProcessMaster
-  
+
+import de.kungle.asap.comet._
+
 object actualLanguage extends SessionVar[String]("english")
 
 
@@ -230,4 +232,24 @@ class SimpleWaveList extends Loggable {
         ("german", "deutsch")
  ), Full(actualLanguage.get), (lang: String) =>{logger.info("Language " + lang + "selected."); langSel(lang)}) 
  
+ 
+ def dropBoxInit: NodeSeq = 
+   if(WorkbenchNews.get.length == 0) 
+     <div id="droppable" class="ui-widget-header"><p>Drop your articles here.</p></div>
+   else
+     <div id="droppable" class="ui-widget-header"><p>{WorkbenchNews.get.length} News In your Box</p></div>
+       
+
+  def clearButton: NodeSeq = {
+    
+    val clearMessage : JsCmd = JsRaw("newsCallback('Box is Empty');")
+    
+    ajaxButton(Text("Clear Box"), {() => WorkbenchNews(Nil)
+                                   TopologyStatusObj.get match {
+                                     case Full(s) => s ! new TopologyUpdate()
+                                     case _ => ()
+                                   }
+                                  clearMessage})
+  }       
+        
 }
