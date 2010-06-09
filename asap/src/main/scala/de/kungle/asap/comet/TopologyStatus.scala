@@ -31,14 +31,24 @@ class TopologyStatus extends CometActor with Loggable {
     
     def plotRelated = {
       val news = WorkbenchNews.get
-          
-      def calcRelated = {
-      val newsTitles = Wave.findAll(ByList(Wave.id, news.map(x => x.drop(4).toLong))).
-        map(x => x.title_english.get)
       
-       val searchResult =  new FingerPrintSearch(newsTitles)
-       val resultWaves = Wave.findAll(ByList(Wave.id, searchResult.neighbours)).reverse
+      
+      def calcRelated = {
+        val selectedWaveIds = news.map(x => x.drop(4).toLong)
+        val selectedNews = Wave.findAll(ByList(Wave.id, selectedWaveIds))
+        val newsTitles = selectedNews.map(x => x.title_english.get)
+
+        val searchResult =  new FingerPrintSearch(newsTitles)
+        val resultWaves = Wave.findAll(ByList(Wave.id, searchResult.neighbours)).
+          reverse.
+          filter(w => !selectedWaveIds.contains(w.id) )
+       
+       <span>
+       <h5>Selected</h5>
+         <ul>{selectedNews.map(w => <li><a href={w.url.is} target="_blank">{w.title_english}</a>({w.publisher})</li>)}</ul>
+       <h5>Related</h5>
        <ul>{resultWaves.map(w => <li><a href={w.url.is} target="_blank">{w.title_english}</a>({w.publisher})</li>)}</ul>
+       </span>  
       }
 
       
