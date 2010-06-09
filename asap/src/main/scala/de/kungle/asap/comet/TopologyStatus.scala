@@ -46,7 +46,7 @@ class TopologyStatus extends CometActor with Loggable {
        <span>
        <h5>Selected</h5>
          <ul>{selectedNews.map(w => <li><a href={w.url.is} target="_blank">{w.title_english}</a>({w.publisher})</li>)}</ul>
-       <h5>Related</h5>
+       <h5>Recommendations</h5>
        <ul>{resultWaves.map(w => <li><a href={w.url.is} target="_blank">{w.title_english}</a>({w.publisher})</li>)}</ul>
        </span>  
       }
