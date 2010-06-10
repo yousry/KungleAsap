@@ -15,6 +15,12 @@
       <attribute value="jar:file:/home/yousry/.m2/repository/commons-fileupload/commons-fileupload/1.2.1/commons-fileupload-1.2.1-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar" sourcepath="M2_REPO/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/home/yousry/.m2/repository/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
   <classpathentry kind="var" path="M2_REPO/org/apache/derby/derby/10.5.3.0_1/derby-10.5.3.0_1.jar"/>
   <classpathentry kind="var" path="M2_REPO/geronimo-spec/geronimo-spec-jta/1.0.1B-rc4/geronimo-spec-jta-1.0.1B-rc4.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/h2database/h2/1.2.134/h2-1.2.134.jar" sourcepath="M2_REPO/com/h2database/h2/1.2.134/h2-1.2.134-sources.jar">
@@ -33,14 +39,20 @@
       <attribute value="jar:file:/home/yousry/.m2/repository/org/mortbay/jetty/jetty-util/6.1.24/jetty-util-6.1.24-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/joda-time/joda-time/1.6/joda-time-1.6.jar" sourcepath="M2_REPO/joda-time/joda-time/1.6/joda-time-1.6-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/home/yousry/.m2/repository/joda-time/joda-time/1.6/joda-time-1.6-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
   <classpathentry kind="var" path="M2_REPO/junit/junit/4.7/junit-4.7.jar" sourcepath="M2_REPO/junit/junit/4.7/junit-4.7-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/net/liftweb/lift-actor/2.0-M5/lift-actor-2.0-M5.jar" sourcepath="M2_REPO/net/liftweb/lift-actor/2.0-M5/lift-actor-2.0-M5-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/net/liftweb/lift-common/2.0-M5/lift-common-2.0-M5.jar" sourcepath="M2_REPO/net/liftweb/lift-common/2.0-M5/lift-common-2.0-M5-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/net/liftweb/lift-json/2.0-M5/lift-json-2.0-M5.jar" sourcepath="M2_REPO/net/liftweb/lift-json/2.0-M5/lift-json-2.0-M5-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/net/liftweb/lift-mapper/2.0-M5/lift-mapper-2.0-M5.jar" sourcepath="M2_REPO/net/liftweb/lift-mapper/2.0-M5/lift-mapper-2.0-M5-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/net/liftweb/lift-util/2.0-M5/lift-util-2.0-M5.jar" sourcepath="M2_REPO/net/liftweb/lift-util/2.0-M5/lift-util-2.0-M5-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/net/liftweb/lift-webkit/2.0-M5/lift-webkit-2.0-M5.jar" sourcepath="M2_REPO/net/liftweb/lift-webkit/2.0-M5/lift-webkit-2.0-M5-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/net/liftweb/lift-widgets/2.0-M5/lift-widgets-2.0-M5.jar" sourcepath="M2_REPO/net/liftweb/lift-widgets/2.0-M5/lift-widgets-2.0-M5-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/liftweb/lift-actor/2.0-RC1/lift-actor-2.0-RC1.jar" sourcepath="M2_REPO/net/liftweb/lift-actor/2.0-RC1/lift-actor-2.0-RC1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/liftweb/lift-common/2.0-RC1/lift-common-2.0-RC1.jar" sourcepath="M2_REPO/net/liftweb/lift-common/2.0-RC1/lift-common-2.0-RC1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/liftweb/lift-json/2.0-RC1/lift-json-2.0-RC1.jar" sourcepath="M2_REPO/net/liftweb/lift-json/2.0-RC1/lift-json-2.0-RC1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/liftweb/lift-mapper/2.0-RC1/lift-mapper-2.0-RC1.jar" sourcepath="M2_REPO/net/liftweb/lift-mapper/2.0-RC1/lift-mapper-2.0-RC1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/liftweb/lift-testkit/2.0-RC1/lift-testkit-2.0-RC1.jar" sourcepath="M2_REPO/net/liftweb/lift-testkit/2.0-RC1/lift-testkit-2.0-RC1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/liftweb/lift-util/2.0-RC1/lift-util-2.0-RC1.jar" sourcepath="M2_REPO/net/liftweb/lift-util/2.0-RC1/lift-util-2.0-RC1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/liftweb/lift-webkit/2.0-RC1/lift-webkit-2.0-RC1.jar" sourcepath="M2_REPO/net/liftweb/lift-webkit/2.0-RC1/lift-webkit-2.0-RC1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/liftweb/lift-widgets/2.0-RC1/lift-widgets-2.0-RC1.jar" sourcepath="M2_REPO/net/liftweb/lift-widgets/2.0-RC1/lift-widgets-2.0-RC1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.14/log4j-1.2.14.jar" sourcepath="M2_REPO/log4j/log4j/1.2.14/log4j-1.2.14-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/mysql/mysql-connector-java/5.1.12/mysql-connector-java-5.1.12.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/thoughtworks/paranamer/paranamer/2.0/paranamer-2.0.jar" sourcepath="M2_REPO/com/thoughtworks/paranamer/paranamer/2.0/paranamer-2.0-sources.jar">
@@ -54,7 +66,11 @@
       <attribute value="jar:file:/home/yousry/.m2/repository/org/scala-lang/scala-library/2.7.7/scala-library-2.7.7-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/org/mortbay/jetty/servlet-api/2.5-20081211/servlet-api-2.5-20081211.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/mortbay/jetty/servlet-api/2.5-20081211/servlet-api-2.5-20081211.jar" sourcepath="M2_REPO/org/mortbay/jetty/servlet-api/2.5-20081211/servlet-api-2.5-20081211-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/home/yousry/.m2/repository/org/mortbay/jetty/servlet-api/2.5-20081211/servlet-api-2.5-20081211-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
   <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.5.11/slf4j-api-1.5.11.jar" sourcepath="M2_REPO/org/slf4j/slf4j-api/1.5.11/slf4j-api-1.5.11-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-log4j12/1.5.11/slf4j-log4j12-1.5.11.jar" sourcepath="M2_REPO/org/slf4j/slf4j-log4j12/1.5.11/slf4j-log4j12-1.5.11-sources.jar"/>
   <classpathentry kind="con" path="ch.epfl.lamp.sdt.launching.SCALA_CONTAINER"/>
