@@ -1,7 +1,7 @@
 @CHARSET "ISO-8859-1";
 
 body {
-   background-image: url(../gfx/slice/headergradient.png);
+   background-image: url(../gfx/slice/headergradient.png), url(../gfx/Kungle.jpg);
    background-repeat:repeat-x;
    background-color: #efefef;
    background-position: 0px 0px; 
