@@ -9,6 +9,11 @@ import util._
 class Captcha extends LongKeyedMapper[Captcha] with IdPK {
   def getSingleton = Captcha
 
+    
+  object Question extends MappedPoliteString(this, 60) {
+    override def defaultValue = ""
+  }
+  
   object Sentence_A extends MappedPoliteString(this, 100) {
     override def defaultValue = ""
   }
@@ -27,5 +32,5 @@ class Captcha extends LongKeyedMapper[Captcha] with IdPK {
 }
 
 object Captcha extends Captcha with LongKeyedMetaMapper[Captcha] {
-  override def fieldOrder = List(id, Sentence_A, Sentence_B, Sentence_C, IsSolved)
+  override def fieldOrder = List(id, Question, Sentence_A, Sentence_B, Sentence_C, IsSolved)
 }
