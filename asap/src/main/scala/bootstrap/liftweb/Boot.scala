@@ -34,7 +34,14 @@ class Boot {
     LiftRules.addToPackages("tools")
 
     // DDL
-    Schemifier.schemify(true, Schemifier.infoF _, Comment, User, UserLog, Wave, DictionaryEntry, Avatar)
+    Schemifier.schemify(true, Schemifier.infoF _, 
+                        Comment, 
+                        User, 
+                        UserLog, 
+                        Wave, 
+                        DictionaryEntry, 
+                        Avatar,
+                        Captcha)
 
     val loggedIn = If(() => User.loggedIn_?,
               () => RedirectResponse("/login"))
