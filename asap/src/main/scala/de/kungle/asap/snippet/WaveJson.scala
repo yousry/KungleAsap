@@ -12,6 +12,11 @@ import de.kungle.process.StrokeMaster
 import de.kungle.asap.comet._
 import scala.xml.NodeSeq
 
+
+object XDialogPipe extends Loggable{
+  
+}
+
 object myStrokeId extends SessionVar[Box[Long]](Empty)
 
 object XNews {

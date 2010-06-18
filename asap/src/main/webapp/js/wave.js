@@ -4,7 +4,23 @@
 */
 
 $(function() {
-	$("#newstopology").dialog({height: 448, width: 297, position:[5 ,145], resizable: false});
+	$("#newstopology").dialog({height: 448, 
+	                           width: 297, 
+	                           position:[5 ,145], 
+	                           resizable: false,
+	                           
+	                           dragStop: function(event, ui) {
+	                           var position = $(this).dialog( "option", "position" );
+	                           
+	                           var jsonTransmitter = {
+        					   		"owner": "newstopology",
+        							"pos": position 
+    						   };
+	                           
+	                           alert(JSON.stringify(jsonTransmitter)); }
+	                           
+	                           
+	                          });
 });
 
 $(document).ready(function() {
