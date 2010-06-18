@@ -46,11 +46,12 @@ class UserInterfaceHandler extends Loggable{
       val cResJs = net.liftweb.json.JsonParser.parse(reply) 
       val owner: String = (cResJs \\ "owner").extract[String]
       val action = (cResJs \\ "action").extract[String]
-      
       val poss = for{JInt(pos) <- cResJs \\ "pos"} yield pos.extract[Int]
-   
+
+      val visibility = if(action == "close") false else true
+      
       val dlgs : List[DialogMeta] = dialogInfo.get
-      dialogInfo(new DialogMeta(owner, (poss(0), poss(1)), true) :: dlgs.filter(x => x.id != owner))
+      dialogInfo(new DialogMeta(owner, (poss(0), poss(1)), visibility) :: dlgs.filter(x => x.id != owner))
       
       //SetHtml("uiaction", Text("(owner: "+owner+", action: "+action+", pos: "+ poss +")")) 
       JsRaw("")
@@ -61,11 +62,19 @@ class UserInterfaceHandler extends Loggable{
   val clientToServer: JsCmd = Function("preCall",List("what"),uiHandler.call(JsVar("what")) )
   
   val update: JsCmd = {
+
+    val dlgsOpen = (dialogInfo.get).filter(_.visible)  
+    val dlgsClosed = (dialogInfo.get).filter(!_.visible)  
     
+    val toJsClose = (selector: String) => "$(\"#" + selector  + "\").dialog('close'); "
     
     val toJsUpdate = (selector: String, x: Int, y: Int) => 
       "$(\"#" + selector  + "\").dialog( \"option\", \"position\", ["+ x +" ,"+ y +"] );"
-    JsRaw((dialogInfo.get.map(x => toJsUpdate(x.id, x.position._1, x.position._2))).mkString(" ")) 
+    
+    JsRaw(
+           (dlgsOpen.map(x => toJsUpdate(x.id, x.position._1, x.position._2))).mkString(" ") + 
+           (dlgsClosed.map(x => toJsClose(x.id))).mkString(" ")
+         ) 
   }
   
   def uiBridge(doc: NodeSeq): NodeSeq = bind("inter", doc,

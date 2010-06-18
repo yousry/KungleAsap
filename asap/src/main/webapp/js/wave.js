@@ -8,6 +8,17 @@
 	                           width: 297, 
 	                           position:[5 ,145], 
 	                           resizable: false,
+
+	                           close: function(event, ui) {
+		                           var position = $(this).dialog( "option", "position" );
+		                           
+		                           var jsonTransmitter = {
+	        					   		"owner": "newstopology",
+	        					   		"action": "close",
+	        							"pos": position 
+	    						   };
+		                           
+		                           preCall(JSON.stringify(jsonTransmitter)); },
 	                           
 	                           dragStop: function(event, ui) {
 	                           var position = $(this).dialog( "option", "position" );
