@@ -14,6 +14,7 @@
 	                           
 	                           var jsonTransmitter = {
         					   		"owner": "newstopology",
+        					   		"action": "dragStop",
         							"pos": position 
     						   };
 	                           

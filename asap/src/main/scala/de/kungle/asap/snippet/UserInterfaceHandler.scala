@@ -21,6 +21,9 @@ import net.liftweb.http.js.JE._
 import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js.{JsCmd,JsExp}
 
+import net.liftweb.json.JsonAST._
+import net.liftweb.json.JsonDSL._
+
 import net.liftweb.http.SessionVar
 
 case class DialogMeta(id: String, position: (Int,Int), visible: Boolean) 
@@ -30,17 +33,45 @@ object dialogInfo extends SessionVar[List[DialogMeta]](Nil)
 class UserInterfaceHandler extends Loggable{
   
   object uiHandler extends JsonHandler {
+    
+    implicit val formats = net.liftweb.json.DefaultFormats
+
     def apply(doc: Any): JsCmd = {
-      logger.info("BUBU NANA LOLO: " + doc.toString)
-      JsRaw("alert('uiHandler: "+ doc +"');") 
+      
+      val reply = doc match {
+        case JsonCmd(cmd, _, _, _) => cmd
+        case _ => """{"owner":"none","action":"none","pos":[0,0]}"""
+      }
+
+      val cResJs = net.liftweb.json.JsonParser.parse(reply) 
+      val owner: String = (cResJs \\ "owner").extract[String]
+      val action = (cResJs \\ "action").extract[String]
+      
+      val poss = for{JInt(pos) <- cResJs \\ "pos"} yield pos.extract[Int]
+   
+      val dlgs : List[DialogMeta] = dialogInfo.get
+      dialogInfo(new DialogMeta(owner, (poss(0), poss(1)), true) :: dlgs.filter(x => x.id != owner))
+      
+      //SetHtml("uiaction", Text("(owner: "+owner+", action: "+action+", pos: "+ poss +")")) 
+      JsRaw("")
+      
     }
   }
   
-  val clientToServer : JsCmd = Function("preCall",List("what"),uiHandler.call(JsVar("what")) )
+  val clientToServer: JsCmd = Function("preCall",List("what"),uiHandler.call(JsVar("what")) )
+  
+  val update: JsCmd = {
+    
+    
+    val toJsUpdate = (selector: String, x: Int, y: Int) => 
+      "$(\"#" + selector  + "\").dialog( \"option\", \"position\", ["+ x +" ,"+ y +"] );"
+    JsRaw((dialogInfo.get.map(x => toJsUpdate(x.id, x.position._1, x.position._2))).mkString(" ")) 
+  }
   
   def uiBridge(doc: NodeSeq): NodeSeq = bind("inter", doc,
     "handler" -> Script(uiHandler.jsCmd),
-    "caller" -> Script(clientToServer)
+    "caller" -> Script(clientToServer),
+    "update" -> Script(OnLoad(update))
   )
   
 }
