@@ -3,7 +3,7 @@
  * (c)2010 Yousry Abdallah
 */
 
-$(function() {
+ $(function() {
 	$("#newstopology").dialog({height: 448, 
 	                           width: 297, 
 	                           position:[5 ,145], 
@@ -17,11 +17,11 @@ $(function() {
         							"pos": position 
     						   };
 	                           
-	                           alert(JSON.stringify(jsonTransmitter)); }
+	                           preCall(JSON.stringify(jsonTransmitter)); }
 	                           
 	                           
 	                          });
-});
+  });
 
 $(document).ready(function() {
 
