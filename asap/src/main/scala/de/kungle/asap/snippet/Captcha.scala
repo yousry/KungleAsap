@@ -19,22 +19,19 @@ class Captcha {
   def findCaptcha: Box[model.Captcha] = Captcha.find(By(Captcha.IsSolved,false)) 
 
   /**
-   * wrap the captcha in a availability check
+   * Wrap the captcha in a availability check
    */
   def captchaIsAvail(doc: NodeSeq) = if(freeQuestions > 0) doc else <span>Captcha Service Down</span>
-  
+
+  /**
+   * Randomize th db query
+   */
   def calcHints(c: model.Captcha): NodeSeq = {
-    
-    val rnd = randomGenerator.nextInt(5)
-    val alternatives = List(c.Alternative_A,c.Alternative_B,c.Alternative_C,c.Alternative_D)    
-    
-    val gugu = alternatives.splitAt(rnd)
-    
-    val bubu = gugu._1 ::: c.Question :: gugu._2
-    
-        <span>{bubu.mkString(", ")}</span>
+    val randomIndexfromRemain = (for(i <- 1 to 5) yield randomGenerator.nextInt(i)) reverse
+    var hints = List(c.Question, c.Alternative_A,c.Alternative_B,c.Alternative_C,c.Alternative_D) 
+    val hintsRandomised = randomIndexfromRemain.map( i => {val r = hints(i);hints -= r;r}).toList 
+    <span>{hintsRandomised.mkString(", ")}</span>
   }
-  
   
   def captcha(doc: NodeSeq): NodeSeq = findCaptcha match {
     case Full(c) => bind("capgen", doc,
