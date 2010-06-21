@@ -1,0 +1,24 @@
+<lift:surround with="article" at="content">
+	<div class="container">
+
+	<div id="header" class="span-42 last primary-1">
+		<h2>Kungle Captcha</h2>
+	</div> <!-- header  -->
+
+	<div id="content" class="span-42">
+
+	<h2>Captcha:</h2>
+	<lift:Captcha.captchaIsAvail>
+		<lift:Captcha.captcha>
+			<b>Sentence A:</b> <capgen:gapTextA/><br/>
+			<b>Sentence B:</b> <capgen:gapTextB/><br/>
+			<b>Sentence C:</b> <capgen:gapTextC/><br/>
+			<b>Hints:</b> <capgen:hints/><br/>
+			<b>Your Guess:</b> <capgen:yourGuess/>
+		</lift:Captcha.captcha>
+	</lift:Captcha.captchaIsAvail>
+	
+	</div> <!-- content -->
+	</div> <!-- container -->
+
+</lift:surround>

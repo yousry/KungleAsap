@@ -49,6 +49,7 @@ class Boot {
     // Build SiteMap
     val entries = 
       Menu(Loc("Home", List("index"), S.??("Home"), LocGroup("default"))) :: 
+      Menu(Loc("Captchatest", List("captchatest"), "captchatest", LocGroup("default"))) ::
       Menu(Loc("Control",("admin" :: "control" :: Nil) -> false, S.??("Control"), LocGroup("default"), loggedIn ))  ::
       Nil
     
@@ -64,10 +65,10 @@ class Boot {
     LiftRules.dispatch.append(AvatarProcessing.matcher)
     
     //  start Actors
-    ActorPing.schedule(InfoCollector, InfoCollector.DoWork, 1 seconds)
-    ActorPing.schedule(TranslationCollector, TranslationCollector.DoWork, 10 seconds)
-    ActorPing.schedule(SimpleCategorize, SimpleCategorize.DoWork, 20 seconds)
-    ActorPing.schedule(SimpleDictionaryUpdate, SimpleDictionaryUpdate.DoWork, 30 seconds)
+//    ActorPing.schedule(InfoCollector, InfoCollector.DoWork, 1 seconds)
+//    ActorPing.schedule(TranslationCollector, TranslationCollector.DoWork, 10 seconds)
+//    ActorPing.schedule(SimpleCategorize, SimpleCategorize.DoWork, 20 seconds)
+//    ActorPing.schedule(SimpleDictionaryUpdate, SimpleDictionaryUpdate.DoWork, 30 seconds)
     
   }
 }
