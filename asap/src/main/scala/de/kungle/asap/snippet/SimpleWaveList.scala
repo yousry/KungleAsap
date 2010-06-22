@@ -9,12 +9,13 @@ import _root_.net.liftweb.util.Helpers
 import Helpers._
 import _root_.net.liftweb.mapper._
 import net.liftweb.http.jquery.JqSHtml
-import net.liftweb.http.RequestVar
 import net.liftweb.http.S._
 import net.liftweb.http.SHtml._
 import net.liftweb.http.js.JE._
 import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js.{JsCmd,JsExp}
+
+import net.liftweb.http.RequestVar
 import net.liftweb.http.SessionVar
 
 import _root_.net.liftweb.widgets.autocomplete._
