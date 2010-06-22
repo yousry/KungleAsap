@@ -23,6 +23,8 @@ import scala.util.Random
 
 class Captcha {
   
+  var answer: String = "ERROR"
+  
   val randomGenerator = new Random
   
   def freeQuestions: Long = Captcha.count(By(Captcha.IsSolved,false))
@@ -55,7 +57,7 @@ class Captcha {
                          	"gapTextA" -> c.Sentence_A,
                          	"gapTextB" -> c.Sentence_B,
                          	"gapTextC" -> c.Sentence_C,
-                         	"yourGuess" -> <span>yourGuess</span>,
+                         	"yourGuess" -> SHtml.text(answer, answer = _, "maxlength" -> "40"),
                          	"hints" -> NodeSeq.fromSeq{
                               <span id="hints" >Wait 10 Seconds</span> 
                               <noscript>Please enable JavaScript</noscript>

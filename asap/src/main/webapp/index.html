@@ -134,19 +134,12 @@
 <div style="visibility: hidden; position:absolute; left: 0px; top:0px; z-index:4;">   
 <!-- TODO: Replace with dynamic update -->
 
-<lift:UserInterfaceHandler.uiBridge>
-  <inter:handler/>
-  <inter:caller/>
-  <inter:update/>
-</lift:UserInterfaceHandler.uiBridge>
-
 <!--
   <div id="simpleedit" style="background-color: #D7F970;" title="Editor">
     <div style="margin-left: -12px; margin-top: -6px; width: 102%; height: 100%;">
       <textarea style="width: 100%; height: 85%" name="wysiwyg" id="wysiwyg" rows="5" cols="47"></textarea>
     </div>
   </div>
-
 
   <script type="text/javascript">
     $(function() {
@@ -168,8 +161,28 @@
   </div> 
 
   <div id="forUserDialog"><center><lift:UserMgt.loginDialog/></center></div>
-  <div id="forRegisterDialog"><center><lift:UserMgt.signUpDialog/></center></div>
-  <lift:UserMgt.initUserDialogs/>	
+  
+  <div id="forRegisterDialog">
+    <center><lift:UserMgt.signUpDialog/></center>
+    <lift:Captcha.captchaIsAvail>
+      <lift:Captcha.captcha>
+	    <capgen:bubu/>
+	    <b>Sentence A:</b> <capgen:gapTextA/><br/>
+	    <b>Sentence B:</b> <capgen:gapTextB/><br/>
+        <b>Sentence C:</b> <capgen:gapTextC/><br/>
+	    <b>Hints:</b> <capgen:hints/><br/>
+	    <b>Your Guess:</b> <capgen:yourGuess/>
+	  </lift:Captcha.captcha>
+    </lift:Captcha.captchaIsAvail>
+  </div>
+  
+  <lift:UserMgt.initUserDialogs/>
+
+  <lift:UserInterfaceHandler.uiBridge>
+    <inter:handler/>
+    <inter:caller/>
+    <inter:update/>
+  </lift:UserInterfaceHandler.uiBridge>
 
 </div> <!-- hidden -->
 

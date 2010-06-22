@@ -46,12 +46,18 @@ class UserInterfaceHandler extends Loggable{
       val cResJs = net.liftweb.json.JsonParser.parse(reply) 
       val owner: String = (cResJs \\ "owner").extract[String]
       val action = (cResJs \\ "action").extract[String]
-      val poss = for{JInt(pos) <- cResJs \\ "pos"} yield pos.extract[Int]
+      val poss = {
+        val mau = for{JInt(pos) <- cResJs \\ "pos"} yield pos.extract[Int]
+        if(mau.length != 2) List(100, 100) else mau
+        }
 
       val visibility = if(action == "close") false else true
       
       val dlgs : List[DialogMeta] = dialogInfo.get
+      
       dialogInfo(new DialogMeta(owner, (poss(0), poss(1)), visibility) :: dlgs.filter(x => x.id != owner))
+      
+      logger.info("Active Dialogs: " + dialogInfo.get.mkString(", "))
       
       //SetHtml("uiaction", Text("(owner: "+owner+", action: "+action+", pos: "+ poss +")")) 
       JsRaw("")
@@ -63,16 +69,21 @@ class UserInterfaceHandler extends Loggable{
   
   val update: JsCmd = {
 
+        
+    val defaultOpen = List("newstopology")
+
     val dlgsOpen = (dialogInfo.get).filter(_.visible)  
-    val dlgsClosed = (dialogInfo.get).filter(!_.visible)  
+    val dlgsClosed = (dialogInfo.get).filter(x => !x.visible && defaultOpen.contains(x.id))  
+    val dlgsToOpen = (dialogInfo.get).filter(x => x.visible && !defaultOpen.contains(x.id) )
     
+    val toJsOpen = (selector: String) => "$('#" + selector  + "').dialog('open'); "
     val toJsClose = (selector: String) => "$(\"#" + selector  + "\").dialog('close'); "
-    
     val toJsUpdate = (selector: String, x: Int, y: Int) => 
       "$(\"#" + selector  + "\").dialog( \"option\", \"position\", ["+ x +" ,"+ y +"] );"
     
-    JsRaw(
-           (dlgsOpen.map(x => toJsUpdate(x.id, x.position._1, x.position._2))).mkString(" ") + 
+    JsRaw( 
+    	   (dlgsToOpen.map(x => toJsOpen(x.id))).mkString(" ") +
+           (dlgsOpen.map(x => toJsUpdate(x.id, x.position._1, x.position._2))).mkString(" ") +
            (dlgsClosed.map(x => toJsClose(x.id))).mkString(" ")
          ) 
   }

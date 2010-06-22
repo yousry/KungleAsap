@@ -25,19 +25,45 @@ import de.kungle.asap.comet.WhatHappensNextInit
 
 class UserMgt extends Loggable {
   
+  
+  val actUIManagement = (myId: String) => """,
+	                           close: function(event, ui) {
+		                           var position = $(this).dialog( "option", "position" );
+		                           
+		                           var jsonTransmitter = {
+	        					   		"owner": '""" + myId +  """',
+	        					   		"action": "close",
+	        							"pos": position 
+	    						   };
+		                           
+		                           preCall(JSON.stringify(jsonTransmitter)); },
+	                           
+	                           dragStop: function(event, ui) {
+	                           var position = $(this).dialog( "option", "position" );
+	                           
+	                           var jsonTransmitter = {
+        					   		"owner": '""" + myId +  """',
+        					   		"action": "dragStop",
+        							"pos": position 
+    						   };
+	                           
+	                           preCall(JSON.stringify(jsonTransmitter)); }
+"""
+  
   def initUserDialogs : NodeSeq = {
     def initDlgs() : JsCmd = JsRaw(
 """
-$('#forUserDialog').dialog({title: '""" + S.??("login") + """', width: 332, height: 167, autoOpen: false, resizable: false });
-$('#forRegisterDialog').dialog({title: '""" + S.??("sign.up") + """', width: 600, height: 200, autoOpen: false, resizable: false });
+$('#forUserDialog').dialog({title: '""" + S.??("login") + """', width: 332, height: 167, autoOpen: false, resizable: false """ +  actUIManagement("forUserDialog") + """ });
+$('#forRegisterDialog').dialog({title: '""" + S.??("sign.up") + """', width: 650, height: 350, autoOpen: false, resizable: false """ + /*  actUIManagement("forRegisterDialog") + */""" });
 """ 
     )
     Script(OnLoad(initDlgs))
   }
 
-  def userMenu : NodeSeq = {
+  def userMenu : NodeSeq = {         
     def userLogin() : JsCmd = JsRaw("$('#forUserDialog').dialog('open')")
-    def userLogout() : JsCmd = User.logout 
+    def userLogout() : JsCmd = try{User.logout}catch{case ex: Exception => JsRaw("")} 
+      
     def userRegister() : JsCmd = JsRaw("$('#forRegisterDialog').dialog('open')")
     
     if(User.loggedIn_?) <ul><li>{a(() => userLogout, Text(S.??("logout")))}</li></ul>
@@ -72,7 +98,11 @@ $('#forRegisterDialog').dialog({title: '""" + S.??("sign.up") + """', width: 600
     
     def testPwd {
       User.find(By(User.userName, username)).filter(_.password.match_?(pwd)).map{
-        u => {logUserIn(u); logger.info("LOGIN CALLED"); WhatHappensNextInit(true)}
+        u => {logUserIn(u); 
+              val dlgs : List[DialogMeta] = dialogInfo.get
+              dialogInfo(dlgs.map(x => if(x.id == "forUserDialog") new DialogMeta(x.id,x.position,false) else x))
+              logger.info("LOGIN CALLED")
+              }
         S.redirectTo("/")
       }.openOr(S.error("Invalid Username/Password"))
     }
