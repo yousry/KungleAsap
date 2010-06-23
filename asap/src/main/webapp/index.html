@@ -162,11 +162,16 @@
 
   <div id="forUserDialog"><center><lift:UserMgt.loginDialog/></center></div>
   
-  <div id="forRegisterDialog">
-    <center><lift:UserMgt.signUpDialog/></center>
+  <div id="forRegisterDialog" style="background-color: #D7F970;">
+    <div style="padding: 4px; margin-right: -8px; margin-left: -8px;" class="ui-widget-content ui-corner-all">
+      <lift:UserMgt.signUpDialog/>
+    </div>
+
+    <div style="padding: 4px; margin-right: -8px; margin-left: -8px;" class="ui-widget-content ui-corner-all">
+    <h4>Cogito Ergo Sum:</h4>
     <lift:Captcha.captchaIsAvail>
       <lift:Captcha.captcha>
-	    <capgen:bubu/>
+        <capgen:triggerCounter/>
 	    <b>Sentence A:</b> <capgen:gapTextA/><br/>
 	    <b>Sentence B:</b> <capgen:gapTextB/><br/>
         <b>Sentence C:</b> <capgen:gapTextC/><br/>
@@ -174,6 +179,8 @@
 	    <b>Your Guess:</b> <capgen:yourGuess/>
 	  </lift:Captcha.captcha>
     </lift:Captcha.captchaIsAvail>
+    </div>
+    
   </div>
   
   <lift:UserMgt.initUserDialogs/>

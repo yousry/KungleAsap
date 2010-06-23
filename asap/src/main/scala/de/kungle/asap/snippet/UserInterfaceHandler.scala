@@ -55,6 +55,8 @@ class UserInterfaceHandler extends Loggable{
       
       val dlgs : List[DialogMeta] = dialogInfo.get
       
+      logger.info("VORHER: " + dlgs.mkString(", "))
+      
       dialogInfo(new DialogMeta(owner, (poss(0), poss(1)), visibility) :: dlgs.filter(x => x.id != owner))
       
       logger.info("Active Dialogs: " + dialogInfo.get.mkString(", "))
@@ -82,9 +84,9 @@ class UserInterfaceHandler extends Loggable{
       "$(\"#" + selector  + "\").dialog( \"option\", \"position\", ["+ x +" ,"+ y +"] );"
     
     JsRaw( 
-    	   (dlgsToOpen.map(x => toJsOpen(x.id))).mkString(" ") +
-           (dlgsOpen.map(x => toJsUpdate(x.id, x.position._1, x.position._2))).mkString(" ") +
-           (dlgsClosed.map(x => toJsClose(x.id))).mkString(" ")
+      (dlgsOpen.map(x => toJsUpdate(x.id, x.position._1, x.position._2))).mkString(" ") +
+      (dlgsToOpen.map(x => toJsOpen(x.id))).mkString(" ") +
+      (dlgsClosed.map(x => toJsClose(x.id))).mkString(" ")
          ) 
   }
   

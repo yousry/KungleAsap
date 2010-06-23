@@ -23,7 +23,7 @@ import scala.util.Random
 
 class Captcha {
   
-  var answer: String = "ERROR"
+  var answer: String = "Type Here"
   
   val randomGenerator = new Random
   
@@ -48,7 +48,13 @@ class Captcha {
   
   def captcha(doc: NodeSeq): NodeSeq = findCaptcha match {
     case Full(c) => bind("capgen", doc,
-                            "bubu" -> {
+                         "triggerCounter" -> {
+                                def alertCaptcha() : JsCmd = JsRaw("$('#hints').html('" + Str(calcHints(c)) + "')")
+                                val bubu = SHtml.ajaxInvoke(() => alertCaptcha)
+                                val mumu = "function triggerCounter(timespan) { window.setTimeout(function () { " + SHtml.makeAjaxCall(Str((bubu)._1 + "=true")).toJsCmd + "; return false; }, 10000);}"
+                                Script(JsRaw(mumu))
+                            }, 
+                            "counter" -> {
                                 def alertCaptcha() : JsCmd = JsRaw("$('#hints').html('" + Str(calcHints(c)) + "')")
                                 val bubu = SHtml.ajaxInvoke(() => alertCaptcha)
                                 val mumu = "window.setTimeout(function () { " + SHtml.makeAjaxCall(Str((bubu)._1 + "=true")).toJsCmd + "; return false; }, 10000);"

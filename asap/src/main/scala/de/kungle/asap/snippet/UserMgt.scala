@@ -47,6 +47,17 @@ class UserMgt extends Loggable {
         							"pos": position 
     						   };
 	                           
+	                           preCall(JSON.stringify(jsonTransmitter)); },
+
+	                           open: function(event, ui) {
+	                           var position = $(this).dialog( "option", "position" );
+	                           
+	                           var jsonTransmitter = {
+        					   		"owner": '""" + myId +  """',
+        					   		"action": "dragStop",
+        							"pos": position 
+    						   };
+	                           
 	                           preCall(JSON.stringify(jsonTransmitter)); }
 """
   
@@ -54,17 +65,17 @@ class UserMgt extends Loggable {
     def initDlgs() : JsCmd = JsRaw(
 """
 $('#forUserDialog').dialog({title: '""" + S.??("login") + """', width: 332, height: 167, autoOpen: false, resizable: false """ +  actUIManagement("forUserDialog") + """ });
-$('#forRegisterDialog').dialog({title: '""" + S.??("sign.up") + """', width: 650, height: 350, autoOpen: false, resizable: false """ + /*  actUIManagement("forRegisterDialog") + */""" });
+$('#forRegisterDialog').dialog({title: '""" + S.??("sign.up") + """', width: 650, height: 350, autoOpen: false, resizable: false """ +   actUIManagement("forRegisterDialog") + """ });
 """ 
     )
     Script(OnLoad(initDlgs))
   }
-
+  
   def userMenu : NodeSeq = {         
     def userLogin() : JsCmd = JsRaw("$('#forUserDialog').dialog('open')")
     def userLogout() : JsCmd = try{User.logout}catch{case ex: Exception => JsRaw("")} 
       
-    def userRegister() : JsCmd = JsRaw("$('#forRegisterDialog').dialog('open')")
+    def userRegister() : JsCmd = JsRaw("$('#forRegisterDialog').dialog('open'); triggerCounter(10000);")
     
     if(User.loggedIn_?) <ul><li>{a(() => userLogout, Text(S.??("logout")))}</li></ul>
     else <ul><li>{a(() => userLogin, Text(S.??("login")))}</li><li>{a(() => userRegister, Text(S.??("sign.up")))}</li></ul>
