@@ -47,6 +47,37 @@ class User extends MegaProtoUser[User] {
 
 object User extends User with MetaMegaProtoUser[User] {
 
+    
+  def signup(doc: NodeSeq) = {
+    val theUser: User = create
+    val theName = signUpPath.mkString("")
+
+    def testSignup() {
+      validateSignup(theUser) match {
+        case Nil =>
+          actionsAfterSignup(theUser)
+          S.redirectTo(homePage)
+
+        case xs => S.error(xs) ; signupFunc(Full(innerSignup _))
+      }
+    }
+
+    def innerSignup = bind("user",
+                           signupXhtml(theUser))
+
+    val blub = bind("sgn", doc, 
+      "inner" -> innerSignup,
+	  "submit" ->SHtml.submit(S.??("sign.up"), testSignup _))
+ 
+	<form method="post" action={S.uri}>{blub}</form>
+  }
+    
+  override def signupXhtml(user: User): Elem = {
+    (<table><tr><td colspan="2"><h4>{ S.??("sign.up") }</h4></td></tr>{localForm(user, false)}</table>)
+  }
+
+// ------------------------------------------------------------    
+    
   override def validateSignup(user: User): List[FieldError] = {
     return super.validateSignup(user)
   }

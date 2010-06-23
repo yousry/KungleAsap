@@ -65,7 +65,7 @@ class UserMgt extends Loggable {
     def initDlgs() : JsCmd = JsRaw(
 """
 $('#forUserDialog').dialog({title: '""" + S.??("login") + """', width: 332, height: 167, autoOpen: false, resizable: false """ +  actUIManagement("forUserDialog") + """ });
-$('#forRegisterDialog').dialog({title: '""" + S.??("sign.up") + """', width: 650, height: 350, autoOpen: false, resizable: false """ +   actUIManagement("forRegisterDialog") + """ });
+$('#forRegisterDialog').dialog({title: '""" + S.??("sign.up") + """', width: 700, height: 365, autoOpen: false, resizable: false """ +   actUIManagement("forRegisterDialog") + """ });
 """ 
     )
     Script(OnLoad(initDlgs))
@@ -97,10 +97,7 @@ $('#forRegisterDialog').dialog({title: '""" + S.??("sign.up") + """', width: 650
   } 
 
   
-  def signUpDialog : NodeSeq = {
-    User.signup
-  }
-  
+  def signUpDialog(doc: NodeSeq): NodeSeq = User.signup(doc)
   
   def loginDialog : NodeSeq = {
             
