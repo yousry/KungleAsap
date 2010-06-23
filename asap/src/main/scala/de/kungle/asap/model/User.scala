@@ -45,7 +45,7 @@ class User extends MegaProtoUser[User] {
   
 }
 
-object User extends User with MetaMegaProtoUser[User] {
+object User extends User with MetaMegaProtoUser[User] with Loggable {
 
     
   def signup(doc: NodeSeq) = {
@@ -56,9 +56,12 @@ object User extends User with MetaMegaProtoUser[User] {
       validateSignup(theUser) match {
         case Nil =>
           actionsAfterSignup(theUser)
+          import de.kungle.asap.snippet.{DialogMeta,dialogInfo}
+          val dlgs : List[DialogMeta] = dialogInfo.get
+          dialogInfo(dlgs.map(x => if(x.id == "forRegisterDialog") new DialogMeta(x.id,x.position,false) else x))
           S.redirectTo(homePage)
 
-        case xs => S.error(xs) ; signupFunc(Full(innerSignup _))
+        case xs => logger.info("Fehler: " + xs); S.error(xs); S.error("Failed Registration") ; signupFunc(Full(innerSignup _))
       }
     }
 
