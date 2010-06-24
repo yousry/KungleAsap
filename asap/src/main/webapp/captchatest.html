@@ -1,26 +1,121 @@
 <lift:surround with="article" at="content">
-<lift:html5/> 
+<lift:html5/>
+<head>
+
+<title>Kungle Imp: Captcha Generator (Demo)</title>
+<meta name="description" content="Kungle Captcha: Guess the missing word." />
+<meta name="keywords" content="captcha generator service example." />
+
+<style type="text/css">
+
+#footer {
+ background-image: url(../gfx/slice/CaptchaFooter.png);
+ height: 25px;
+ font-size: 15px;
+  padding-top: 5px;
+}
+
+#header {
+ background-image: url(../gfx/slice/CaptchaHeader.png);
+ height: 108px;
+}
+
+#menu {
+ background-image: url(../gfx/slice/CaptchaMenu.png);
+ margin-top: 5px;
+ width: 160px;
+ height: 155px;
+ padding-top: 25px;
+ padding-left: 10px;
+ font-size: 14px;
+}
+
+#content {
+ background-color: white;
+ margin-top: -2px;
+ min-height: 800px;
+ background: white;
+ color: black;
+ font: 120% Verdana, sans-serif;
+ text-align:left;
+}
+
+h4 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font: 125% Verdana, sans-serif;
+}
+
+body {
+	background: #e0e0e0;
+}
+
+</style>
+</head> 
 	<div class="container">
 
-	<div id="header" class="span-42 last primary-1">
-		<h2>Kungle Captcha</h2>
+	<div id="header" class="span-42 last">
 	</div> <!-- header  -->
 
-	<div id="content" class="span-42">
-     Captcha Test: 
-	<h4>COGITO ERGO SUM</h4>
+	<div id="content" class="span-42 last">
+	
+	<div id="menu" class="span-10">
+	  <lift:Menu.builder />
+	  <lift:msgs/>
+	</div>
+
+	<div style="padding-top: 10px;" class="span-32 last">
+     <span style="color: red;" >Live Example:</span> 
+	<h4>Kungle Captcha: Guess the missing word.</h4>
 	<lift:Captcha.captchaIsAvail>
 		<lift:Captcha.captcha>
 			<capgen:counter/>
 			<b>Sentence A:</b> <capgen:gapTextA/><br/>
 			<b>Sentence B:</b> <capgen:gapTextB/><br/>
-			<b>Sentence C:</b> <capgen:gapTextC/><br/>
+			<b>Sentence C:</b> <capgen:gapTextC/><br/><br/>
 			<b>Hints:</b> <capgen:hints/><br/><br/>
 			<b>Your Guess:</b> <capgen:yourGuess/>
 		</lift:Captcha.captcha>
 	</lift:Captcha.captchaIsAvail>
+	</div>
+
+	
+
+	<div style="padding-top: 20px" class="prepend-2 span-38 append-2 last">
+	<br/>
+	<center><img src="/gfx/slice/CaptchaSepA.png" ></img></center>
+	
+	<h4>What it is:</h4>	
+	
+	Kungles "<b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>uring test to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part" 
+	is a web service, designed to protect your webpage from malicious bots and crawler. In contrast to other systems, <b>Kungle Captcha</b> 
+	uses text questions instead of pictures for the test and can therefore be uses by disabled persons.
+	
+	<h4>How does it work:</h4>
+	A Random Gap Text is generated. In each sentence the search word is removed. You have to guess the missing word.   
+	An <b>optional</b> hint list can be activated after a period of time. Each test is unique and removed from the catalogue once 
+	the correct answer was given.
+	
+	
+	<h4>Technology:</h4>
+	The Service is capable to generate more than 1.000.000 unique questions per month. KungleImp.de has a quota of 50.000 questions.
+	
+	
+	<h4>Contact &amp; Information</h4>
+	More information is available here:
+	 <a href="mailto:support@kungle.de">Support@kungle.de</a>
+	
+	
+	</div>
+	
+	
 	
 	</div> <!-- content -->
+	
+	<div id="footer" class="span-42 last">
+	<a href="http://www.kungle.de/Trend/about">About/Impressum</a>  
+	</div>
+	
 	</div> <!-- container -->
 
 </lift:surround>

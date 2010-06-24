@@ -65,10 +65,10 @@ class Boot {
     LiftRules.dispatch.append(AvatarProcessing.matcher)
     
     //  start Actors
-//    ActorPing.schedule(InfoCollector, InfoCollector.DoWork, 1 seconds)
-//    ActorPing.schedule(TranslationCollector, TranslationCollector.DoWork, 10 seconds)
-//    ActorPing.schedule(SimpleCategorize, SimpleCategorize.DoWork, 20 seconds)
-//    ActorPing.schedule(SimpleDictionaryUpdate, SimpleDictionaryUpdate.DoWork, 30 seconds)
+    ActorPing.schedule(InfoCollector, InfoCollector.DoWork, 1 seconds)
+    ActorPing.schedule(TranslationCollector, TranslationCollector.DoWork, 10 seconds)
+    ActorPing.schedule(SimpleCategorize, SimpleCategorize.DoWork, 20 seconds)
+    ActorPing.schedule(SimpleDictionaryUpdate, SimpleDictionaryUpdate.DoWork, 30 seconds)
     
   }
 }

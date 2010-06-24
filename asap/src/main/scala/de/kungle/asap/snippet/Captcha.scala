@@ -36,8 +36,18 @@ class Captcha {
   
   def freeQuestions: Long = Captcha.count(By(Captcha.IsSolved,false))
   
-  def findCaptcha: Box[model.Captcha] = Captcha.find(By(Captcha.IsSolved,false)) 
+  def findCaptcha: Box[model.Captcha] = {
 
+    val rnd  = randomGenerator.nextInt(freeQuestions.toInt)
+    
+    val result = Captcha.findAll(
+      By(Captcha.IsSolved,false), 
+      StartAt(  randomGenerator.nextInt(rnd)),
+      MaxRows(1)
+    ) 
+
+    if(result.length == 1) Full(result.head) else Empty
+  }
   var activeCaptcha: Box[model.Captcha] = Empty
   
   def closeQuestion = activeCaptcha match {
@@ -55,8 +65,8 @@ class Captcha {
    * Randomize th db query
    */
   def calcHints(c: model.Captcha): String = {
-    val randomIndexfromRemain = (for(i <- 1 to 5) yield randomGenerator.nextInt(i)) reverse
-    var hints = List(c.Question, c.Alternative_A,c.Alternative_B,c.Alternative_C,c.Alternative_D) 
+    var hints = List(c.Question, c.Alternative_A, c.Alternative_B, c.Alternative_C, c.Alternative_D).removeDuplicates
+    val randomIndexfromRemain = (for(i <- 1 to hints.length) yield randomGenerator.nextInt(i)) reverse
     val hintsRandomised = randomIndexfromRemain.map( i => {val r = hints(i);hints -= r;r}).toList 
     hintsRandomised.mkString(", ")
   }
