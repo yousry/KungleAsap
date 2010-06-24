@@ -161,21 +161,23 @@
   </div> 
 
   <div id="forUserDialog"><center><lift:UserMgt.loginDialog/></center></div>
-  
+
   <div id="forRegisterDialog" style="background-color: #D7F970;">
   <lift:UserMgt.signUpDialog>
-    <div style="padding: 4px; margin-right: -8px; margin-left: -8px;" class="ui-widget-content ui-corner-all">
+    <div style="padding: 4px; margin-right: -8px; margin-left: -8px; height: 150px;" class="ui-widget-content ui-corner-all">
       <sgn:inner/>
+      <lift:Msg id="user_t_userName" errorClass="ui-state-error" />
     </div>
     <lift:Captcha.captchaIsAvail>
       <lift:Captcha.captcha>
-        <div style="padding: 4px; margin-right: -8px; margin-left: -8px;" class="ui-widget-content ui-corner-top">
+        <div style="padding: 4px; margin-right: -8px; margin-left: -8px; height: 160px;" class="ui-widget-content ui-corner-top">
           <h4>Guess the missing word:</h4>
           <capgen:triggerCounter/>
 	      <b>A:</b> <capgen:gapTextA/><br/>
 	      <b>B:</b> <capgen:gapTextB/><br/>
           <b>C:</b> <capgen:gapTextC/><br/><br/>
 	      <b>Hints:</b> <capgen:hints/><br/>
+	      <lift:Msg id="user_t_password" errorClass="ui-state-error" />
 	    </div>
 	    <div style="padding: 4px; margin-right: -8px; margin-left: -8px;" class="ui-corner-bottom secondary-b-2">
 	      <b>Your Guess:</b> <capgen:yourGuess/><sgn:submit/>

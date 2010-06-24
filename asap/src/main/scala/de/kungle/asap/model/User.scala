@@ -22,6 +22,8 @@ import _root_.net.liftweb.util._
 import _root_.net.liftweb.common._
 import _root_.net.liftweb.util.Mailer._
 import S._
+          
+import de.kungle.asap.snippet._
 
 
 class User extends MegaProtoUser[User] {
@@ -37,6 +39,11 @@ class User extends MegaProtoUser[User] {
   
   object userName extends MappedPoliteString(this, 200) {
     override def displayName = "User Name"
+    override def validations =  isToShort _ :: valUnique(S.??("unique.email.address")) _ :: super.validations
+
+    def isToShort(s: String) = if(s.length < 4) List(FieldError(this, "Username to Short."))
+                               else List()
+    
   }
   
   object avatar extends MappedLongForeignKey(this, Avatar) {
@@ -56,7 +63,6 @@ object User extends User with MetaMegaProtoUser[User] with Loggable {
       validateSignup(theUser) match {
         case Nil =>
           actionsAfterSignup(theUser)
-          import de.kungle.asap.snippet.{DialogMeta,dialogInfo}
           val dlgs : List[DialogMeta] = dialogInfo.get
           dialogInfo(dlgs.map(x => if(x.id == "forRegisterDialog") new DialogMeta(x.id,x.position,false) else x))
           S.redirectTo(homePage)
@@ -82,7 +88,19 @@ object User extends User with MetaMegaProtoUser[User] with Loggable {
 // ------------------------------------------------------------    
     
   override def validateSignup(user: User): List[FieldError] = {
-    return super.validateSignup(user)
+    
+    var error = ""
+    
+    sessionCaptcha.get match {
+      case Full(s) => {
+        logger.info("Your answer: " +s.answer + " Correct: " + s.question)
+        if(s.answer.toLowerCase.trim == s.question) s.closeQuestion
+        error = if(s.answer.toLowerCase.trim != s.question) "Wrong Guess." else ""
+      }
+      case _ => {logger.info("Captcha is missing"); error = "Captcha missing."}
+    }
+    
+    if(error != "") FieldError(user.password, error) :: super.validateSignup(user) else super.validateSignup(user)
   }
   
   override def signupFields  = userName :: password :: Nil

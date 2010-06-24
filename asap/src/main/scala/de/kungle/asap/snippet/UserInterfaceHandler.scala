@@ -78,7 +78,8 @@ class UserInterfaceHandler extends Loggable{
     val dlgsClosed = (dialogInfo.get).filter(x => !x.visible && defaultOpen.contains(x.id))  
     val dlgsToOpen = (dialogInfo.get).filter(x => x.visible && !defaultOpen.contains(x.id) )
     
-    val toJsOpen = (selector: String) => "$('#" + selector  + "').dialog('open'); "
+    // TODO: Special Handler Functor for postopen functions
+    val toJsOpen = (selector: String) => if(selector == "forRegisterDialog") "$('#" + selector  + "').dialog('open'); triggerCounter(10000); " else "$('#" + selector  + "').dialog('open'); "  
     val toJsClose = (selector: String) => "$(\"#" + selector  + "\").dialog('close'); "
     val toJsUpdate = (selector: String, x: Int, y: Int) => 
       "$(\"#" + selector  + "\").dialog( \"option\", \"position\", ["+ x +" ,"+ y +"] );"

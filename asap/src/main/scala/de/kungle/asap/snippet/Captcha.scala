@@ -17,20 +17,35 @@ import net.liftweb.http.jquery.JqSHtml
 import net.liftweb.http.js.jquery.JqJsCmds
 import net.liftweb.http.js.jquery.JqJsCmds._
 
+import net.liftweb.http.SessionVar
+
 import _root_.scala.xml._
 
 import scala.util.Random
 
+object sessionCaptcha extends SessionVar[Box[Captcha]](Empty)
+
 class Captcha {
   
-  var answer: String = "Type Here"
+  sessionCaptcha(Full(this))
   
+  var question: String = ""
+  var answer: String = "Type Here"
+
   val randomGenerator = new Random
   
   def freeQuestions: Long = Captcha.count(By(Captcha.IsSolved,false))
   
   def findCaptcha: Box[model.Captcha] = Captcha.find(By(Captcha.IsSolved,false)) 
 
+  var activeCaptcha: Box[model.Captcha] = Empty
+  
+  def closeQuestion = activeCaptcha match {
+    case Full(c) => c.IsSolved(true); c.save
+    case _ => ()                                  
+  }
+  
+  
   /**
    * Wrap the captcha in a availability check
    */
@@ -63,7 +78,7 @@ class Captcha {
                          	"gapTextA" -> c.Sentence_A,
                          	"gapTextB" -> c.Sentence_B,
                          	"gapTextC" -> c.Sentence_C,
-                         	"yourGuess" -> SHtml.text(answer, answer = _, "maxlength" -> "40"),
+                         	"yourGuess" -> { activeCaptcha = Full(c); question = c.Question.get; SHtml.text(answer, answer = _, "maxlength" -> "40") % ("onclick" -> "$(this).val('')")},
                          	"hints" -> NodeSeq.fromSeq{
                               <span id="hints" >Wait 10 Seconds</span> 
                               <noscript>Please enable JavaScript</noscript>
