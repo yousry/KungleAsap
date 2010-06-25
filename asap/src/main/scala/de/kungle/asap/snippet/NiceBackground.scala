@@ -25,7 +25,10 @@ class NiceBackground {
   
   def background(document: NodeSeq): NodeSeq = 
     Helpers.bind("bg", document, 
-                 "bgImage" -> <div id="myBackground" style="margin-left: -24px; position: absolute; top:140px; width:100%; height: 90%;z-index: 1;background:url(/photo/ExampleK);background-repeat:repeat-x;"></div>, 
+                 "bgImage" -> 
+                   <div id="myBackground" style="margin-left: -24px; position: absolute; top:140px; width:100%; height: 90%;z-index: 1;">
+                     <img style="width: 100%; height: 100%" src="/photo/ExampleK" />
+                   </div>,
                   "bgEffect" -> effect
     )
   
