@@ -41,7 +41,8 @@ class Boot {
                         Wave, 
                         DictionaryEntry, 
                         Avatar,
-                        Captcha)
+                        Captcha,
+                        Photo)
 
     val loggedIn = If(() => User.loggedIn_?,
               () => RedirectResponse("/login"))
