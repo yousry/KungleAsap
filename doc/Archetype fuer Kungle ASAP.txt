@@ -18,3 +18,4 @@ mvn -Declipse.workspace="C:\\Users\\yousry\\Documents\\workspace" eclipse:add-ma
 
 mvn -Declipse.workspace="/home/yousry/workspace" eclipse:add-maven-repo
 
+example cleanup: mvn -e -X clean compile 
