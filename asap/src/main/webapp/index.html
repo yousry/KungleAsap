@@ -137,116 +137,106 @@
 <div style="visibility: hidden; position:absolute; left: 0px; top:0px; z-index:4;">   
 
   <div id="simpleedit" style="background-color: #D7F970;" title="Editor">  
-
-<div id="kungle_wysiwyg" class="kungle_wysiwyg">
-<div id="kungle_toolbar" class="kungle_toolbar">
-	<img src="gfx/ico/bold.png" onclick="action(this,'bold')" title="bold" alt="bold" />
-	<img src="gfx/ico/italic.png" onclick="action(this,'italic')" title="italic" alt="italic" />
-	<img src="gfx/ico/underline.png" onclick="action(this,'underline')" title="underline" alt="underline" />
-	<img src="gfx/ico/strikethrough.png" onclick="action(this,'strikethrough')" title="strikethrough" alt="strikethrough" />		 
-	<img src="gfx/ico/link.png" onclick="action(this,'createLink',prompt('URL?'))" title="link" alt="link" />
-	<img src="gfx/ico/unlink.png" onclick="action(this,'unlink')" title="unlink" alt="unlink" />	
-	<img src="gfx/ico/h1.png" onclick="action(this,'heading', 'h1')" title="h1" alt="h1" />
-	<img src="gfx/ico/h2.png" onclick="action(this,'heading', 'h2')" title="h1" alt="h2" /> 
-	<img src="gfx/ico/h3.png" onclick="action(this,'heading', 'h3')" title="h1" alt="h3" /> 
-	<img src="gfx/ico/h4.png" onclick="action(this,'heading', 'h4')" title="h1" alt="h4" /> 
-	<img src="gfx/ico/h5.png" onclick="action(this,'heading', 'h5')" title="h1" alt="h5" /> 
-	<img src="gfx/ico/h6.png" onclick="action(this,'heading', 'h6')" title="h1" alt="h6" />  
-	<img src="gfx/ico/paragraph.png" onclick="action(this,'insertparagraph')" title="paragraph" alt="paragraph" />
-	<select onChange="action(this,'heading',this.value)">
-		<option value="h1">Heading 1</option>
-		<option value="h2">Heading 2</option>
-		<option value="h3">Heading 3</option>
-		<option value="h4">Heading 4</option>
-		<option value="h5">Heading 5</option>
-		<option value="h6">Heading 6</option>
-		<option value="p">Paragraph</option>									
-	</select>
-	<img src="gfx/ico/image.png" onclick="action(this,'insertimage',prompt('URL?'))" title="image" alt="image" />
-	<img src="gfx/ico/hr.png" onclick="action(this,'inserthorizontalrule')" title="hr" alt="hr" />
-	<img src="gfx/ico/undo.png" onclick="action(this,'undo')" title="undo" alt="undo" />
-	<img src="gfx/ico/redo.png" onclick="action(this,'redo')" title="redo" alt="redo" />
-	<img src="gfx/ico/backcolor.png" onclick="action(this,'backcolor',prompt('Color?'))" title="backcolor" alt="backcolor" />
-	<img src="gfx/ico/fontcolor.png" onclick="action(this,'forecolor',prompt('Color?'))" title="fontcolor" alt="fontcolor" />
-	<img src="gfx/ico/hilightcolor.png" onclick="action(this,'hilitecolor',prompt('Color?'))" title="hilightcolor" alt="hilightcolor" />
-	<img src="gfx/ico/increase.png" onclick="action(this,'increasefontsize')" title="increase" alt="increase" />
-	<img src="gfx/ico/decrease.png" onclick="action(this,'decreasefontsize')" title="decrease" alt="decrease" />
-	<select onchange="action(this,'fontname', this.value)">
-		<option style="font-family:Courier New">Courier New</option>
-		<option style="font-familyTimes New Roman">Times New Roman</option>
-		<option style="font-family:Tahoma">Tahoma</option>
-		<option style="font-family:Verdana">Verdana</option>
-		<option style="font-family:Georgia">Georgia</option>
-		<option style="font-family:Impact">Impact</option>
-	</select>
-	<select onchange="action(this,'FontSize', this.value)">
-		<option value="1">10</option>
-		<option value="2">13</option>
-		<option value="3">16</option>
-		<option value="4">18</option>
-		<option value="5">24</option>
-		<option value="6">32</option>
-		<option value="7">48</option>
-	</select>
-	<img src="gfx/ico/subscript.png" onclick="action(this,'subscript')" title="subscript" alt="subscript" />
-	<img src="gfx/ico/superscript.png" onclick="action(this,'superscript')" title="superscript" alt="superscript" />
-	<img src="gfx/ico/paste.png" onclick="action(this,'paste')" title="paste" alt="paste" />
-	<img src="gfx/ico/cut.png" onclick="action(this,'cut')" title="cut" alt="cut" />
-	<img src="gfx/ico/copy.gif" onclick="action(this,'copy')" title="copy" alt="copy" />
-	<img src="gfx/ico/left.png" onclick="action(this,'justifyleft')" title="left" alt="left" />
-	<img src="gfx/ico/right.png" onclick="action(this,'justifyright')" title="right" alt="right" />
-	<img src="gfx/ico/center.png" onclick="action(this,'justifycenter')" title="center" alt="center" />
-	<img src="gfx/ico/justify.png" onclick="action(this,'justifyfull')" title="justify" alt="justify" />
-	<img src="gfx/ico/ol.png" onclick="action(this,'insertorderedlist')" title="ol" alt="ol" />
-	<img src="gfx/ico/ul.png" onclick="action(this,'insertunorderedlist')" title="ul" alt="ul" />
-	<img src="gfx/ico/html.png" onclick="action(this,'inserthtml', prompt('HTML?'))" title="html" alt="html" />
-	<img src="gfx/ico/indent.png" onclick="action(this,'indent')" title="indent" alt="indent" />
-	<img src="gfx/ico/outdent.png" onclick="action(this,'outdent')" title="outdent" alt="outdent" />
-	<img src="gfx/ico/delete.png" onclick="action(this,'delete')" title="delete" alt="delete" />
-	<a href="http://localhost" target="_blank"><img src="gfx/ico/about.png" title="about" alt="about" style="border:0" /></a>	
-</div>
-
-<div contenteditable="true" id="kungle_editor" class="ui-widget-content ui-corner-all kungle_editor">Example text</div>
-
-</div>
-
-<input type="button" name="Submit" value="submit"  onclick="alert($('#kungle_editor').html());" />
-
+    <div style="height: 80%;" id="kungle_wysiwyg" class="kungle_wysiwyg">
+      <div id="kungle_toolbar" class="kungle_toolbar">
+  	    <img src="gfx/ico/bold.png" onclick="action(this,'bold')" title="bold" alt="bold" />
+	    <img src="gfx/ico/italic.png" onclick="action(this,'italic')" title="italic" alt="italic" />
+	    <img src="gfx/ico/underline.png" onclick="action(this,'underline')" title="underline" alt="underline" />
+	    <img src="gfx/ico/strikethrough.png" onclick="action(this,'strikethrough')" title="strikethrough" alt="strikethrough" />		 
+	    <img src="gfx/ico/link.png" onclick="action(this,'createLink',prompt('URL?'))" title="link" alt="link" />
+  	    <img src="gfx/ico/unlink.png" onclick="action(this,'unlink')" title="unlink" alt="unlink" />	
+	    <img src="gfx/ico/h1.png" onclick="action(this,'heading', 'h1')" title="h1" alt="h1" />
+	    <img src="gfx/ico/h2.png" onclick="action(this,'heading', 'h2')" title="h1" alt="h2" /> 
+	    <img src="gfx/ico/h3.png" onclick="action(this,'heading', 'h3')" title="h1" alt="h3" /> 
+	    <img src="gfx/ico/h4.png" onclick="action(this,'heading', 'h4')" title="h1" alt="h4" /> 
+	    <img src="gfx/ico/h5.png" onclick="action(this,'heading', 'h5')" title="h1" alt="h5" /> 
+	    <img src="gfx/ico/h6.png" onclick="action(this,'heading', 'h6')" title="h1" alt="h6" />  
+	    <img src="gfx/ico/paragraph.png" onclick="action(this,'insertparagraph')" title="paragraph" alt="paragraph" />
+	    <select onChange="action(this,'heading',this.value)">
+	      <option value="h1">Heading 1</option>
+	  	  <option value="h2">Heading 2</option>
+		  <option value="h3">Heading 3</option>
+		  <option value="h4">Heading 4</option>
+		  <option value="h5">Heading 5</option>
+		  <option value="h6">Heading 6</option>
+		  <option value="p">Paragraph</option>									
+	    </select>
+	    <img src="gfx/ico/image.png" onclick="action(this,'insertimage',prompt('URL?'))" title="image" alt="image" />
+	    <img src="gfx/ico/hr.png" onclick="action(this,'inserthorizontalrule')" title="hr" alt="hr" />
+	    <img src="gfx/ico/undo.png" onclick="action(this,'undo')" title="undo" alt="undo" />
+	    <img src="gfx/ico/redo.png" onclick="action(this,'redo')" title="redo" alt="redo" />
+	    <img src="gfx/ico/backcolor.png" onclick="action(this,'backcolor',prompt('Color?'))" title="backcolor" alt="backcolor" />
+	    <img src="gfx/ico/fontcolor.png" onclick="action(this,'forecolor',prompt('Color?'))" title="fontcolor" alt="fontcolor" />
+	    <img src="gfx/ico/hilightcolor.png" onclick="action(this,'hilitecolor',prompt('Color?'))" title="hilightcolor" alt="hilightcolor" />
+	    <img src="gfx/ico/increase.png" onclick="action(this,'increasefontsize')" title="increase" alt="increase" />
+	    <img src="gfx/ico/decrease.png" onclick="action(this,'decreasefontsize')" title="decrease" alt="decrease" />
+	    <select onchange="action(this,'fontname', this.value)">
+	      <option style="font-family:Courier New">Courier New</option>
+	      <option style="font-familyTimes New Roman">Times New Roman</option>
+	  	  <option style="font-family:Tahoma">Tahoma</option>
+		  <option style="font-family:Verdana">Verdana</option>
+		  <option style="font-family:Georgia">Georgia</option>
+		  <option style="font-family:Impact">Impact</option>
+	    </select>
+	    <select onchange="action(this,'FontSize', this.value)">
+		  <option value="1">10</option>
+		  <option value="2">13</option>
+		  <option value="3">16</option>
+		  <option value="4">18</option>
+		  <option value="5">24</option>
+		  <option value="6">32</option>
+		  <option value="7">48</option>
+	    </select>
+	    <img src="gfx/ico/subscript.png" onclick="action(this,'subscript')" title="subscript" alt="subscript" />
+	    <img src="gfx/ico/superscript.png" onclick="action(this,'superscript')" title="superscript" alt="superscript" />
+	    <img src="gfx/ico/paste.png" onclick="action(this,'paste')" title="paste" alt="paste" />
+  	    <img src="gfx/ico/cut.png" onclick="action(this,'cut')" title="cut" alt="cut" />
+	    <img src="gfx/ico/copy.gif" onclick="action(this,'copy')" title="copy" alt="copy" />
+	    <img src="gfx/ico/left.png" onclick="action(this,'justifyleft')" title="left" alt="left" />
+	    <img src="gfx/ico/right.png" onclick="action(this,'justifyright')" title="right" alt="right" />
+	    <img src="gfx/ico/center.png" onclick="action(this,'justifycenter')" title="center" alt="center" />
+	    <img src="gfx/ico/justify.png" onclick="action(this,'justifyfull')" title="justify" alt="justify" />
+	    <img src="gfx/ico/ol.png" onclick="action(this,'insertorderedlist')" title="ol" alt="ol" />
+	    <img src="gfx/ico/ul.png" onclick="action(this,'insertunorderedlist')" title="ul" alt="ul" />
+	    <img src="gfx/ico/html.png" onclick="action(this,'inserthtml', prompt('HTML?'))" title="html" alt="html" />
+	    <img src="gfx/ico/indent.png" onclick="action(this,'indent')" title="indent" alt="indent" />
+	    <img src="gfx/ico/outdent.png" onclick="action(this,'outdent')" title="outdent" alt="outdent" />
+	    <img src="gfx/ico/delete.png" onclick="action(this,'delete')" title="delete" alt="delete" />
+	    <a href="http://localhost" target="_blank"><img src="gfx/ico/about.png" title="about" alt="about" style="border:0" /></a>	
+        <input type="button" name="Submit" value="submit"  onclick="alert($('#kungle_editor').html());" />
+      </div>
+      <div contenteditable="true" style="height: 90%; overflow:auto;" id="kungle_editor" class="ui-widget-content ui-corner-all kungle_editor">Example text</div>
+    </div>
   </div>
 
   <script type="text/javascript">
-      $("#simpleedit").dialog({
-          height: 448, 
-          width: 500, 
-          position:[450 ,100], 
-          resizable: true
+    $("#simpleedit").dialog({
+      height: 448, 
+      width: 500, 
+      position:[450 ,100], 
+      resizable: true
+    });
+
+    function action(e, a,p) {
+      $(e).parents().each(function(){
+        var obj = $(this);
+        var classlist = obj.attr("class");
+        var allclasses = "";
+
+        if(classlist !== undefined) {
+          allclasses = classlist.split(' ');
+        };
+
+        if($.inArray('kungle_wysiwyg', allclasses) > -1) {
+          obj.find('.kungle_editor').focus();
+          //document.getElementById('kungle_editor').focus(); 
+        };
       });
 
-function action(e, a,p) {
-
-  $(e).parents().each(function(){
-    var obj = $(this);
-    var classlist = obj.attr("class");
-    
-    var allclasses = "";
-
-  if(classlist !== undefined) {
-    allclasses = classlist.split(' ');
-  };
-
-  if($.inArray('kungle_wysiwyg', allclasses) > -1) {
-    obj.find('kungle_editor').focus();
-
-  };
-
-
-  });
-
-  if (p == null) p = false;
-  else if (p == false) return false;
-	
-  document.execCommand(a,false,p);
-}
+      if (p == null) p = false; 
+      else if (p == false) return false;
+      document.execCommand(a,false,p);
+    }
       
   </script>
 
