@@ -18,9 +18,9 @@ class PhotoRef extends LongKeyedMapper[PhotoRef] with IdPK {
   object PublishingDate extends MappedDate(this)
   object Publisher extends MappedPoliteString(this, 100) {override def defaultValue = ""}
   object ArticleUrl extends MappedPoliteString(this, 250) {override def defaultValue = ""}
-  object PhotoFile extends MappedLongForeignKey(this, Photo)
+  object PhotoLookup extends MappedPoliteString(this, 16) {override def defaultValue = ""}
 }
 
 object PhotoRef extends PhotoRef with LongKeyedMetaMapper[PhotoRef] {
-  override def fieldOrder = List(id, Title, Topic, TopicNumber, PublishingDate, Publisher, ArticleUrl, PhotoFile)
+  override def fieldOrder = List(id, Title, Topic, TopicNumber, PublishingDate, Publisher, ArticleUrl, PhotoLookup)
 }
