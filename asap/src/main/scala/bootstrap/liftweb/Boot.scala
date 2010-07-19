@@ -47,7 +47,8 @@ class Boot {
     // Build SiteMap
     val entries = 
       Menu(Loc("Home", List("index"), S.??("Home"), LocGroup("default"))) :: 
-//    Menu(Loc("captchatest", List("captchatest"), "Captcha Demo", LocGroup("default"))) :: 
+//    Menu(Loc("captchatest", List("captchatest"), "Captcha Demo", LocGroup("default"))) ::
+      Menu(Loc("piclist", List("piclist"), "POTD", LocGroup("default"))) ::
       Menu(Loc("Control",("admin" :: "control" :: Nil) -> false, S.??("Control"), LocGroup("default"), loggedIn ))  ::
       Nil
     
