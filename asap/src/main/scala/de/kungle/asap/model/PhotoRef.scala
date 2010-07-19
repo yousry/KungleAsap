@@ -14,6 +14,7 @@ class PhotoRef extends LongKeyedMapper[PhotoRef] with IdPK {
   object Title extends MappedPoliteString(this, 20) 
   object Topic extends MappedPoliteString(this, 20) 
   object TopicNumber extends MappedInt(this)
+  object DayOfYear extends MappedInt(this)
   object PublishingDate extends MappedDate(this)
   object Publisher extends MappedPoliteString(this, 100) {override def defaultValue = ""}
   object ArticleUrl extends MappedPoliteString(this, 250) {override def defaultValue = ""}
