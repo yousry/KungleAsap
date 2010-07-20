@@ -11,7 +11,7 @@ import scala.xml._
 class PhotoRef extends LongKeyedMapper[PhotoRef] with IdPK {
   def getSingleton = PhotoRef
 
-  object Title extends MappedPoliteString(this, 20) 
+  object Title extends MappedPoliteString(this, 200) 
   object Topic extends MappedPoliteString(this, 20) 
   object TopicNumber extends MappedInt(this)
   object DayOfYear extends MappedInt(this)

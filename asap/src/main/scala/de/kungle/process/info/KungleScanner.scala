@@ -7,7 +7,7 @@ import de.kungle.asap.model._
 import net.liftweb.mapper._
 
 class KungleScanner extends Loggable {
-  val url="http://www.kungle.de/Trend/api/top" 
+  val url="http://www.kungle.de/api/top" 
   
   def createWave(e: KungleNews) : Unit = {
     val w = Wave.create
