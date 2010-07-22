@@ -10,10 +10,16 @@
 <div id="content" style="position:absolute; left: 50%; margin-left: -480px; top:0px; z-index: 2;"> 
 <div id="container" class="container">
 <div id="header" class="span-42 last primary-1">
-<div class="span-15 prepend-6" style="margin-top:0px;"><h1>Kungle Imp</h1></div>
-<div class="span-20  last" style="text-align:right; color: black">&copy;2010 Yousry Abdallah<br/>V:153:c86bfd3ca4de<br/></div>
+<div class="span-8 prepend-6" style="margin-top:0px;"><h1>Kungle Imp</h1></div>
+<div class="span-17" style="text-align:left; color: black"><h2>Picture Of The Day</h2></div>
+<div class="span-10  last" style="text-align:right; color: black">&copy;2010 Yousry Abdallah<br/>V:162:17f36dd173bb<br/></div>
 </div> <!-- header -->
 <div id="menu" class="span-42 last primary-2">
+<lift:PicturesOfTheDay.dayMenu>
+<div style="text-align: right; font-size: 16px; padding-top: 12px" class="span-17"><m:prev/></div>
+<div style="text-align: center; font-size: 26px;" class="span-8"><m:day/></div>
+<div style="text-align: left; font-size: 16px; padding-top: 12px" class="span-17 last"><m:next/></div>
+</lift:PicturesOfTheDay.dayMenu>
 </div> <!-- menu -->
 
 <div id="leftColumn" class="left-menu span-13 prepend-1">
@@ -27,15 +33,6 @@
       </div>
       
       <hr/>
-	  
-	  <div class="left-menu span-13 prepend-1 last">
-        <h5>User</h5>
-        <div id="animenu" style="height:50px">
-          <lift:UserMgt.userMenu/>
-        </div>
-      </div>
-      
-	  <hr/>
       	  
       <div class="left-menu span-13 prepend-1 last">
         <lift:UserMgt.loginStatus/>
@@ -43,20 +40,164 @@
 
 
 </div> <!-- leftColumn -->
-
+              
+      <lift:PicturesOfTheDay.queryTabel>
+      
       <div style="margin-left: -2px;" class="span-28 last" id="news-column">
         <div class="scroll-pane ui-widget ui-widget ui-corner-all" id="target"> 
           <div class="scroll-content" id="innerself">
-            <div class="scroll-content-item">
-              <div class="span-22 last">
-              <img  src="/photo/200_Sc_1" />
-              </div> 
-              <div class="summary span-26 last">
+          
+                      
+            <div style="height: 50px; text-align: center" class="scroll-content-item">
+            <h1>Science</h1>
+            </div> <!-- scroll-content-item -->
+            <query:entries>
+            <div style="height: 150px;" class="scroll-content-item">
+              <div style="height: 100%; display:block; margin:0 auto; text-align:center;" class="span-7">
+                <entry:photoLink/><!-- <lift:lazy-load> </lift:lazy-load> #588 -->
               </div>
-            </div> <!-- scroll-content -->
+              <div style="padding-top: 5px" class="prepend-1 span-18 last">
+              Publisher: <b><entry:publisher/></b><br/>
+              Title: <entry:title/><br/>
+              Published: <entry:pubdat/>
+              </div>
+            </div> <!-- scroll-content-item -->
+            </query:entries>
+
+            <div style="height: 50px; text-align: center" class="scroll-content-item">
+            <h1>Economy</h1>
+            </div> <!-- scroll-content-item -->
+            <query:economy>
+            <div style="height: 150px;" class="scroll-content-item">
+              <div style="height: 100%; display:block; margin:0 auto; text-align:center;" class="span-7">
+                <entry:photoLink/><!-- <lift:lazy-load> </lift:lazy-load> #588 -->
+              </div>
+              <div style="padding-top: 5px" class="prepend-1 span-18 last">
+              Publisher: <b><entry:publisher/></b><br/>
+              Title: <entry:title/><br/>
+              Published: <entry:pubdat/>
+              </div>
+            </div> <!-- scroll-content-item -->
+            </query:economy>
+
+            <div style="height: 50px; text-align: center" class="scroll-content-item">
+            <h1>Politic</h1>
+            </div> <!-- scroll-content-item -->
+            <query:politic>
+            <div style="height: 150px;" class="scroll-content-item">
+              <div style="height: 100%; display:block; margin:0 auto; text-align:center;" class="span-7">
+                <entry:photoLink/><!-- <lift:lazy-load> </lift:lazy-load> #588 -->
+              </div>
+              <div style="padding-top: 5px" class="prepend-1 span-18 last">
+              Publisher: <b><entry:publisher/></b><br/>
+              Title: <entry:title/><br/>
+              Published: <entry:pubdat/>
+              </div>
+            </div> <!-- scroll-content-item -->
+            </query:politic>
+
+            <div style="height: 50px; text-align: center" class="scroll-content-item">
+            <h1>Technology</h1>
+            </div> <!-- scroll-content-item -->
+            <query:technology>
+            <div style="height: 150px;" class="scroll-content-item">
+              <div style="height: 100%; display:block; margin:0 auto; text-align:center;" class="span-7">
+                <entry:photoLink/><!-- <lift:lazy-load> </lift:lazy-load> #588 -->
+              </div>
+              <div style="padding-top: 5px" class="prepend-1 span-18 last">
+              Publisher: <b><entry:publisher/></b><br/>
+              Title: <entry:title/><br/>
+              Published: <entry:pubdat/>
+              </div>
+            </div> <!-- scroll-content-item -->
+            </query:technology>
+            
+            <div style="height: 50px; text-align: center" class="scroll-content-item">
+            <h1>Entertainment</h1>
+            </div> <!-- scroll-content-item -->
+            <query:entertainment>
+            <div style="height: 150px;" class="scroll-content-item">
+              <div style="height: 100%; display:block; margin:0 auto; text-align:center;" class="span-7">
+                <entry:photoLink/><!-- <lift:lazy-load> </lift:lazy-load> #588 -->
+              </div>
+              <div style="padding-top: 5px" class="prepend-1 span-18 last">
+              Publisher: <b><entry:publisher/></b><br/>
+              Title: <entry:title/><br/>
+              Published: <entry:pubdat/>
+              </div>
+            </div> <!-- scroll-content-item -->
+            </query:entertainment>
+            
+            <div style="height: 50px; text-align: center" class="scroll-content-item">
+            <h1>Sport</h1>
+            </div> <!-- scroll-content-item -->
+            <query:sport>
+            <div style="height: 150px;" class="scroll-content-item">
+              <div style="height: 100%; display:block; margin:0 auto; text-align:center;" class="span-7">
+                <entry:photoLink/><!-- <lift:lazy-load> </lift:lazy-load> #588 -->
+              </div>
+              <div style="padding-top: 5px" class="prepend-1 span-18 last">
+              Publisher: <b><entry:publisher/></b><br/>
+              Title: <entry:title/><br/>
+              Published: <entry:pubdat/>
+              </div>
+            </div> <!-- scroll-content-item -->
+            </query:sport>
+            
+            <div style="height: 50px; text-align: center" class="scroll-content-item">
+            <h1>Boulevard</h1>
+            </div> <!-- scroll-content-item -->
+            <query:boulevard>
+            <div style="height: 150px;" class="scroll-content-item">
+              <div style="height: 100%; display:block; margin:0 auto; text-align:center;" class="span-7">
+                <entry:photoLink/><!-- <lift:lazy-load> </lift:lazy-load> #588 -->
+              </div>
+              <div style="padding-top: 5px" class="prepend-1 span-18 last">
+              Publisher: <b><entry:publisher/></b><br/>
+              Title: <entry:title/><br/>
+              Published: <entry:pubdat/>
+              </div>
+            </div> <!-- scroll-content-item -->
+            </query:boulevard>
+            
+            <div style="height: 50px; text-align: center" class="scroll-content-item">
+            <h1>Adult</h1>
+            </div> <!-- scroll-content-item -->
+            <query:adult>
+            <div style="height: 150px;" class="scroll-content-item">
+              <div style="height: 100%; display:block; margin:0 auto; text-align:center;" class="span-7">
+                <entry:photoLink/><!-- <lift:lazy-load> </lift:lazy-load> #588 -->
+              </div>
+              <div style="padding-top: 5px" class="prepend-1 span-18 last">
+              Publisher: <b><entry:publisher/></b><br/>
+              Title: <entry:title/><br/>
+              Published: <entry:pubdat/>
+              </div>
+            </div> <!-- scroll-content-item -->
+            </query:adult>
+            
+            <div style="height: 50px; text-align: center" class="scroll-content-item">
+            <h1>Religion</h1>
+            </div> <!-- scroll-content-item -->
+            <query:religion>
+            <div style="height: 150px;" class="scroll-content-item">
+              <div style="height: 100%; display:block; margin:0 auto; text-align:center;" class="span-7">
+                <entry:photoLink/><!-- <lift:lazy-load> </lift:lazy-load> #588 -->
+              </div>
+              <div style="padding-top: 5px" class="prepend-1 span-18 last">
+              Publisher: <b><entry:publisher/></b><br/>
+              Title: <entry:title/><br/>
+              Published: <entry:pubdat/>
+              </div>
+            </div> <!-- scroll-content-item -->
+            </query:religion>
+            
+            
+            
           </div> <!-- scroll-content -->
         </div>  <!-- scroll-pane -->
       </div> <!-- news-column -->
+      </lift:PicturesOfTheDay.queryTabel>
 
 <div id="footer" class="span-42 last">
 <p style="padding-top: 8px"><a href="http://www.kungle.de/Trend/about">About/Impressum</a></p> 
