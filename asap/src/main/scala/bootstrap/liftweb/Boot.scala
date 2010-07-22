@@ -48,7 +48,7 @@ class Boot {
     val entries = 
       Menu(Loc("Home", List("index"), S.??("Home"), LocGroup("default"))) :: 
 //    Menu(Loc("captchatest", List("captchatest"), "Captcha Demo", LocGroup("default"))) ::
-      Menu(Loc("piclist", List("piclist"), "Picture Of The Day", LocGroup("default"))) ::
+      Menu(Loc("piclist", List("piclist"), "Pictures Of The Day", LocGroup("default"))) ::
       Menu(Loc("Control",("admin" :: "control" :: Nil) -> false, S.??("Control"), LocGroup("default"), loggedIn ))  ::
       Nil
     

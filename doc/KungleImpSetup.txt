@@ -181,5 +181,6 @@ We need more memory:
 export JAVA_OPTIONS="-Xms64m -Xmx512m -Drun.mode=production"
 
  
- 
+For Image upload
+ssh -C -L 3307:127.0.0.1:3306 yousry@kungleImp.de 
  
