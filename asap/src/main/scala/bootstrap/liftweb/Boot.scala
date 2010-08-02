@@ -18,6 +18,8 @@ import de.kungle.asap.snippet.{WaveJson}
 
 import tools.AvatarProcessing
 
+import de.kungle.api.PicAPI
+
 /**
   * A class that's instantiated early and run.  It allows the application
   * to modify lift's environment
@@ -62,6 +64,9 @@ class Boot {
     
     // Avatar Processor as Dispatcher
     LiftRules.dispatch.append(AvatarProcessing.matcher)
+    
+    // activate the REST API
+    LiftRules.dispatch.prepend(PicAPI.dispatch)
     
     //  start Actors
     ActorPing.schedule(InfoCollector, InfoCollector.DoWork, 1 seconds)
