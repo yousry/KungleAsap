@@ -8,6 +8,7 @@ import Helpers._
 import net.liftweb.common._
 import de.kungle.process.info.KungleScanner
 import _root_.net.liftweb.mapper._
+import de.kungle.process.ProcessMaster
 
 object SimpleCategorize extends LiftActor with BackgroundTask with Loggable {
 

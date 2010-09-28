@@ -8,6 +8,7 @@ import Helpers._
 import net.liftweb.common._
 import net.liftweb.mapper._
 import de.kungle.asap.model.Wave
+import de.kungle.process.ProcessMaster
 
 object TranslationCollector extends LiftActor with BackgroundTask with Loggable {
   

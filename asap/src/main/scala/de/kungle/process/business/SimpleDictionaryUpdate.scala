@@ -14,6 +14,7 @@ import de.kungle.process.info.KungleScanner
 import _root_.net.liftweb.mapper._
 import de.kungle.asap.model._
 import scala.collection.mutable.HashMap
+import de.kungle.process.ProcessMaster
 
 object SimpleDictionaryUpdate extends LiftActor with BackgroundTask with Loggable  {
   

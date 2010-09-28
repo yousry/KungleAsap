@@ -6,8 +6,8 @@ import http._
 import util._
 import Helpers._
 import net.liftweb.common._
-import de.kungle.process.info.KungleScanner
-
+import de.kungle.process._
+import de.kungle.process.info._
 
 object InfoCollector extends LiftActor with BackgroundTask with Loggable {
 
